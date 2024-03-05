@@ -5,14 +5,16 @@ import App from './App';
 import { XmplProvider } from 'xmpl-react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const xmpcfg = {
+var xmpcfg = {
     access: {
-        accessToken: '8ae058d5-31f0-4e12-8a47-9f82fc6df6ef_1fdb5415-794f-4e1a-9912-093fc810bc64_e299a53d478a4276a769a8d815db4cc4',
-        url: 'http://176.34.252.52/XMPieXMPL_REST_API',
-        circleProjectID: '1fdb5415-794f-4e1a-9912-093fc810bc64',
-        circleProjectName: 'Sample'
-    }
-};
+      accessToken:
+        '3b5a1f9e-e9c3-412e-a0c3-09ea6613ada9_1dacdc66-9448-4d9a-877b-6d9f0e7b8fd2_6d40bc73b649483691c6d9a8d36f2d98',
+      url: 'https://xmp3.c121.com.au/XMPieXMPL_REST_API',
+      circleProjectID: '1dacdc66-9448-4d9a-877b-6d9f0e7b8fd2',
+      circleProjectName: 'Dev Testing',
+    },
+  };
+  
 root.render(
     <React.StrictMode>
         <XmplProvider xmpcfg={xmpcfg}>
