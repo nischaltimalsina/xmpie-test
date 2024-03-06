@@ -3,11 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { XmplProvider } from 'xmpl-react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Content } from './components/Content';
-import { ErrorPage } from './components/ErrorPage';
-import { NewRecipientForm } from './components/NewRecipientForm';
-import { ReferredRecipientData } from './components/ReferredRecipientData';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var xmpcfg = {
@@ -23,16 +18,7 @@ var xmpcfg = {
 root.render(
     <React.StrictMode>
         <XmplProvider xmpcfg={xmpcfg}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<App/>}/>
-                    <Route path='/content' element={<Content/>}/>
-                    <Route path='/errorPage' element={<ErrorPage/>}/>
-                    <Route path='/anonymous' element={<NewRecipientForm type='anon'/>}/>
-                    <Route path='/ref' element={<NewRecipientForm type='ref'/>}/>
-                    <Route path='/referredRecipientData' element={<ReferredRecipientData/>}/>
-                </Routes>
-            </BrowserRouter>
+            <App/>
         </XmplProvider>
     </React.StrictMode>
 );

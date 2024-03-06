@@ -18,16 +18,15 @@ export const Contact = () => {
     }, [xmp])
 
     const trackEvent = (e) => {
-        e.preventDefault();
         const rid = new URLSearchParams(window.location.search).get('rid') || localStorage.getItem('xmpRecipientID')
         const isAnchor = e.target.tagName === 'A'
         const options = {
             sync: isAnchor,
             recipientID: rid,
-            PageName: 'Sample1',
+            PageName: 'Sample',
             ActionName: 'Requested followup',
             ActionParams: 'actionParameters',
-            type: 'Performed Action',
+            type: 'mousedown',
         }
         events(options)
     }
@@ -38,12 +37,13 @@ export const Contact = () => {
             'firstName': firstName,
             'lastName': lastName,
             'email': email,
-            // 'followup': true,
+            'followup': true,
         })
         if (res) {
             setShowThanks(true)
             setShowForm(false)
         }
+        trackEvent(e);
     }
 
     return (
@@ -92,9 +92,6 @@ export const Contact = () => {
                             <ul className="actions">
                                 <li><input type="submit" value="Send me more information" className="primary"
                                            onClick={updateData}/>
-                                </li>
-                                <li><input type="submit" value="Track click test" className="primary"
-                                           onClick={trackEvent}/>
                                 </li>
                             </ul>
                         </form>
