@@ -41,7 +41,7 @@ export const Contact = () => {
         xmpTo: email,
         xmpSubject: "More Information"
       }
-      await trigger(...options)
+       trigger(options)
     }catch(error){
       console.log(error)
     }
