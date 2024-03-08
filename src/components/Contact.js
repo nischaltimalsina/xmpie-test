@@ -34,13 +34,9 @@ export const Contact = () => {
     events(options);
   };
   const triggerEmail = () =>{
-    const options= {
-    TouchPointID: "E92ca71eb-8b78-4b3b-b54c-d6de2e07d4a52",
-    Customizations: {
-      xmpSubject:"More Information"
-    }
-    }
-    trigger(options)
+    trigger({
+      TouchPointID: "92ca71eb-8b78-4b3b-b54c-d6de2e07d4a5",
+      })
   }
 
 
