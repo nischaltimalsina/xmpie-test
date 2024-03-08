@@ -34,9 +34,7 @@ export const Contact = () => {
     events(options);
   };
   const triggerEmail = () =>{
-    trigger({
-      TouchPointID: "92ca71eb-8b78-4b3b-b54c-d6de2e07d4a5",
-      })
+    trigger("92ca71eb-8b78-4b3b-b54c-d6de2e07d4a5")
   }
 
 
