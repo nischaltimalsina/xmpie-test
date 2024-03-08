@@ -5,7 +5,7 @@ export const Contact = () => {
   const { xmp } = useContext(XmplContext);
   const [showThanks, setShowThanks] = useState(false);
   const [showForm, setShowForm] = useState(true);
-  const { updateAdors,getAdoreValues } = useAdors();
+  const { updateAdors } = useAdors();
   const [firstName, setFirstName] = useState(xmp.r['firstname']);
   const [lastName, setLastName] = useState(xmp.r['lastname']);
   const [email, setEmail] = useState(xmp.r['email']);
@@ -35,7 +35,7 @@ export const Contact = () => {
   };
   const triggerEmail = () =>{
     const options= {
-    TouchPointID: "E2",
+    TouchPointID: "E92ca71eb-8b78-4b3b-b54c-d6de2e07d4a52",
     Customizations: {
       xmpSubject:"More Information"
     }
