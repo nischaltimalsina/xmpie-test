@@ -1,15 +1,17 @@
-import { XmplContext, useAdors, useEvents } from 'xmpl-react';
+import { XmplContext, useAdors, useEvents,useTrigger } from 'xmpl-react';
 import { useContext, useEffect, useState } from 'react';
 
 export const Contact = () => {
   const { xmp } = useContext(XmplContext);
   const [showThanks, setShowThanks] = useState(false);
   const [showForm, setShowForm] = useState(true);
-  const { updateAdors } = useAdors();
+  const { updateAdors,getAdoreValues } = useAdors();
   const [firstName, setFirstName] = useState(xmp.r['firstname']);
   const [lastName, setLastName] = useState(xmp.r['lastname']);
   const [email, setEmail] = useState(xmp.r['email']);
   const { events } = useEvents();
+  const {trigger} = useTrigger()
+  const rid = new URLSearchParams(window.location.search).get('rid') || localStorage.getItem('xmpRecipientID')
 
   useEffect(() => {
     setFirstName(xmp.r['firstname']);
@@ -18,20 +20,29 @@ export const Contact = () => {
   }, [xmp]);
 
   const trackEvent = (e) => {
-    const rid =
-      new URLSearchParams(window.location.search).get('rid') ||
-      localStorage.getItem('xmpRecipientID');
+    
     const isAnchor = e.target.tagName === 'A';
     const options = {
       sync: isAnchor,
       recipientID: rid,
       PageName: 'Sample',
-      ActionName: 'Requested followup',
+      ActionName: 'Send me more information',
       ActionParams: 'actionParameters',
       type: 'mousedown',
+
     };
     events(options);
   };
+  const triggerEmail = () =>{
+    const options= {
+    TouchPointID: "E2",
+    Customizations: {
+      xmpSubject:"More Information"
+    }
+    }
+    trigger(options)
+  }
+
 
   const updateData = async (e) => {
     e.preventDefault();
@@ -45,6 +56,7 @@ export const Contact = () => {
       setShowThanks(true);
       setShowForm(false);
     }
+    triggerEmail()
     trackEvent(e);
   };
 
@@ -101,7 +113,6 @@ export const Contact = () => {
                 <li>
                   <input
                     type='submit'
-                    xmp-success-trigger='E2'
                     value='Send me more information'
                     className='primary'
                     onClick={updateData}
