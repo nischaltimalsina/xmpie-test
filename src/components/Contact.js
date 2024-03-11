@@ -35,7 +35,7 @@ export const Contact = () => {
   };
   const  triggerEmail = async() =>{
     try{
-       trigger("92ca71eb-8b78-4b3b-b54c-d6de2e07d4a5")
+       trigger("E2")
     }catch(error){
       console.log(error)
     }
