@@ -21,7 +21,7 @@ export const Header = () => {
                 </a>
             </div>
             <nav className=" px-12 py-6 bg-white">
-                <div className="container flex items-center justify-start flex-wrap">
+                <div className="container mx-auto flex items-center justify-start flex-wrap">
                     <div className="flex items-center flex-shrink-0 ">
                         <img
                             className="hidden md:block h-14 aspect-[20/7]"

@@ -1,0 +1,46 @@
+{
+    "studyArea": [
+        { "value": "1211", "text": "Business, Management and Finance" },
+        { "value": "1212", "text": "Creative Arts and Media" },
+        { "value": "1146", "text": "Education" },
+        { "value": "1209", "text": "Engineering and Construction" },
+        { "value": "1216", "text": "Foundation Studies" },
+        { "value": "1213", "text": "Health, Nursing and Dermal Sciences" },
+        { "value": "1217", "text": "Hospitality and Commercial Cookery" },
+        { "value": "1202", "text": "Information Technology" },
+        { "value": "1208", "text": "Law and Criminology" },
+        { "value": "1214", "text": "Psychology" },
+        { "value": "1210", "text": "Science" },
+        { "value": "1215", "text": "Social Work and Community Development" },
+        { "value": "1247", "text": "Sport and Exercise Science" }
+    ],
+    "studyLevel": [
+        "Vocational and further education courses",
+        "Masters, graduate courses and PhDs (postgraduate)",
+        "Bachelor and diploma courses (undergraduate)"
+    ],
+    "topics": ["course length", "entry", "fees", "pathways", "start dates", "subjects"],
+    "mastersGraduatesAndPhds": [
+        "Graduate Diploma in Project Management",
+        "Master of Business Administration (Global)",
+        "Master of Business Analytics",
+        "Master of Enterprise Resource Planning",
+        "Master of Professional Accounting",
+        "Master of Project Management",
+        "Master of Supply Chain Management"
+    ],
+    "alreadyInBrochure": [
+        "application requirements",
+        "campus locations and descriptions",
+        "course information",
+        "university benefits and study models"
+    ],
+    "aboutMelbourne": ["Cost of Living", "Housing and Accommodation", "Live in Melbourne"],
+    "englishLanguageSupport": ["English Language Requirements", "English Language Courses"],
+    "universityServices": [
+        "Block Model",
+        "Scholarships",
+        "Student Support and Safety",
+        "Career and Employment Services"
+    ]
+}
