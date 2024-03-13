@@ -1,11 +1,8 @@
-import './assets/css/main.css';
-import { Header } from './components/Header';
-import { Banner } from './components/Banner';
-import { Footer } from './components/Footer';
-import { MainBlock } from './components/MainBlock';
-import { Contact } from './components/Contact';
 import { useContext, useEffect } from 'react';
 import { XmplContext, useAdors } from 'xmpl-react';
+import { Footer } from './components/Footer';
+import { Header } from './components/Header';
+import { MainBlock } from './components/MainBlock';
 
 function App() {
     const { xmp } = useContext(XmplContext)
@@ -24,14 +21,11 @@ function App() {
         })
     }, [xmp])
     return (
-        <div className="App">
-            <div id="wrapper">
+        <div className="">
+           
                 <Header/>
-                <Banner/>
                 <MainBlock/>
-                <Contact/>
                 <Footer/>
-            </div>
         </div>
     );
 }

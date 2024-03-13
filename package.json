@@ -40,6 +40,7 @@
     ]
   },
   "devDependencies": {
-    "react-anchor-link-smooth-scroll": "^1.0.12"
+    "react-anchor-link-smooth-scroll": "^1.0.12",
+    "tailwindcss": "^3.4.1"
   }
 }
