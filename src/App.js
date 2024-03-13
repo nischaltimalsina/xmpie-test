@@ -5,27 +5,39 @@ import { Header } from './components/Header';
 import { MainBlock } from './components/MainBlock';
 
 function App() {
-    const { xmp } = useContext(XmplContext)
+    const { xmp } = useContext(XmplContext);
     const { getAdorValues } = useAdors();
-    const rid = new URLSearchParams(window.location.search).get('rid')
+    const rid = new URLSearchParams(window.location.search).get('rid');
 
     useEffect(() => {
         getAdorValues({
             rid,
             isLogin: true,
-            adors: ['firstname', 'lastname', 'preference', 'email', 'photo1', 'photo2', 'photo3', 'photo4', 'backgroundColor', 'isClubMember', 'showForm', 'showThanks'],
+            adors: [
+                'firstname',
+                'lastname',
+                'preference',
+                'email',
+                'photo1',
+                'photo2',
+                'photo3',
+                'photo4',
+                'backgroundColor',
+                'isClubMember',
+                'showForm',
+                'showThanks'
+            ],
             resolved: ['photo1', 'photo2', 'photo3', 'photo4'],
             async: false,
             isCached: true,
-            noCache: false,
-        })
-    }, [xmp])
+            noCache: false
+        });
+    }, [xmp]);
     return (
-        <div className="">
-           
-                <Header/>
-                <MainBlock/>
-                <Footer/>
+        <div className="bg-gray-100 w-full h-full min-h-screen">
+            <Header />
+            <MainBlock />
+            <Footer />
         </div>
     );
 }

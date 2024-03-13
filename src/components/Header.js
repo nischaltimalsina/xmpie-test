@@ -1,47 +1,46 @@
-import logo from '../images/RoundTravel_Logo.png'
-import { useEffect, useState } from 'react';
+import { HiGlobeEuropeAfrica } from 'react-icons/hi2';
 
 export const Header = () => {
-    const [isMenuVisible, setisMenuVisible] = useState(false);
-    const [scrollTop, setScrollTop] = useState(0);
-    const [isNavFixed, setisNavFixed] = useState(false);
-    const toggleMenu = () => {
-    document.body.className =  document.body.className === 'is-menu-visible' ? '' : 'is-menu-visible'
-        setisMenuVisible(!isMenuVisible)
-    }
-
-    useEffect(()=>{
-        const handleScroll = (event) => {
-            setisNavFixed(scrollTop > 100)
-            setScrollTop(window.scrollY)
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        }
-    })
     return (
-        <>
-            <header id="header" className= {isNavFixed ? 'reveal' : 'alt reveal'}>
-                <a href="" className="logo"><img src={logo} alt="'Round Travel"/></a>
-                <nav>
-                    <a onClick={toggleMenu} href="#menu">Menu</a>
-                </nav>
-            </header>
-            <nav id="menu">
-                <div className='inner'>
-                    <ul className="links">
-                        <li><a onClick={toggleMenu} href="">Home Page</a></li>
-                        <li><a onClick={toggleMenu} href="">Content Page</a></li>
-                        <li><a onClick={toggleMenu} href="https://www.xmpie.com">XMPie Website</a></li>
-                        <li><a onClick={toggleMenu} href="https://campus.xmpie.com">XMPie Campus</a></li>
-                    </ul>
-                    <ul className="actions stacked">
-                        <li><a onClick={toggleMenu} href="" className="button primary fit">Get Started</a></li>
-                    </ul>
+        <header>
+            <div className="hidden md:grid grid-cols-[auto,154px,154px,565px]  font-semibold h-12 text-xl">
+                <div></div>
+                <a
+                    href="#"
+                    className="bg-[#21104b] cursor-pointer text-white px-12 flex items-center">
+                    ENQUIRE
+                </a>
+                <a href="#" className="bg-[#40c7f4] cursor-pointer px-12 flex items-center">
+                    APPLY
+                </a>
+                <a
+                    href="#"
+                    className="bg-black min-w-[142px] whitespace-nowrap flex items-center cursor-pointer text-white px-4 text-left">
+                    <HiGlobeEuropeAfrica className="mr-3 text-3xl" />
+                    International Students
+                </a>
+            </div>
+            <nav className=" px-12 py-6 bg-white">
+                <div className="container flex items-center justify-start flex-wrap">
+                    <div className="flex items-center flex-shrink-0 ">
+                        <img
+                            className="hidden md:block h-14 aspect-[20/7]"
+                            src="https://eaams.vu.edu.au/lava/img/vu/logo.svg"
+                            alt="logo"
+                        />
+                        <img
+                            className=" h-14 block md:hidden"
+                            src="https://eaams.vu.edu.au/lava/img/vu/logo-mobile.svg"
+                            alt="logo"
+                        />
+                    </div>
+                    <div>
+                        <span className="text-xl tracking-tight ml-6">
+                            Create your personalised brochure
+                        </span>
+                    </div>
                 </div>
-                <a className='close' href='' onClick={toggleMenu}>Close </a>
             </nav>
-        </>
-    )
-}
+        </header>
+    );
+};
