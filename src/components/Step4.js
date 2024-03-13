@@ -2,7 +2,7 @@ import React from 'react';
 
 const Step4 = () => {
     return (
-        <div className="px-8 py-10 pb-20 bg-white">
+        <div className="container mx-auto px-8 py-10 pb-20 bg-white">
             <h2 className="pt-5 pb-8 text-5xl font-light font-condensed">TELL US ABOUT YOURSELF</h2>
             <div className="flex flex-col gap-2 text-sm font-normal">
                 <label htmlFor="name" className="mb-3 text-xl font-semibold mt-7">
