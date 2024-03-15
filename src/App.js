@@ -3,7 +3,6 @@ import { XmplContext, useAdors } from 'xmpl-react';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { MainBlock } from './components/MainBlock';
-import Step4 from './components/Step4';
 
 function App() {
     const { xmp } = useContext(XmplContext);
@@ -38,7 +37,6 @@ function App() {
         <div className="bg-gray-100 w-full h-full min-h-screen">
             <Header />
             <MainBlock />
-            <Step4 />
             <Footer />
         </div>
     );

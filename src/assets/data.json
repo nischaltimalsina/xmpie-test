@@ -1,18 +1,122 @@
 {
     "studyArea": [
-        { "value": "1211", "text": "Business, Management and Finance" },
-        { "value": "1212", "text": "Creative Arts and Media" },
-        { "value": "1146", "text": "Education" },
-        { "value": "1209", "text": "Engineering and Construction" },
-        { "value": "1216", "text": "Foundation Studies" },
-        { "value": "1213", "text": "Health, Nursing and Dermal Sciences" },
-        { "value": "1217", "text": "Hospitality and Commercial Cookery" },
-        { "value": "1202", "text": "Information Technology" },
-        { "value": "1208", "text": "Law and Criminology" },
-        { "value": "1214", "text": "Psychology" },
-        { "value": "1210", "text": "Science" },
-        { "value": "1215", "text": "Social Work and Community Development" },
-        { "value": "1247", "text": "Sport and Exercise Science" }
+        {
+            "value": "1211",
+            "text": "Business, Management and Finance",
+            "vocational": [],
+            "masters": [
+                "Graduate Diploma in Project Management",
+                "Master of Business Administration (Global)",
+                "Master of Business Analytics",
+                "Master of Enterprise Resource Planning",
+                "Master of Professional Accounting",
+                "Master of Project Management",
+                "Master of Supply Chain Management"
+            ],
+            "bachelor": [
+                "Associate Degree in Hospitality and Hotel Management",
+                "Bachelor of Accounting",
+                "Bachelor of Business",
+                "Bachelor of Sport Management",
+                "Bachelor of Sport Management / Bachelor of Business",
+                "Bachelor of Sport Science (Human Movement) / Bachelor of Sport Management",
+                "Diploma of Business (Enterprise)"
+            ]
+        },
+        {
+            "value": "1212",
+            "text": "Creative Arts and Media",
+            "vocational": [],
+            "masters": [
+                "Graduate Certificate in Digital Media",
+                "Graduate Diploma in Digital Media",
+                "Master of Digital Media"
+            ],
+            "bachelor": ["Bachelor of Arts", "Bachelor of Music", "Bachelor of Screen Media"]
+        },
+        {
+            "value": "1146",
+            "text": "Education",
+            "vocational": [
+                "Certificate III in Early Childhood Education and Care",
+                "Diploma of Early Childhood Education and Care"
+            ],
+            "masters": [
+                "Graduate Certificate in Education",
+                "Graduate Diploma in Early Childhood Education",
+                "Graduate Diploma in Education",
+                "Master of Education",
+                "Master of Teaching (Primary Education)",
+                "Master of Teaching (Secondary Education)"
+            ],
+            "bachelor": [
+                "Bachelor of Early Childhood Education",
+                "Bachelor of Early Childhood Education and Leadership",
+                "Bachelor of Education (P-12)",
+                "Bachelor of Education Studies",
+                "Bachelor of Outdoor Leadership",
+                "Bachelor of Physical Education and Sport Science",
+                "Diploma of Education Studies"
+            ]
+        },
+        {
+            "value": "1209",
+            "text": "Engineering and Construction",
+            "vocational": [],
+            "masters": [],
+            "bachelor": []
+        },
+        {
+            "value": "1216",
+            "text": "Foundation Studies",
+            "vocational": [],
+            "masters": [],
+            "bachelor": []
+        },
+        {
+            "value": "1213",
+            "text": "Health, Nursing and Dermal Sciences",
+            "vocational": [],
+            "masters": [],
+            "bachelor": []
+        },
+        {
+            "value": "1217",
+            "text": "Hospitality and Commercial Cookery",
+            "vocational": [],
+            "masters": [],
+            "bachelor": []
+        },
+        {
+            "value": "1202",
+            "text": "Information Technology",
+            "vocational": [],
+            "masters": [],
+            "bachelor": []
+        },
+        {
+            "value": "1208",
+            "text": "Law and Criminology",
+            "vocational": [],
+            "masters": [],
+            "bachelor": []
+        },
+        { "value": "1214", "text": "Psychology", "vocational": [], "masters": [], "bachelor": [] },
+        { "value": "1210", "text": "Science", "vocational": [], "masters": [], "bachelor": [] },
+        {
+            "value": "1215",
+            "text": "Social Work and Community Development",
+            "vocational": [],
+            "masters": [],
+            "bachelor": []
+        },
+        {
+            "value": "1247",
+            "text": "Sport and Exercise Science",
+            "vocational": [],
+            "masters": [],
+            "bachelor": []
+        }
     ],
     "studyLevel": [
         "Vocational and further education courses",
@@ -20,6 +124,7 @@
         "Bachelor and diploma courses (undergraduate)"
     ],
     "topics": ["course length", "entry", "fees", "pathways", "start dates", "subjects"],
+
     "mastersGraduatesAndPhds": [
         "Graduate Diploma in Project Management",
         "Master of Business Administration (Global)",
@@ -42,5 +147,27 @@
         "Scholarships",
         "Student Support and Safety",
         "Career and Employment Services"
+    ],
+    "titles": [
+        {
+            "value": 1,
+            "text": "Select study area & level"
+        },
+        {
+            "value": 2,
+            "text": "Choose a course"
+        },
+        {
+            "value": 3,
+            "text": "Add information"
+        },
+        {
+            "value": 4,
+            "text": "Provide your details"
+        },
+        {
+            "value": 5,
+            "text": "Download brochure"
+        }
     ]
 }
