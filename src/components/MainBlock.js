@@ -1,17 +1,170 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import data from '../assets/data.json';
 import InfoComponent from './common/InfoComponent';
+import { XmplContext, useAdors, useEvents, useTrigger } from 'xmpl-react';
 
 export const MainBlock = () => {
+    const { xmp } = useContext(XmplContext);
+    const { updateAdors } = useAdors();
+    const { events } = useEvents();
+    const { trigger } = useTrigger();
+
     const [step, setStep] = useState(1);
     // const [error, setError] = useState('');
     const [activeCourse, setActiveCourse] = useState({});
     const [formData, setFormData] = useState({
+        firstName: xmp.r['firstname'],
+        lastName: xmp.r['lastname'],
+        email: xmp.r['email'],
+        phone: xmp.r['phone'],
+        optionalemail: xmp.r['optionalemail'],
+        residentcountry: xmp.r['residentcountry'],
+        nationality: xmp.r['nationality'],
+        month: xmp.r['month'],
+        year: xmp.r['year'],
+
+        graduatediplomainprojectmanagement: xmp.r['graduatediplomainprojectmanagement'],
+        masterofbusinessadministrationglobal: xmp.r['masterofbusinessadministrationglobal'],
+        masterofbusinessanalytics: xmp.r['masterofbusinessanalytics'],
+        masterofenterpriseresourceplanning: xmp.r['masterofenterpriseresourceplanning'],
+        masterofprofessionalaccounting: xmp.r['masterofprofessionalaccounting'],
+        masterofprojectmanagement: xmp.r['masterofprojectmanagement'],
+        masterofsupplychainmanagement: xmp.r['masterofsupplychainmanagement'],
+        associatedegreeinhospitalityandhotelmanagement:
+            xmp.r['associatedegreeinhospitalityandhotelmanagement'],
+        bachelorofaccounting: xmp.r['bachelorofaccounting'],
+        bachelorofbusiness: xmp.r['bachelorofbusiness'],
+        bachelorofsportmanagement: xmp.r['bachelorofsportmanagement'],
+        bachelorofsportmanagementbachelorofbusiness:
+            xmp.r['bachelorofsportmanagementbachelorofbusiness'],
+        bachelorofsportsciencehumanmovementbachelorofsportmanagement:
+            xmp.r['bachelorofsportsciencehumanmovementbachelorofsportmanagement'],
+        diplomaofbusinessenterprise: xmp.r['diplomaofbusinessenterprise'],
+        // graduatecertificateindigitalmedia,
+        // graduatediplomaindigitalmedia,
+        // masterofdigitalmedia,
+        // bachelorofarts,
+        // bachelorofmusic,
+        // bachelorofscreenmedia,
+        // graduatecertificateineducation,
+        // graduatediplomainearlychildhoodeducation,
+        // graduatediplomaineducation,
+        // masterofeducation,
+        // masterofteachingprimaryeducation,
+        // masterofteachingsecondaryeducation,
+        // bachelorofearlychildhoodeducation,
+        // bachelorofearlychildhoodeducationandleadership,
+        // bachelorofeducationp12,
+        // bachelorofeducationstudies,
+        // bachelorofoutdoorleadership,
+        // bachelorofphysicaleducationandsportscience,
+        // diplomaofeducationstudies,
+        // certificateiiiinearlychildhoodeducationandcare,
+        // diplomaofearlychildhoodeducationandcare,
+        // diplomaofbuildingandconstructionbuilding,
+        // graduatediplomainprojectmanagement,
+        // masterofengineering,
+        // masterofprojectmanagement,
+        // bachelorofbuildingdesign,
+        // bachelorofconstructionmanagementhonours,
+        // bachelorofengineeringhonourscivilengineering,
+        // bachelorofengineeringhonourselectricalandelectronicengineering,
+        // bachelorofengineeringhonoursmechanicalengineering,
+        // internationalfoundationsatvu,
+        // internationalfoundationsatvuextended,
+        // bachelorofscienceosteopathymasterofhealthscienceosteopathy,
+        // graduatecertificateinglobalpublichealth,
+        // masterofglobalpublichealth,
+        // bachelorofbiomedicalscience,
+        // bachelorofbiomedicine,
+        // bachelorofdermalsciences,
+        // bachelorofhealthscience,
+        // bachelorofhumannutrition,
+        // bachelorofmidwiferybachelorofnursing,
+        // bachelorofnursing,
+        // bachelorofparamedicine,
+        // bachelorofscienceosteopathymasterofhealthscienceosteopathy,
+        // associatedegreeinhospitalityandhotelmanagement,
+        // graduatecertificateinartificialintelligence,
+        // graduatecertificateindigitalmedia,
+        // graduatediplomaincybersecurity,
+        // graduatediplomaindigitalmedia,
+        // graduatediplomainprojectmanagement,
+        // masterofappliedinformationtechnology,
+        // masterofbusinessanalytics,
+        // masterofdigitalmedia,
+        // masterofenterpriseresourceplanning,
+        // masterofprojectmanagement,
+        // masterofsupplychainmanagement,
+        // graduatecertificateinartificialintelligence,
+        // graduatecertificateindigitalmedia,
+        // graduatediplomaincybersecurity,
+        // graduatediplomaindigitalmedia,
+        // graduatediplomainprojectmanagement,
+        // masterofappliedinformationtechnology,
+        // masterofbusinessanalytics,
+        // masterofdigitalmedia,
+        // masterofenterpriseresourceplanning,
+        // masterofprojectmanagement,
+        // masterofsupplychainmanagement,
+        // graduatediplomainmigrationlaw,
+        // bachelorofcriminaljustice,
+        // bachelorofcriminaljusticeandpsychologicalstudies,
+        // bachelorofcriminology,
+        // bachelorofcriminologybachelorofpsychologicalstudies,
+        // bacheloroflaws,
+        // bacheloroflawsgraduateentry,
+        // bacheloroflawsbachelorofcriminology,
+        // masterofcounselling,
+        // bachelorofcriminaljusticeandpsychologicalstudies,
+        // bachelorofcriminologybachelorofpsychologicalstudies,
+        // bachelorofpsychologicalstudies,
+        // bachelorofpsychologicalstudiesbachelorofbusiness,
+        // bachelorofpsychologyhonoursbachelorofsportsciencehumanmovementbachelorofpsychologicalstudies,
+        // bachelorofbiomedicalandexercisescience,
+        // bachelorofbiomedicalscience,
+        // bachelorofbiomedicine,
+        // bachelorofdermalsciences,
+        // bachelorofhealthscience,
+        // bachelorofhumannutrition,
+        // bachelorofsciencehonoursbiomedicalscience,
+        // graduatecertificateinglobalpublichealth,
+        // graduatecertificateininternationalcommunitydevelopment,
+        // graduatediplomaininternationalcommunitydevelopment,
+        // masterofinternationalcommunitydevelopment,
+        // bachelorofcommunitydevelopment,
+        // bachelorofsocialwork,
+        // bachelorofyouthwork,
+        // masterofclinicalexercisescienceandrehabilitation,
+        // bachelorofbiomedicalandexercisescience,
+        // bachelorofexercisescienceclinicalpractice,
+        // bachelorofexercisesciencesportpractice,
+        // bachelorofoutdoorleadership,
+        // bachelorofphysicaleducationandsportscience,
+        // bachelorofsportmanagementbachelorofsportmanagementbachelorofbusiness,
+        // bachelorofsportscience,
+        // bachelorofsportsciencehumanmovementbachelorofpsychologicalstudies,
+        // bachelorofsportsciencehumanmovementbachelorofsportmanagement,
+        // blockmodel,
+        // scholarships,
+        // studentsupportandsafety,
+        // careerandemploymentservices,
+        // englishlanguagerequirements,
+        // englishlanguagecourses,
+        // costofliving,
+        // housingandaccommodation,
+        // liveinmelbourne,
+
         studyArea: '',
         studyLevel: [],
         courses: [],
         additionalInformation: []
     });
+
+    const [showThanks, setShowThanks] = useState(false);
+    const rid =
+        new URLSearchParams(window.location.search).get('rid') ||
+        localStorage.getItem('xmpRecipientID');
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -28,31 +181,122 @@ export const MainBlock = () => {
             ...prevData,
             [name]:
                 type === 'checkbox'
-                    ? checked
-                        ? [...prevData[name], value]
-                        : prevData[name].filter((item) => item !== value)
+                    ? name === 'studyLevel'
+                        ? checked
+                            ? [...prevData[name], value]
+                            : prevData[name].filter((item) => item !== value)
+                        : checked
+                          ? true
+                          : false
                     : value
         }));
     };
 
-    const handleSubmit = () => {};
+    const handleSubmit = () => {
+        updateData();
+    };
+    const trackEvent = (e) => {
+        const isAnchor = e.target.tagName === 'A';
+        const options = {
+            sync: isAnchor,
+            recipientID: rid,
+            PageName: 'Sample',
+            ActionName: 'Send me more information',
+            ActionParams: 'actionParameters',
+            type: 'mousedown'
+        };
+        events(options);
+    };
+    const triggerEmail = async () => {
+        try {
+            trigger('E2');
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const updateData = async (e) => {
+        const res = await updateAdors({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
 
+            phone: formData.phone,
+            optionalemail: formData.optionalemail,
+            residentcountry: formData.residentcountry,
+            nationality: formData.nationality,
+            month: formData.month,
+            year: formData.year,
+
+            graduatediplomainprojectmanagement: formData.graduatediplomainprojectmanagement,
+            masterofbusinessadministrationglobal: formData.masterofbusinessadministrationglobal,
+            masterofbusinessanalytics: formData.masterofbusinessanalytics,
+            masterofenterpriseresourceplanning: formData.masterofenterpriseresourceplanning,
+            masterofprofessionalaccounting: formData.masterofprofessionalaccounting,
+            masterofprojectmanagement: formData.masterofprojectmanagement,
+            masterofsupplychainmanagement: formData.masterofsupplychainmanagement,
+            associatedegreeinhospitalityandhotelmanagement:
+                formData.associatedegreeinhospitalityandhotelmanagement,
+            bachelorofaccounting: formData.bachelorofaccounting,
+            bachelorofbusiness: formData.bachelorofbusiness,
+            bachelorofsportmanagement: formData.bachelorofsportmanagement,
+            bachelorofsportmanagementbachelorofbusiness:
+                formData.bachelorofsportmanagementbachelorofbusiness,
+            bachelorofsportsciencehumanmovementbachelorofsportmanagement:
+                formData.bachelorofsportsciencehumanmovementbachelorofsportmanagement,
+            diplomaofbusinessenterprise: formData.diplomaofbusinessenterprise,
+
+            followup: true
+        });
+        if (res) {
+            setShowThanks(true);
+        }
+        triggerEmail();
+        trackEvent(e);
+    };
     useEffect(() => {
         let tempActiveCourse = data.studyArea.filter((d) => d.value === formData.studyArea);
         let courses = {};
         if (formData.studyLevel.includes('Vocational and further education courses')) {
-            courses.vocational = [tempActiveCourse[0].vocational];
+            courses.vocational = [...tempActiveCourse[0].vocational];
         }
         if (formData.studyLevel.includes('Masters, graduate courses and PhDs (postgraduate)')) {
-            courses.masters = [tempActiveCourse[0].masters];
+            courses.masters = [...tempActiveCourse[0].masters];
         }
         if (formData.studyLevel.includes('Bachelor and diploma courses (undergraduate)')) {
-            courses.bachelor = [tempActiveCourse[0].bachelor];
+            courses.bachelor = [...tempActiveCourse[0].bachelor];
         }
         setActiveCourse(courses);
     }, [formData.studyLevel]);
+    useEffect(() => {
+        setFormData({
+            firstName: xmp.r['firstname'],
+            lastName: xmp.r['lastname'],
+            email: xmp.r['email'],
+            phone: xmp.r['phone'],
+            optionalemail: xmp.r['optionalemail'],
+            residentcountry: xmp.r['residentcountry'],
+            nationality: xmp.r['nationality'],
+            month: xmp.r['month'],
+            year: xmp.r['year'],
 
-    console.log(activeCourse, formData.studyArea);
+            graduatediplomainprojectmanagement: xmp.r['graduatediplomainprojectmanagement'],
+            masterofbusinessadministrationglobal: xmp.r['masterofbusinessadministrationglobal'],
+            masterofbusinessanalytics: xmp.r['masterofbusinessanalytics'],
+            masterofenterpriseresourceplanning: xmp.r['masterofenterpriseresourceplanning'],
+            masterofprofessionalaccounting: xmp.r['masterofprofessionalaccounting'],
+            masterofprojectmanagement: xmp.r['masterofprojectmanagement'],
+            masterofsupplychainmanagement: xmp.r['masterofsupplychainmanagement'],
+            associatedegreeinhospitalityandhotelmanagement:
+                xmp.r['associatedegreeinhospitalityandhotelmanagement'],
+            bachelorofaccounting: xmp.r['bachelorofaccounting'],
+            studyArea: '',
+            studyLevel: [],
+            courses: [],
+            additionalInformation: []
+        });
+    }, [xmp]);
+
+    console.log(formData);
     return (
         <main className="container mx-auto mb-32">
             <section>
@@ -139,36 +383,126 @@ export const MainBlock = () => {
                                     <li key={topic}>{topic}</li>
                                 ))}
                             </ul>
-                            <h3 className="text-[28px] leading-[36px] font-condensed my-[25px] text-[#262626] font-medium ">
-                                BUSINESS, MANAGEMENT AND FINANCE
+                            <h3 className="text-[28px] leading-[36px] uppercase font-condensed my-[25px] text-[#262626] font-medium ">
+                                {formData.studyArea}
                             </h3>
-                            <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
-                                Vocational and further education
-                            </h4>
-                            There are currently no Vocational and Further Education Courses
-                            (International) relating to Business, Management and Finance.
-                            <div className="my-4">
-                                <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
-                                    Masters, graduate courses and PhDs (postgraduate)
-                                </label>
-                                <div>
-                                    {data.studyLevel.map((course) => (
-                                        <div key={course}>
-                                            <input
-                                                type="checkbox"
-                                                id={course}
-                                                name="courses"
-                                                value={course}
-                                                checked={formData.courses.includes(course)}
-                                                onChange={handleChange}
-                                            />
-                                            <label htmlFor="reading" className="ml-2 mr-4">
-                                                {course}
-                                            </label>
+                            {activeCourse?.vocational &&
+                                (activeCourse?.vocational.length === 0 ? (
+                                    `There are currently no Vocational and Further Education Courses(International) relating to ${formData.studyArea}`
+                                ) : (
+                                    <div className="my-4">
+                                        <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                                            Vocational and further education
+                                        </label>
+                                        <div>
+                                            {activeCourse?.vocational?.map((course) => (
+                                                <div key={course}>
+                                                    <input
+                                                        type="checkbox"
+                                                        id={course}
+                                                        name={course
+                                                            .replaceAll(' ', '')
+                                                            .replaceAll('(', '')
+                                                            .replaceAll(')', '')
+                                                            .toLowerCase()}
+                                                        value={course}
+                                                        checked={
+                                                            formData[
+                                                                course
+                                                                    .replaceAll(' ', '')
+                                                                    .replaceAll('(', '')
+                                                                    .replaceAll(')', '')
+                                                                    .toLowerCase()
+                                                            ] === true
+                                                        }
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="reading" className="ml-2 mr-4">
+                                                        {course}
+                                                    </label>
+                                                </div>
+                                            ))}
                                         </div>
-                                    ))}
-                                </div>
-                            </div>
+                                    </div>
+                                ))}
+                            {activeCourse?.bachelor &&
+                                (activeCourse?.bachelor.length === 0 ? (
+                                    `There are currently no Bachelor Courses(International) relating to ${formData.studyArea}`
+                                ) : (
+                                    <div className="my-4">
+                                        <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                                            Bachelor Courses
+                                        </label>
+                                        <div>
+                                            {activeCourse?.bachelor?.map((course) => (
+                                                <div key={course}>
+                                                    <input
+                                                        type="checkbox"
+                                                        id={course}
+                                                        name={course
+                                                            .replaceAll(' ', '')
+                                                            .replaceAll('(', '')
+                                                            .replaceAll(')', '')
+                                                            .toLowerCase()}
+                                                        value={course}
+                                                        checked={
+                                                            formData[
+                                                                course
+                                                                    .replaceAll(' ', '')
+                                                                    .replaceAll('(', '')
+                                                                    .replaceAll(')', '')
+                                                                    .toLowerCase()
+                                                            ] === true
+                                                        }
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="reading" className="ml-2 mr-4">
+                                                        {course}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            {activeCourse?.masters &&
+                                (activeCourse?.masters.length === 0 ? (
+                                    `There are currently no Masters Courses(International) relating to  ${formData.studyArea}`
+                                ) : (
+                                    <div className="my-4">
+                                        <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                                            Masters, graduate courses and PhDs (postgraduate)
+                                        </label>
+                                        <div>
+                                            {activeCourse?.masters?.map((course) => (
+                                                <div key={course}>
+                                                    <input
+                                                        type="checkbox"
+                                                        id={course}
+                                                        name={course
+                                                            .replaceAll(' ', '')
+                                                            .replaceAll('(', '')
+                                                            .replaceAll(')', '')
+                                                            .toLowerCase()}
+                                                        value={course}
+                                                        checked={
+                                                            formData[
+                                                                course
+                                                                    .replaceAll(' ', '')
+                                                                    .replaceAll('(', '')
+                                                                    .replaceAll(')', '')
+                                                                    .toLowerCase()
+                                                            ] === true
+                                                        }
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="reading" className="ml-2 mr-4">
+                                                        {course}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
                         </section>
                     )}
                     {step === 3 && (
@@ -198,12 +532,13 @@ export const MainBlock = () => {
                                         <li key={about}>
                                             <input
                                                 type="checkbox"
-                                                id={about}
-                                                name="additionalInformation"
+                                                name={about.replaceAll(' ', '').toLowerCase()}
                                                 value={about}
-                                                checked={formData.additionalInformation.includes(
-                                                    about
-                                                )}
+                                                checked={
+                                                    formData[
+                                                        about.replaceAll(' ', '').toLowerCase()
+                                                    ] === true
+                                                }
                                                 onChange={handleChange}
                                             />
                                             <label htmlFor="reading" className="ml-2 mr-4">
@@ -269,7 +604,7 @@ export const MainBlock = () => {
                                     Which country are you currently living in?
                                 </label>
                                 <select className="h-12 max-w-md px-4 border">
-                                    <option value="" disabled selected>
+                                    <option value="" disabled defaultValue>
                                         Select a Country
                                     </option>
                                 </select>
@@ -279,7 +614,7 @@ export const MainBlock = () => {
                                     What is your nationality?
                                 </label>
                                 <select className="h-12 max-w-md px-4 border">
-                                    <option value="" disabled selected>
+                                    <option value="" disabled defaultValue>
                                         Select a Country
                                     </option>
                                 </select>
@@ -289,12 +624,12 @@ export const MainBlock = () => {
                                     When do you plan to start your study?
                                 </label>
                                 <select className="h-12 max-w-md px-4 border">
-                                    <option value="" disabled selected>
+                                    <option value="" disabled defaultValue>
                                         Month
                                     </option>
                                 </select>
                                 <select className="h-12 max-w-md px-4 border">
-                                    <option value="" disabled selected>
+                                    <option value="" disabled defaultValue>
                                         Year
                                     </option>
                                 </select>
@@ -307,11 +642,17 @@ export const MainBlock = () => {
                                     className="h-12 max-w-md px-4 border "
                                     placeholder="Given Name"
                                     type="text"
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
                                 />
                                 <input
                                     className="h-12 max-w-md px-4 border "
                                     placeholder="Family Name"
                                     type="text"
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="flex flex-col text-sm font-normal gap-">
@@ -322,11 +663,17 @@ export const MainBlock = () => {
                                     className="h-12 max-w-md px-4 border "
                                     placeholder="0412 345 678 (Optional)"
                                     type="text"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
                                 />
                                 <input
                                     className="h-12 max-w-md px-4 border "
                                     placeholder="Email Address"
                                     type="text"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="flex flex-col text-sm font-normal gap-">
@@ -337,6 +684,9 @@ export const MainBlock = () => {
                                     className="h-12 max-w-md px-4 border "
                                     placeholder="Email Address (optional)"
                                     type="text"
+                                    name="optionalemail"
+                                    value={formData.optionalemail}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="flex flex-col text-sm font-normal gap-">
@@ -397,7 +747,7 @@ export const MainBlock = () => {
                             </div>
                         </section>
                     )}
-                    {step === 5 && <></>}
+                    {step === 5 && <>{showThanks ? 'Thank you' : 'Please submit the form'}</>}
                 </form>
             </section>
             <section className="flex w-full justify-between mt-32 px-10">
