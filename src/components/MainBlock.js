@@ -192,16 +192,13 @@ export const MainBlock = () => {
         }));
     };
 
-    const handleSubmit = () => {
-        updateData();
-    };
     const trackEvent = (e) => {
         const isAnchor = e.target.tagName === 'A';
         const options = {
             sync: isAnchor,
             recipientID: rid,
             PageName: 'Sample',
-            ActionName: 'Send me more information',
+            ActionName: 'Submit',
             ActionParams: 'actionParameters',
             type: 'mousedown'
         };
@@ -215,6 +212,8 @@ export const MainBlock = () => {
         }
     };
     const updateData = async (e) => {
+        e.preventDefault();
+
         const res = await updateAdors({
             firstName: formData.firstName,
             lastName: formData.lastName,
@@ -312,7 +311,7 @@ export const MainBlock = () => {
                 ))}
             </section>
             <section className="bg-white w-full  p-8 ">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={updateData}>
                     {step === 1 && (
                         <section>
                             <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
@@ -774,7 +773,7 @@ export const MainBlock = () => {
                             let elem = document.getElementById('scrollToHere');
                             elem.scrollIntoView();
                         } else {
-                            handleSubmit();
+                            updateData(e);
                         }
                     }}>
                     {step !== 5 ? 'Next' : 'Submit'}
