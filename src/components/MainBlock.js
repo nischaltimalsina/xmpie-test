@@ -764,20 +764,22 @@ export const MainBlock = () => {
                         </button>
                     )}
                 </div>
-                <button
-                    className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        if (step !== 5) {
-                            setStep((prevStep) => Number(prevStep) + 1);
-                            let elem = document.getElementById('scrollToHere');
-                            elem.scrollIntoView();
-                        } else {
-                            updateData(e);
-                        }
-                    }}>
-                    {step !== 5 ? 'Next' : 'Submit'}
-                </button>
+                {!showThanks && (
+                    <button
+                        className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (step !== 5) {
+                                setStep((prevStep) => Number(prevStep) + 1);
+                                let elem = document.getElementById('scrollToHere');
+                                elem.scrollIntoView();
+                            } else {
+                                updateData(e);
+                            }
+                        }}>
+                        {step !== 5 ? 'Next' : 'Submit'}
+                    </button>
+                )}
             </section>
         </main>
     );
