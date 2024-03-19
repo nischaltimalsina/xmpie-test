@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import data from '../assets/data.json';
 import InfoComponent from './common/InfoComponent';
-import { XmplContext, useEvents, useTrigger } from 'xmpl-react';
+import { XmplContext, useAdors, useEvents, useTrigger } from 'xmpl-react';
 
 export const MainBlock = () => {
     const { xmp } = useContext(XmplContext);
-    // const { updateAdors } = useAdors();
+    const { updateAdors } = useAdors();
     const { events } = useEvents();
     const { trigger } = useTrigger();
 
@@ -161,7 +161,7 @@ export const MainBlock = () => {
         additionalInformation: []
     });
 
-    // const [showThanks, setShowThanks] = useState(false);
+    const [showThanks, setShowThanks] = useState(false);
     const rid =
         new URLSearchParams(window.location.search).get('rid') ||
         localStorage.getItem('xmpRecipientID');
@@ -214,40 +214,40 @@ export const MainBlock = () => {
     const updateData = async (e) => {
         e.preventDefault();
 
-        // const res = await updateAdors({
-        //     firstName: formData.firstName,
-        //     lastName: formData.lastName,
-        //     email: formData.email,
+        const res = await updateAdors({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
 
-        //     phone: formData.phone,
-        //     optionalemail: formData.optionalemail,
-        //     residentcountry: formData.residentcountry,
-        //     nationality: formData.nationality,
-        //     month: formData.month,
-        //     year: formData.year,
+            phone: formData.phone,
+            optionalemail: formData.optionalemail,
+            residentcountry: formData.residentcountry,
+            nationality: formData.nationality,
+            month: formData.month,
+            year: formData.year,
 
-        //     graduatediplomainprojectmanagement: formData.graduatediplomainprojectmanagement,
-        //     masterofbusinessadministrationglobal: formData.masterofbusinessadministrationglobal,
-        //     masterofbusinessanalytics: formData.masterofbusinessanalytics,
-        //     masterofenterpriseresourceplanning: formData.masterofenterpriseresourceplanning,
-        //     masterofprofessionalaccounting: formData.masterofprofessionalaccounting,
-        //     masterofprojectmanagement: formData.masterofprojectmanagement,
-        //     masterofsupplychainmanagement: formData.masterofsupplychainmanagement,
-        //     associatedegreeinhospitalityandhotelmanagement:
-        //         formData.associatedegreeinhospitalityandhotelmanagement,
-        //     bachelorofaccounting: formData.bachelorofaccounting,
-        //     bachelorofbusiness: formData.bachelorofbusiness,
-        //     bachelorofsportmanagement: formData.bachelorofsportmanagement,
-        //     bachelorofsportmanagementbachelorofbusiness:
-        //         formData.bachelorofsportmanagementbachelorofbusiness,
-        //     bachelorofsportsciencehumanmovementbachelorofsportmanagement:
-        //         formData.bachelorofsportsciencehumanmovementbachelorofsportmanagement,
-        //     diplomaofbusinessenterprise: formData.diplomaofbusinessenterprise,
-        //     followup: true
-        // });
-        // if (res) {
-        //     setShowThanks(true);
-        // }
+            graduatediplomainprojectmanagement: formData.graduatediplomainprojectmanagement,
+            masterofbusinessadministrationglobal: formData.masterofbusinessadministrationglobal,
+            masterofbusinessanalytics: formData.masterofbusinessanalytics,
+            masterofenterpriseresourceplanning: formData.masterofenterpriseresourceplanning,
+            masterofprofessionalaccounting: formData.masterofprofessionalaccounting,
+            masterofprojectmanagement: formData.masterofprojectmanagement,
+            masterofsupplychainmanagement: formData.masterofsupplychainmanagement,
+            associatedegreeinhospitalityandhotelmanagement:
+                formData.associatedegreeinhospitalityandhotelmanagement,
+            bachelorofaccounting: formData.bachelorofaccounting,
+            bachelorofbusiness: formData.bachelorofbusiness,
+            bachelorofsportmanagement: formData.bachelorofsportmanagement,
+            bachelorofsportmanagementbachelorofbusiness:
+                formData.bachelorofsportmanagementbachelorofbusiness,
+            bachelorofsportsciencehumanmovementbachelorofsportmanagement:
+                formData.bachelorofsportsciencehumanmovementbachelorofsportmanagement,
+            diplomaofbusinessenterprise: formData.diplomaofbusinessenterprise,
+            followup: true
+        });
+        if (res) {
+            setShowThanks(true);
+        }
         triggerEmail();
         trackEvent(e);
     };
@@ -292,7 +292,6 @@ export const MainBlock = () => {
             courses: [],
             additionalInformation: []
         });
-        console.log(xmp);
     }, [xmp]);
 
     return (
@@ -745,14 +744,7 @@ export const MainBlock = () => {
                             </div>
                         </section>
                     )}
-                    {step === 5 && (
-                        <>
-                            {
-                                // showThanks
-                                // ? 'Thank you' : 'Please submit the form'
-                            }
-                        </>
-                    )}
+                    {step === 5 && <>{showThanks ? 'Thank you' : 'Please submit the form'}</>}
                 </form>
             </section>
             <section className="flex w-full justify-between mt-32 px-10">
@@ -770,9 +762,8 @@ export const MainBlock = () => {
                         </button>
                     )}
                 </div>
-                {
-                    // !showThanks &&
-                    step === 5 ? (
+                {!showThanks &&
+                    (step === 5 ? (
                         <button
                             type="submit"
                             className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
@@ -790,8 +781,7 @@ export const MainBlock = () => {
                             }}>
                             Next
                         </button>
-                    )
-                }
+                    ))}
             </section>
         </main>
     );
