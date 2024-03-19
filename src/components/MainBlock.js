@@ -165,7 +165,7 @@ export const MainBlock = () => {
     const rid =
         new URLSearchParams(window.location.search).get('rid') ||
         localStorage.getItem('xmpRecipientID');
-
+    console.log(rid);
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
 
