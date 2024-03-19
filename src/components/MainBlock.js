@@ -292,6 +292,7 @@ export const MainBlock = () => {
             courses: [],
             additionalInformation: []
         });
+        console.log(xmp);
     }, [xmp]);
 
     return (
