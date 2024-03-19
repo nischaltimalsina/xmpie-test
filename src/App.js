@@ -7,7 +7,9 @@ import { MainBlock } from './components/MainBlock';
 function App() {
     const { xmp } = useContext(XmplContext);
     const { getAdorValues } = useAdors();
-    const rid = new URLSearchParams(window.location.search).get('rid');
+    const rid =
+        new URLSearchParams(window.location.search).get('rid') ||
+        localStorage.getItem('xmpRecipientID');
 
     useEffect(() => {
         getAdorValues({
