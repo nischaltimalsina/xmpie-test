@@ -206,7 +206,7 @@ export const MainBlock = () => {
     };
     const triggerEmail = async () => {
         try {
-            trigger({ recipientID: rid, touchPointId: 'E2' });
+            trigger(rid, 'E2');
         } catch (error) {
             console.log(error);
         }
@@ -226,24 +226,23 @@ export const MainBlock = () => {
             month: formData.month,
             year: formData.year,
 
-            graduatediplomainprojectmanagement: formData.graduatediplomainprojectmanagement,
-            masterofbusinessadministrationglobal: formData.masterofbusinessadministrationglobal,
-            masterofbusinessanalytics: formData.masterofbusinessanalytics,
-            masterofenterpriseresourceplanning: formData.masterofenterpriseresourceplanning,
-            masterofprofessionalaccounting: formData.masterofprofessionalaccounting,
-            masterofprojectmanagement: formData.masterofprojectmanagement,
-            masterofsupplychainmanagement: formData.masterofsupplychainmanagement,
-            associatedegreeinhospitalityandhotelmanagement:
-                formData.associatedegreeinhospitalityandhotelmanagement,
-            bachelorofaccounting: formData.bachelorofaccounting,
-            bachelorofbusiness: formData.bachelorofbusiness,
-            bachelorofsportmanagement: formData.bachelorofsportmanagement,
-            bachelorofsportmanagementbachelorofbusiness:
-                formData.bachelorofsportmanagementbachelorofbusiness,
-            bachelorofsportsciencehumanmovementbachelorofsportmanagement:
-                formData.bachelorofsportsciencehumanmovementbachelorofsportmanagement,
-            diplomaofbusinessenterprise: formData.diplomaofbusinessenterprise,
-            rid,
+            // graduatediplomainprojectmanagement: formData.graduatediplomainprojectmanagement,
+            // masterofbusinessadministrationglobal: formData.masterofbusinessadministrationglobal,
+            // masterofbusinessanalytics: formData.masterofbusinessanalytics,
+            // masterofenterpriseresourceplanning: formData.masterofenterpriseresourceplanning,
+            // masterofprofessionalaccounting: formData.masterofprofessionalaccounting,
+            // masterofprojectmanagement: formData.masterofprojectmanagement,
+            // masterofsupplychainmanagement: formData.masterofsupplychainmanagement,
+            // associatedegreeinhospitalityandhotelmanagement:
+            //     formData.associatedegreeinhospitalityandhotelmanagement,
+            // bachelorofaccounting: formData.bachelorofaccounting,
+            // bachelorofbusiness: formData.bachelorofbusiness,
+            // bachelorofsportmanagement: formData.bachelorofsportmanagement,
+            // bachelorofsportmanagementbachelorofbusiness:
+            //     formData.bachelorofsportmanagementbachelorofbusiness,
+            // bachelorofsportsciencehumanmovementbachelorofsportmanagement:
+            //     formData.bachelorofsportsciencehumanmovementbachelorofsportmanagement,
+            // diplomaofbusinessenterprise: formData.diplomaofbusinessenterprise,
             followup: true
         });
         if (res) {
@@ -295,7 +294,6 @@ export const MainBlock = () => {
         });
     }, [xmp]);
 
-    console.log(formData);
     return (
         <main className="container mx-auto mb-32">
             <section>
