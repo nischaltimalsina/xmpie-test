@@ -8,7 +8,7 @@ function App() {
     const { xmp } = useContext(XmplContext);
     const { getAdorValues } = useAdors();
     const rid = new URLSearchParams(window.location.search).get('rid');
-    console.log(new URLSearchParams(window.location.search), 'here');
+    console.log(new URLSearchParams(window.location.search).get('rid'), 'here');
     useEffect(() => {
         getAdorValues({
             rid,
