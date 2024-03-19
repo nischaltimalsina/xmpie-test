@@ -7,10 +7,8 @@ import { MainBlock } from './components/MainBlock';
 function App() {
     const { xmp } = useContext(XmplContext);
     const { getAdorValues } = useAdors();
-    const rid =
-        new URLSearchParams(window.location.search).get('rid') ||
-        localStorage.getItem('xmpRecipientID');
-
+    const rid = new URLSearchParams(window.location.search).get('rid');
+    console.log(new URLSearchParams(window.location.search), 'here');
     useEffect(() => {
         getAdorValues({
             rid,
@@ -159,6 +157,7 @@ function App() {
             isCached: true,
             noCache: false
         });
+        console.log(rid);
     }, [xmp]);
     return (
         <div className="bg-gray-100 w-full h-full min-h-screen">

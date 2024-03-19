@@ -13,13 +13,11 @@ export const Contact = () => {
     const { trigger } = useTrigger();
     const rid =
         new URLSearchParams(window.location.search).get('rid') ||
-        localStorage.getItem('xmpRecipientID');
-
-    useEffect(() => {
-        setFirstName(xmp.r['firstname']);
-        setLastName(xmp.r['lastname']);
-        setEmail(xmp.r['email']);
-    }, [xmp]);
+        useEffect(() => {
+            setFirstName(xmp.r['firstname']);
+            setLastName(xmp.r['lastname']);
+            setEmail(xmp.r['email']);
+        }, [xmp]);
 
     const trackEvent = (e) => {
         const isAnchor = e.target.tagName === 'A';
