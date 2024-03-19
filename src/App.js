@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { XmplContext, useAdors } from 'xmpl-react';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
-// import { MainBlock } from './components/MainBlock';
+import { MainBlock } from './components/MainBlock';
 import { Contact } from './components/Contact';
 
 function App() {
@@ -165,7 +165,7 @@ function App() {
         <div className="bg-gray-100 w-full h-full min-h-screen">
             <Header />
             <Contact />
-            {/* <MainBlock /> */}
+            <MainBlock />
             <Footer />
         </div>
     );
