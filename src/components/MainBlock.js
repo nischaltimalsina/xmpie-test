@@ -206,7 +206,7 @@ export const MainBlock = () => {
     };
     const triggerEmail = async () => {
         try {
-            trigger('E2');
+            trigger({ recipientID: rid, touchPointId: 'E2' });
         } catch (error) {
             console.log(error);
         }
@@ -243,7 +243,7 @@ export const MainBlock = () => {
             bachelorofsportsciencehumanmovementbachelorofsportmanagement:
                 formData.bachelorofsportsciencehumanmovementbachelorofsportmanagement,
             diplomaofbusinessenterprise: formData.diplomaofbusinessenterprise,
-
+            rid,
             followup: true
         });
         if (res) {
