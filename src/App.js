@@ -7,7 +7,10 @@ import { MainBlock } from './components/MainBlock';
 function App() {
     const { xmp } = useContext(XmplContext);
     const { getAdorValues } = useAdors();
-    const rid = new URLSearchParams(window.location.search).get('rand');
+    const rid =
+        new URLSearchParams(window.location.search).get('rid') ||
+        localStorage.getItem('xmpRecipientID');
+    console.log(rid);
     useEffect(() => {
         getAdorValues({
             rid,
