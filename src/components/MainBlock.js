@@ -206,7 +206,7 @@ export const MainBlock = () => {
     };
     const triggerEmail = async () => {
         try {
-            trigger(rid, 'E2');
+            trigger('E2');
         } catch (error) {
             console.log(error);
         }
@@ -226,23 +226,23 @@ export const MainBlock = () => {
             month: formData.month,
             year: formData.year,
 
-            // graduatediplomainprojectmanagement: formData.graduatediplomainprojectmanagement,
-            // masterofbusinessadministrationglobal: formData.masterofbusinessadministrationglobal,
-            // masterofbusinessanalytics: formData.masterofbusinessanalytics,
-            // masterofenterpriseresourceplanning: formData.masterofenterpriseresourceplanning,
-            // masterofprofessionalaccounting: formData.masterofprofessionalaccounting,
-            // masterofprojectmanagement: formData.masterofprojectmanagement,
-            // masterofsupplychainmanagement: formData.masterofsupplychainmanagement,
-            // associatedegreeinhospitalityandhotelmanagement:
-            //     formData.associatedegreeinhospitalityandhotelmanagement,
-            // bachelorofaccounting: formData.bachelorofaccounting,
-            // bachelorofbusiness: formData.bachelorofbusiness,
-            // bachelorofsportmanagement: formData.bachelorofsportmanagement,
-            // bachelorofsportmanagementbachelorofbusiness:
-            //     formData.bachelorofsportmanagementbachelorofbusiness,
-            // bachelorofsportsciencehumanmovementbachelorofsportmanagement:
-            //     formData.bachelorofsportsciencehumanmovementbachelorofsportmanagement,
-            // diplomaofbusinessenterprise: formData.diplomaofbusinessenterprise,
+            graduatediplomainprojectmanagement: formData.graduatediplomainprojectmanagement,
+            masterofbusinessadministrationglobal: formData.masterofbusinessadministrationglobal,
+            masterofbusinessanalytics: formData.masterofbusinessanalytics,
+            masterofenterpriseresourceplanning: formData.masterofenterpriseresourceplanning,
+            masterofprofessionalaccounting: formData.masterofprofessionalaccounting,
+            masterofprojectmanagement: formData.masterofprojectmanagement,
+            masterofsupplychainmanagement: formData.masterofsupplychainmanagement,
+            associatedegreeinhospitalityandhotelmanagement:
+                formData.associatedegreeinhospitalityandhotelmanagement,
+            bachelorofaccounting: formData.bachelorofaccounting,
+            bachelorofbusiness: formData.bachelorofbusiness,
+            bachelorofsportmanagement: formData.bachelorofsportmanagement,
+            bachelorofsportmanagementbachelorofbusiness:
+                formData.bachelorofsportmanagementbachelorofbusiness,
+            bachelorofsportsciencehumanmovementbachelorofsportmanagement:
+                formData.bachelorofsportsciencehumanmovementbachelorofsportmanagement,
+            diplomaofbusinessenterprise: formData.diplomaofbusinessenterprise,
             followup: true
         });
         if (res) {
@@ -762,22 +762,26 @@ export const MainBlock = () => {
                         </button>
                     )}
                 </div>
-                {!showThanks && (
-                    <button
-                        className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            if (step !== 5) {
+                {!showThanks &&
+                    (step === 5 ? (
+                        <button
+                            type="submit"
+                            className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                            onClick={updateData}>
+                            Submit
+                        </button>
+                    ) : (
+                        <button
+                            className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                            onClick={(e) => {
+                                e.preventDefault();
                                 setStep((prevStep) => Number(prevStep) + 1);
                                 let elem = document.getElementById('scrollToHere');
                                 elem.scrollIntoView();
-                            } else {
-                                updateData(e);
-                            }
-                        }}>
-                        {step !== 5 ? 'Next' : 'Submit'}
-                    </button>
-                )}
+                            }}>
+                            Next
+                        </button>
+                    ))}
             </section>
         </main>
     );
