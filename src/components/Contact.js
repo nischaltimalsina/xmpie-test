@@ -115,14 +115,14 @@ export const Contact = () => {
                 <section id="scrollToHere" className="flex bg-white justify-around mb-1 py-16">
                     {data.titles.map((title) => (
                         <span
-                            className="text-center text-lg font-semibold leading-7"
+                            className={`text-center text-lg font-semibold leading-7 ${step === title.value ? 'text-green-500' : ''}`}
                             key={title.value}>
                             {title.text}
                         </span>
                     ))}
                 </section>
                 <section className="bg-white w-full  p-8 ">
-                    <form className="bg-white">
+                    <form className="">
                         {step === 1 && (
                             <section>
                                 <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
