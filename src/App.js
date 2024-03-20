@@ -17,8 +17,8 @@ function App() {
             rid,
             isLogin: true,
             adors: [
-                'firstname',
-                'lastname',
+                'firstName',
+                'lastName',
                 'preference',
                 'email',
                 'photo1',
