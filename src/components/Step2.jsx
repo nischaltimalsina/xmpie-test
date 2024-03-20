@@ -1,7 +1,132 @@
 import React from 'react';
+import data from '../assets/data.json';
 
-const Step2 = () => {
-    return <div>Step2</div>;
+const Step2 = ({ studyArea, activeCourse, courses, setCourses }) => {
+    return (
+        <section>
+            <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
+                WHAT COURSES ARE YOU INTERESTED IN?
+            </h2>
+            Choose up to 12 courses from the options below and we’ll add them to your personalised
+            brochure.
+            <br />
+            We&apos;ll also include information on these topics, and more:
+            <ul className="list-disc ml-8">
+                {data.topics.map((topic) => (
+                    <li key={topic}>{topic}</li>
+                ))}
+            </ul>
+            <h3 className="text-[28px] leading-[36px] uppercase font-condensed my-[25px] text-[#262626] font-medium ">
+                {studyArea}
+            </h3>
+            {activeCourse?.vocational &&
+                (activeCourse?.vocational.length === 0 ? (
+                    `There are currently no Vocational and Further Education Courses(International) relating to ${studyArea}`
+                ) : (
+                    <div className="my-4">
+                        <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                            Vocational and further education
+                        </label>
+                        <div>
+                            {activeCourse?.vocational?.map((course) => (
+                                <div key={course}>
+                                    <input
+                                        type="checkbox"
+                                        id={course}
+                                        name="courses"
+                                        value={course}
+                                        checked={courses.includes(course)}
+                                        onChange={(e) => {
+                                            setCourses((prevData) =>
+                                                e.target.checked
+                                                    ? [...prevData, e.target.value]
+                                                    : prevData.filter(
+                                                          (item) => item !== e.target.value
+                                                      )
+                                            );
+                                        }}
+                                    />
+                                    <label htmlFor="reading" className="ml-2 mr-4">
+                                        {course}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            {activeCourse?.bachelor &&
+                (activeCourse?.bachelor.length === 0 ? (
+                    `There are currently no Bachelor Courses(International) relating to ${studyArea}`
+                ) : (
+                    <div className="my-4">
+                        <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                            Bachelor Courses
+                        </label>
+                        <div>
+                            {activeCourse?.bachelor?.map((course) => (
+                                <div key={course}>
+                                    <input
+                                        type="checkbox"
+                                        id={course}
+                                        name="courses"
+                                        value={course}
+                                        checked={courses.includes(course)}
+                                        onChange={(e) => {
+                                            setCourses((prevData) =>
+                                                e.target.checked
+                                                    ? [...prevData, e.target.value]
+                                                    : prevData.filter(
+                                                          (item) => item !== e.target.value
+                                                      )
+                                            );
+                                        }}
+                                    />
+                                    <label htmlFor="reading" className="ml-2 mr-4">
+                                        {course}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            {activeCourse?.masters &&
+                (activeCourse?.masters.length === 0 ? (
+                    `There are currently no Masters Courses(International) relating to  ${studyArea}`
+                ) : (
+                    <div className="my-4">
+                        <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                            Masters, graduate courses and PhDs (postgraduate)
+                        </label>
+                        <div>
+                            {activeCourse?.masters?.map((course) => (
+                                <div key={course}>
+                                    <input
+                                        type="checkbox"
+                                        id={course}
+                                        name="courses"
+                                        value={course}
+                                        checked={courses.includes(course)}
+                                        onChange={(e) => {
+                                            setCourses((prevData) =>
+                                                e.target.checked
+                                                    ? [...prevData, e.target.value]
+                                                    : prevData.filter(
+                                                          (item) => item !== e.target.value
+                                                      )
+                                            );
+                                        }}
+                                    />
+                                    <label htmlFor="reading" className="ml-2 mr-4">
+                                        {course}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+        </section>
+    );
 };
 
 export default Step2;
+Step2.propTypes = false;

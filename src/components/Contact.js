@@ -1,7 +1,11 @@
 import { XmplContext, useAdors, useEvents, useTrigger } from 'xmpl-react';
 import { useContext, useEffect, useState } from 'react';
 import data from '../assets/data.json';
-import InfoComponent from './common/InfoComponent';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
+import Step5 from './Step5';
+import CallToActions from './CallToActions';
 
 export const Contact = () => {
     const { xmp } = useContext(XmplContext);
@@ -67,7 +71,8 @@ export const Contact = () => {
         }
     };
 
-    const downLoadBrochure = () => {
+    const downLoadBrochure = (e) => {
+        e.preventDefault();
         try {
             trigger('P2');
         } catch (error) {
@@ -133,326 +138,26 @@ export const Contact = () => {
                 <section className="bg-white w-full  p-8 ">
                     <form className="">
                         {step === 1 && (
-                            <section>
-                                <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
-                                    WHAT STUDY AREA AND LEVEL ARE YOU INTERESTED IN?
-                                </h2>
-                                {/* <div className="w-full border-red-600 border-[2px] p-4 text-red-600 text-lg font-semibold mb-4">
-                                {error}
-                            </div> */}
-                                <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
-                                    StudyArea
-                                    <InfoComponent text="Choose your study Area" />
-                                </label>
-                                <select
-                                    id="studyArea"
-                                    name="studyArea"
-                                    value={studyArea}
-                                    onChange={(e) => {
-                                        setStudyArea(e.target.value);
-                                    }}
-                                    className="w-full max-w-md text-xs box-border rounded-none h-12 px-[15px] border-[1px] border-[#ccc]  shadow-sm focus-visible:outline-0">
-                                    <option value="" className="text-xs">
-                                        Select a Study Area
-                                    </option>
-                                    {data?.studyArea.slice(0, 3).map((study) => (
-                                        <option
-                                            key={study.value}
-                                            value={study.value}
-                                            className="text-xs">
-                                            {study.text}
-                                        </option>
-                                    ))}
-                                </select>
-                                <div className="my-4 max-w-md">
-                                    <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
-                                        Study Level
-                                        <InfoComponent text="Choose your study Level" />
-                                    </label>
-                                    Select up to 2 of the options below:
-                                    <div>
-                                        {data.studyLevel.map((level) => (
-                                            <div key={level}>
-                                                <input
-                                                    type="checkbox"
-                                                    id={level}
-                                                    name="studyLevel"
-                                                    value={level}
-                                                    checked={studyLevel.includes(level)}
-                                                    onChange={(e) => {
-                                                        setStudyLevel((prevData) =>
-                                                            e.target.checked
-                                                                ? [...prevData, e.target.value]
-                                                                : prevData.filter(
-                                                                      (item) =>
-                                                                          item !== e.target.value
-                                                                  )
-                                                        );
-                                                    }}
-                                                />
-                                                <label htmlFor="reading" className="ml-2 mr-4">
-                                                    {level}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </section>
+                            <Step1
+                                studyArea={studyArea}
+                                setStudyArea={setStudyArea}
+                                studyLevel={studyLevel}
+                                setStudyLevel={setStudyLevel}
+                            />
                         )}
                         {step === 2 && (
-                            <section>
-                                <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
-                                    WHAT COURSES ARE YOU INTERESTED IN?
-                                </h2>
-                                Choose up to 12 courses from the options below and we’ll add them to
-                                your personalised brochure.
-                                <br />
-                                We&apos;ll also include information on these topics, and more:
-                                <ul className="list-disc ml-8">
-                                    {data.topics.map((topic) => (
-                                        <li key={topic}>{topic}</li>
-                                    ))}
-                                </ul>
-                                <h3 className="text-[28px] leading-[36px] uppercase font-condensed my-[25px] text-[#262626] font-medium ">
-                                    {studyArea}
-                                </h3>
-                                {activeCourse?.vocational &&
-                                    (activeCourse?.vocational.length === 0 ? (
-                                        `There are currently no Vocational and Further Education Courses(International) relating to ${studyArea}`
-                                    ) : (
-                                        <div className="my-4">
-                                            <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
-                                                Vocational and further education
-                                            </label>
-                                            <div>
-                                                {activeCourse?.vocational?.map((course) => (
-                                                    <div key={course}>
-                                                        <input
-                                                            type="checkbox"
-                                                            id={course}
-                                                            name="courses"
-                                                            value={course}
-                                                            checked={courses.includes(course)}
-                                                            onChange={(e) => {
-                                                                setCourses((prevData) =>
-                                                                    e.target.checked
-                                                                        ? [
-                                                                              ...prevData,
-                                                                              e.target.value
-                                                                          ]
-                                                                        : prevData.filter(
-                                                                              (item) =>
-                                                                                  item !==
-                                                                                  e.target.value
-                                                                          )
-                                                                );
-                                                            }}
-                                                        />
-                                                        <label
-                                                            htmlFor="reading"
-                                                            className="ml-2 mr-4">
-                                                            {course}
-                                                        </label>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ))}
-                                {activeCourse?.bachelor &&
-                                    (activeCourse?.bachelor.length === 0 ? (
-                                        `There are currently no Bachelor Courses(International) relating to ${studyArea}`
-                                    ) : (
-                                        <div className="my-4">
-                                            <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
-                                                Bachelor Courses
-                                            </label>
-                                            <div>
-                                                {activeCourse?.bachelor?.map((course) => (
-                                                    <div key={course}>
-                                                        <input
-                                                            type="checkbox"
-                                                            id={course}
-                                                            name="courses"
-                                                            value={course}
-                                                            checked={courses.includes(course)}
-                                                            onChange={(e) => {
-                                                                setCourses((prevData) =>
-                                                                    e.target.checked
-                                                                        ? [
-                                                                              ...prevData,
-                                                                              e.target.value
-                                                                          ]
-                                                                        : prevData.filter(
-                                                                              (item) =>
-                                                                                  item !==
-                                                                                  e.target.value
-                                                                          )
-                                                                );
-                                                            }}
-                                                        />
-                                                        <label
-                                                            htmlFor="reading"
-                                                            className="ml-2 mr-4">
-                                                            {course}
-                                                        </label>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ))}
-                                {activeCourse?.masters &&
-                                    (activeCourse?.masters.length === 0 ? (
-                                        `There are currently no Masters Courses(International) relating to  ${studyArea}`
-                                    ) : (
-                                        <div className="my-4">
-                                            <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
-                                                Masters, graduate courses and PhDs (postgraduate)
-                                            </label>
-                                            <div>
-                                                {activeCourse?.masters?.map((course) => (
-                                                    <div key={course}>
-                                                        <input
-                                                            type="checkbox"
-                                                            id={course}
-                                                            name="courses"
-                                                            value={course}
-                                                            checked={courses.includes(course)}
-                                                            onChange={(e) => {
-                                                                setCourses((prevData) =>
-                                                                    e.target.checked
-                                                                        ? [
-                                                                              ...prevData,
-                                                                              e.target.value
-                                                                          ]
-                                                                        : prevData.filter(
-                                                                              (item) =>
-                                                                                  item !==
-                                                                                  e.target.value
-                                                                          )
-                                                                );
-                                                            }}
-                                                        />
-                                                        <label
-                                                            htmlFor="reading"
-                                                            className="ml-2 mr-4">
-                                                            {course}
-                                                        </label>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ))}
-                            </section>
+                            <Step2
+                                studyArea={studyArea}
+                                activeCourse={activeCourse}
+                                courses={courses}
+                                setCourses={setCourses}
+                            />
                         )}
                         {step === 3 && (
-                            <section>
-                                <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
-                                    WHAT ADDITIONAL INFORMATION ARE YOU INTERESTED IN?
-                                </h2>
-                                We&apos;ll provide all of the core information about your course and
-                                the University. Here you can add more information, should you need
-                                it.
-                                <h3 className="text-[28px] leading-[36px] font-condensed my-[25px] text-[#262626] font-medium ">
-                                    ALREADY IN YOUR PERSONALISED BROCHURE:
-                                </h3>
-                                <ul className="list-disc ml-8">
-                                    {data.alreadyInBrochure.map((topic) => (
-                                        <li key={topic}>{topic}</li>
-                                    ))}
-                                </ul>
-                                <h3 className="text-[28px] leading-[36px] font-condensed my-[25px] text-[#262626] font-medium ">
-                                    CHOOSE TO ADD INFORMATION ON THE FOLLOWING:
-                                </h3>
-                                <ul className="flex flex-col md:flex-row justify-between">
-                                    <div>
-                                        <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
-                                            About Melbourne
-                                        </h4>
-                                        {data.aboutMelbourne.map((about) => (
-                                            <li key={about}>
-                                                <input
-                                                    type="checkbox"
-                                                    id={about}
-                                                    name="additionalData"
-                                                    value={about}
-                                                    checked={additionalData.includes(about)}
-                                                    onChange={(e) => {
-                                                        setAdditionalData((prevData) =>
-                                                            e.target.checked
-                                                                ? [...prevData, e.target.value]
-                                                                : prevData.filter(
-                                                                      (item) =>
-                                                                          item !== e.target.value
-                                                                  )
-                                                        );
-                                                    }}
-                                                />
-                                                <label htmlFor="reading" className="ml-2 mr-4">
-                                                    {about}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </div>
-                                    <div>
-                                        <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
-                                            English Language Support
-                                        </h4>
-                                        {data.englishLanguageSupport.map((english) => (
-                                            <li key={english}>
-                                                <input
-                                                    type="checkbox"
-                                                    id={english}
-                                                    name="additionalData"
-                                                    value={english}
-                                                    checked={additionalData.includes(english)}
-                                                    onChange={(e) => {
-                                                        setAdditionalData((prevData) =>
-                                                            e.target.checked
-                                                                ? [...prevData, e.target.value]
-                                                                : prevData.filter(
-                                                                      (item) =>
-                                                                          item !== e.target.value
-                                                                  )
-                                                        );
-                                                    }}
-                                                />
-                                                <label htmlFor="reading" className="ml-2 mr-4">
-                                                    {english}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </div>
-                                    <div>
-                                        <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
-                                            University Services
-                                        </h4>
-                                        {data.universityServices.map((service) => (
-                                            <li key={service}>
-                                                <input
-                                                    type="checkbox"
-                                                    id={service}
-                                                    name="additionalData"
-                                                    value={service}
-                                                    checked={additionalData.includes(service)}
-                                                    onChange={(e) => {
-                                                        setAdditionalData((prevData) =>
-                                                            e.target.checked
-                                                                ? [...prevData, e.target.value]
-                                                                : prevData.filter(
-                                                                      (item) =>
-                                                                          item !== e.target.value
-                                                                  )
-                                                        );
-                                                    }}
-                                                />
-                                                <label htmlFor="reading" className="ml-2 mr-4">
-                                                    {service}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </div>
-                                </ul>
-                            </section>
+                            <Step3
+                                additionalData={additionalData}
+                                setAdditionalData={setAdditionalData}
+                            />
                         )}
                         {step === 4 && (
                             <section className="mx-auto py-10 pb-20 ">
@@ -771,77 +476,23 @@ export const Contact = () => {
                             </section>
                         )}
                         {step === 5 && (
-                            <>
-                                {showThanks ? (
-                                    <>
-                                        You can download your personalised brochure now {firstName}{' '}
-                                        {lastName}. We&apos;ve also sent an email to {email} with a
-                                        link.
-                                        <br />{' '}
-                                        <span className="font-semibold">
-                                            You requested the following information for your
-                                            personalised brochure:
-                                        </span>
-                                        {courses.map((course) => (
-                                            <p key={course}>{course}</p>
-                                        ))}
-                                        {additionalData.map((course) => (
-                                            <p key={course}>{course}</p>
-                                        ))}
-                                    </>
-                                ) : (
-                                    <>
-                                        <p className="font-semibold">
-                                            Please submit the form to get brochure through email.
-                                            You can also download it from below:
-                                            <br />
-                                            <button
-                                                className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                                                onClick={downLoadBrochure}>
-                                                Download Brochure
-                                            </button>
-                                        </p>
-                                    </>
-                                )}
-                            </>
+                            <Step5
+                                showThanks={showThanks}
+                                firstName={firstName}
+                                lastName={lastName}
+                                email={email}
+                                courses={courses}
+                                additionalData={additionalData}
+                                downLoadBrochure={downLoadBrochure}
+                            />
                         )}
                     </form>
-                    <section className="flex w-full justify-between mt-32 px-10">
-                        <div>
-                            {step !== 1 && (
-                                <button
-                                    className="text-[#261248] cursor-pointer font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setStep((prevStep) => Number(prevStep) - Number(1));
-                                        let elem = document.getElementById('scrollToHere');
-                                        elem.scrollIntoView();
-                                    }}>
-                                    Back
-                                </button>
-                            )}
-                        </div>
-                        {!showThanks &&
-                            (step === 5 ? (
-                                <button
-                                    type="submit"
-                                    className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                                    onClick={updateData}>
-                                    Submit
-                                </button>
-                            ) : (
-                                <button
-                                    className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setStep((prevStep) => Number(prevStep) + 1);
-                                        let elem = document.getElementById('scrollToHere');
-                                        elem.scrollIntoView();
-                                    }}>
-                                    Next
-                                </button>
-                            ))}
-                    </section>
+                    <CallToActions
+                        step={step}
+                        setStep={setStep}
+                        showThanks={showThanks}
+                        updateData={updateData}
+                    />
                 </section>
             </div>
         </section>
