@@ -104,7 +104,7 @@ export const Contact = () => {
                                 </div>
                                 <input type="hidden" id="followup" name="followup" />
                             </div> */}
-                            <section className="mx-auto py-10 pb-20 bg-white">
+                            <section className="mx-auto py-10 pb-20 ">
                                 <h2 className="pt-5 pb-8 text-5xl font-light font-condensed">
                                     TELL US ABOUT YOURSELF
                                 </h2>
