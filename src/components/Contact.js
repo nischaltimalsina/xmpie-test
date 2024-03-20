@@ -11,6 +11,10 @@ export const Contact = () => {
     const [email, setEmail] = useState(xmp.r['email']);
     const [phone, setPhone] = useState(xmp.r['phone']);
     const [optionalEmail, setOptionalEmail] = useState(xmp.r['optionalEmail']);
+    const [month, setMonth] = useState(xmp.r['month']);
+    const [year, setYear] = useState(xmp.r['year']);
+    const [nationality, setNationality] = useState(xmp.r['nationality']);
+    const [residenceCountry, setResidenceCountry] = useState(xmp.r['residenceCountry']);
 
     const { events } = useEvents();
     const { trigger } = useTrigger();
@@ -24,6 +28,10 @@ export const Contact = () => {
         setEmail(xmp.r['email']);
         setOptionalEmail(xmp.r['optionalEmail']);
         setPhone(xmp.r['phone']);
+        setMonth(xmp.r['month']);
+        setYear(xmp.r['year']);
+        setNationality(xmp.r['nationality']);
+        setResidenceCountry(xmp.r['residenceCountry']);
     }, [xmp]);
 
     const trackEvent = (e) => {
@@ -52,7 +60,13 @@ export const Contact = () => {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            followup: true
+            phone: phone,
+            optionalEmail: optionalEmail,
+            followup: true,
+            month,
+            year,
+            nationality,
+            residenceCountry
         });
         if (res) {
             setShowThanks(true);
@@ -119,8 +133,15 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         Which country are you currently living in?
                                     </label>
-                                    <select className="h-12 max-w-md px-4 border">
-                                        <option value="" disabled defaultValue>
+                                    <select
+                                        className="h-12 max-w-md px-4 border"
+                                        name="residenceCountry"
+                                        id="residenceCountry"
+                                        value={residenceCountry || ''}
+                                        onChange={(e) => {
+                                            setResidenceCountry(e.target.value);
+                                        }}>
+                                        <option value="Nepal" disabled defaultValue>
                                             Select a Country
                                         </option>
                                     </select>
@@ -131,8 +152,15 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         What is your nationality?
                                     </label>
-                                    <select className="h-12 max-w-md px-4 border">
-                                        <option value="" disabled defaultValue>
+                                    <select
+                                        className="h-12 max-w-md px-4 border"
+                                        name="nationality"
+                                        id="nationality"
+                                        value={nationality || ''}
+                                        onChange={(e) => {
+                                            setNationality(e.target.value);
+                                        }}>
+                                        <option value="Nepal" disabled defaultValue>
                                             Select a Country
                                         </option>
                                     </select>
@@ -143,12 +171,26 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         When do you plan to start your study?
                                     </label>
-                                    <select className="h-12 max-w-md px-4 border">
+                                    <select
+                                        className="h-12 max-w-md px-4 border"
+                                        name="month"
+                                        id="month"
+                                        value={month || ''}
+                                        onChange={(e) => {
+                                            setMonth(e.target.value);
+                                        }}>
                                         <option value="" disabled defaultValue>
                                             Month
                                         </option>
                                     </select>
-                                    <select className="h-12 max-w-md px-4 border">
+                                    <select
+                                        className="h-12 max-w-md px-4 border"
+                                        name="year"
+                                        id="year"
+                                        value={year || ''}
+                                        onChange={(e) => {
+                                            setYear(e.target.value);
+                                        }}>
                                         <option value="" disabled defaultValue>
                                             Year
                                         </option>
