@@ -67,6 +67,14 @@ export const Contact = () => {
         }
     };
 
+    const downLoadBrochure = () => {
+        try {
+            trigger('P2');
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const updateData = async (e) => {
         e.preventDefault();
         const res = await updateAdors({
@@ -104,6 +112,7 @@ export const Contact = () => {
         }
         setActiveCourse(courses);
     }, [studyLevel]);
+
     return (
         <section id="contact" className="mb-32 container mx-auto">
             <div className="">
@@ -146,7 +155,7 @@ export const Contact = () => {
                                     <option value="" className="text-xs">
                                         Select a Study Area
                                     </option>
-                                    {data?.studyArea.map((study) => (
+                                    {data?.studyArea.slice(0, 3).map((study) => (
                                         <option
                                             key={study.value}
                                             value={study.value}
@@ -464,8 +473,23 @@ export const Contact = () => {
                                         onChange={(e) => {
                                             setResidenceCountry(e.target.value);
                                         }}>
-                                        <option value="Nepal" defaultValue>
+                                        <option value="" defaultValue>
                                             Select a Country
+                                        </option>
+                                        <option value="Nepal" defaultValue>
+                                            Nepal
+                                        </option>
+                                        <option value="India" defaultValue>
+                                            India
+                                        </option>
+                                        <option value="Srilanka" defaultValue>
+                                            Srilanka
+                                        </option>
+                                        <option value="Australia" defaultValue>
+                                            Australia
+                                        </option>
+                                        <option value="Bhutan" defaultValue>
+                                            Bhutan
                                         </option>
                                     </select>
                                 </div>
@@ -483,8 +507,35 @@ export const Contact = () => {
                                         onChange={(e) => {
                                             setNationality(e.target.value);
                                         }}>
-                                        <option value="Nepal" defaultValue>
+                                        <option value="" defaultValue>
                                             Select a Country
+                                        </option>
+                                        <option value="Nepal" defaultValue>
+                                            Nepal
+                                        </option>
+                                        <option value="India" defaultValue>
+                                            India
+                                        </option>
+                                        <option value="Srilanka" defaultValue>
+                                            Srilanka
+                                        </option>
+                                        <option value="" defaultValue>
+                                            Select a Country
+                                        </option>
+                                        <option value="Nepal" defaultValue>
+                                            Nepal
+                                        </option>
+                                        <option value="India" defaultValue>
+                                            India
+                                        </option>
+                                        <option value="Srilanka" defaultValue>
+                                            Srilanka
+                                        </option>
+                                        <option value="Australia" defaultValue>
+                                            Australia
+                                        </option>
+                                        <option value="Bhutan" defaultValue>
+                                            Bhutan
                                         </option>
                                     </select>
                                 </div>
@@ -494,30 +545,84 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         When do you plan to start your study?
                                     </label>
-                                    <select
-                                        className="h-12 max-w-md px-4 border"
-                                        name="month"
-                                        id="month"
-                                        value={month || ''}
-                                        onChange={(e) => {
-                                            setMonth(e.target.value);
-                                        }}>
-                                        <option value="Jan" defaultValue>
-                                            Month
-                                        </option>
-                                    </select>
-                                    <select
-                                        className="h-12 max-w-md px-4 border"
-                                        name="year"
-                                        id="year"
-                                        value={year || ''}
-                                        onChange={(e) => {
-                                            setYear(e.target.value);
-                                        }}>
-                                        <option value="2020" defaultValue>
-                                            Year
-                                        </option>
-                                    </select>
+                                    <div className="flex flex-col lg:flex-row w-full justify-start">
+                                        <select
+                                            className="h-12 mb-2 lg:mb-0 lg:w-6/12 max-w-md px-4 lg:mr-12 border"
+                                            name="month"
+                                            id="month"
+                                            value={month || ''}
+                                            onChange={(e) => {
+                                                setMonth(e.target.value);
+                                            }}>
+                                            <option value="" defaultValue>
+                                                Select a Month
+                                            </option>
+                                            <option value="Jan" defaultValue>
+                                                Jan
+                                            </option>
+                                            <option value="Feb" defaultValue>
+                                                Feb
+                                            </option>
+                                            <option value="Mar" defaultValue>
+                                                Mar
+                                            </option>
+                                            <option value="Apr" defaultValue>
+                                                Apr
+                                            </option>
+                                            <option value="May" defaultValue>
+                                                May
+                                            </option>
+                                            <option value="June" defaultValue>
+                                                June
+                                            </option>
+                                            <option value="July" defaultValue>
+                                                July
+                                            </option>
+                                            <option value="Aug" defaultValue>
+                                                Aug
+                                            </option>
+                                            <option value="Sept" defaultValue>
+                                                Sept
+                                            </option>
+                                            <option value="Oct" defaultValue>
+                                                Oct
+                                            </option>
+                                            <option value="Nov" defaultValue>
+                                                Nov
+                                            </option>
+                                            <option value="Dec" defaultValue>
+                                                Dec
+                                            </option>
+                                        </select>
+                                        <select
+                                            className="h-12 px-4  lg:w-6/12 max-w-md border"
+                                            name="year"
+                                            id="year"
+                                            value={year || ''}
+                                            onChange={(e) => {
+                                                setYear(e.target.value);
+                                            }}>
+                                            <option value="" defaultValue>
+                                                Select a Year
+                                            </option>
+
+                                            <option value="2024" defaultValue>
+                                                2024
+                                            </option>
+                                            <option value="2025" defaultValue>
+                                                2025
+                                            </option>
+                                            <option value="2026" defaultValue>
+                                                2026
+                                            </option>
+                                            <option value="2027" defaultValue>
+                                                2027
+                                            </option>
+                                            <option value="2028" defaultValue>
+                                                2028
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div className="flex flex-col text-sm font-normal gap-">
                                     <label
@@ -525,28 +630,30 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         Name
                                     </label>
-                                    <input
-                                        className="h-12 max-w-md px-4 border "
-                                        placeholder="Given Name"
-                                        type="text"
-                                        name="firstName"
-                                        id="firstName"
-                                        value={firstName || ''}
-                                        onChange={(e) => {
-                                            setFirstName(e.target.value);
-                                        }}
-                                    />
-                                    <input
-                                        className="h-12 max-w-md px-4 border "
-                                        placeholder="Family Name"
-                                        type="text"
-                                        name="lastName"
-                                        id="lastName"
-                                        value={lastName || ''}
-                                        onChange={(e) => {
-                                            setLastName(e.target.value);
-                                        }}
-                                    />
+                                    <div className="flex flex-col lg:flex-row w-full justify-start">
+                                        <input
+                                            className="lg:mb-0 mb-2 lg:w-6/12 lg:mr-12 h-12 max-w-md px-4 border "
+                                            placeholder="Given Name"
+                                            type="text"
+                                            name="firstName"
+                                            id="firstName"
+                                            value={firstName || ''}
+                                            onChange={(e) => {
+                                                setFirstName(e.target.value);
+                                            }}
+                                        />
+                                        <input
+                                            className="lg:mb-0 lg:w-6/12  h-12 max-w-md px-4 border "
+                                            placeholder="Family Name"
+                                            type="text"
+                                            name="lastName"
+                                            id="lastName"
+                                            value={lastName || ''}
+                                            onChange={(e) => {
+                                                setLastName(e.target.value);
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="flex flex-col text-sm font-normal gap-">
                                     <label
@@ -554,28 +661,30 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         Contact Details
                                     </label>
-                                    <input
-                                        className="h-12 max-w-md px-4 border "
-                                        placeholder="0412 345 678 (Optional)"
-                                        type="text"
-                                        name="phone"
-                                        id="phone"
-                                        value={phone || ''}
-                                        onChange={(e) => {
-                                            setPhone(e.target.value);
-                                        }}
-                                    />
-                                    <input
-                                        className="h-12 max-w-md px-4 border "
-                                        placeholder="Email Address"
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        value={email || ''}
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                        }}
-                                    />
+                                    <div className="flex flex-col lg:flex-row w-full justify-start">
+                                        <input
+                                            className="h-12 mb-2 lg:mb-0 lg:w-6/12 max-w-md px-4 lg:mr-12 border"
+                                            placeholder="0412 345 678 (Optional)"
+                                            type="text"
+                                            name="phone"
+                                            id="phone"
+                                            value={phone || ''}
+                                            onChange={(e) => {
+                                                setPhone(e.target.value);
+                                            }}
+                                        />
+                                        <input
+                                            className="lg:mb-0 lg:w-6/12  h-12 max-w-md px-4 border  "
+                                            placeholder="Email Address"
+                                            type="text"
+                                            name="email"
+                                            id="email"
+                                            value={email || ''}
+                                            onChange={(e) => {
+                                                setEmail(e.target.value);
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="flex flex-col text-sm font-normal gap-">
                                     <label
@@ -661,7 +770,41 @@ export const Contact = () => {
                                 </div>
                             </section>
                         )}
-                        {step === 5 && <>{showThanks ? 'Thank you' : 'Please submit the form'}</>}
+                        {step === 5 && (
+                            <>
+                                {showThanks ? (
+                                    <>
+                                        You can download your personalised brochure now {firstName}{' '}
+                                        {lastName}. We&apos;ve also sent an email to {email} with a
+                                        link.
+                                        <br />{' '}
+                                        <span className="font-semibold">
+                                            You requested the following information for your
+                                            personalised brochure:
+                                        </span>
+                                        {courses.map((course) => (
+                                            <p key={course}>{course}</p>
+                                        ))}
+                                        {additionalData.map((course) => (
+                                            <p key={course}>{course}</p>
+                                        ))}
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="font-semibold">
+                                            Please submit the form to get brochure through email.
+                                            You can also download it from below:
+                                            <br />
+                                            <button
+                                                className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                                                onClick={downLoadBrochure}>
+                                                Download Brochure
+                                            </button>
+                                        </p>
+                                    </>
+                                )}
+                            </>
+                        )}
                     </form>
                     <section className="flex w-full justify-between mt-32 px-10">
                         <div>
