@@ -1,10 +1,10 @@
 import React from 'react';
 
-const CallToActions = ({ step, setStep, showThanks, updateData }) => {
+const CallToActions = ({ step, setStep, updateData }) => {
     return (
         <section className="flex w-full justify-between mt-32 px-10">
             <div>
-                {step !== 1 && (
+                {step !== 1 && step !== 5 && (
                     <button
                         className="text-[#261248] cursor-pointer font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
                         onClick={(e) => {
@@ -17,15 +17,15 @@ const CallToActions = ({ step, setStep, showThanks, updateData }) => {
                     </button>
                 )}
             </div>
-            {!showThanks &&
-                (step === 5 ? (
-                    <button
-                        type="submit"
-                        className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                        onClick={updateData}>
-                        Submit
-                    </button>
-                ) : (
+            {step === 4 ? (
+                <button
+                    type="submit"
+                    className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                    onClick={updateData}>
+                    Submit
+                </button>
+            ) : (
+                step !== 5 && (
                     <button
                         className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
                         onClick={(e) => {
@@ -36,7 +36,8 @@ const CallToActions = ({ step, setStep, showThanks, updateData }) => {
                         }}>
                         Next
                     </button>
-                ))}
+                )
+            )}
         </section>
     );
 };

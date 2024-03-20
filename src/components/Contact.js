@@ -7,9 +7,11 @@ import Step3 from './Step3';
 import Step5 from './Step5';
 import CallToActions from './CallToActions';
 
+const countries = ['Nepal', 'India', 'Maldives', 'Australia', 'Srilanka'];
+const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+const years = ['2024', '2025', '2026', '2027', '2028', '2029'];
 export const Contact = () => {
     const { xmp } = useContext(XmplContext);
-    const [showThanks, setShowThanks] = useState(false);
     const { updateAdors } = useAdors();
     const [firstName, setFirstName] = useState(xmp.r['firstName']);
     const [lastName, setLastName] = useState(xmp.r['lastName']);
@@ -74,7 +76,7 @@ export const Contact = () => {
     const downLoadBrochure = (e) => {
         e.preventDefault();
         try {
-            trigger('P2');
+            trigger('P3');
         } catch (error) {
             console.log(error);
         }
@@ -98,7 +100,7 @@ export const Contact = () => {
             additionalData: additionalData.join(',')
         });
         if (res) {
-            setShowThanks(true);
+            setStep(5);
         }
         triggerEmail();
         trackEvent(e);
@@ -181,21 +183,11 @@ export const Contact = () => {
                                         <option value="" defaultValue>
                                             Select a Country
                                         </option>
-                                        <option value="Nepal" defaultValue>
-                                            Nepal
-                                        </option>
-                                        <option value="India" defaultValue>
-                                            India
-                                        </option>
-                                        <option value="Srilanka" defaultValue>
-                                            Srilanka
-                                        </option>
-                                        <option value="Australia" defaultValue>
-                                            Australia
-                                        </option>
-                                        <option value="Bhutan" defaultValue>
-                                            Bhutan
-                                        </option>
+                                        {countries.map((country) => (
+                                            <option key={country} value={country}>
+                                                {country}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                                 <div className="flex flex-col gap-2 text-sm font-normal">
@@ -215,33 +207,11 @@ export const Contact = () => {
                                         <option value="" defaultValue>
                                             Select a Country
                                         </option>
-                                        <option value="Nepal" defaultValue>
-                                            Nepal
-                                        </option>
-                                        <option value="India" defaultValue>
-                                            India
-                                        </option>
-                                        <option value="Srilanka" defaultValue>
-                                            Srilanka
-                                        </option>
-                                        <option value="" defaultValue>
-                                            Select a Country
-                                        </option>
-                                        <option value="Nepal" defaultValue>
-                                            Nepal
-                                        </option>
-                                        <option value="India" defaultValue>
-                                            India
-                                        </option>
-                                        <option value="Srilanka" defaultValue>
-                                            Srilanka
-                                        </option>
-                                        <option value="Australia" defaultValue>
-                                            Australia
-                                        </option>
-                                        <option value="Bhutan" defaultValue>
-                                            Bhutan
-                                        </option>
+                                        {countries.map((country) => (
+                                            <option key={country} value={country}>
+                                                {country}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                                 <div className="flex flex-col gap-2 text-sm font-normal">
@@ -262,42 +232,11 @@ export const Contact = () => {
                                             <option value="" defaultValue>
                                                 Select a Month
                                             </option>
-                                            <option value="Jan" defaultValue>
-                                                Jan
-                                            </option>
-                                            <option value="Feb" defaultValue>
-                                                Feb
-                                            </option>
-                                            <option value="Mar" defaultValue>
-                                                Mar
-                                            </option>
-                                            <option value="Apr" defaultValue>
-                                                Apr
-                                            </option>
-                                            <option value="May" defaultValue>
-                                                May
-                                            </option>
-                                            <option value="June" defaultValue>
-                                                June
-                                            </option>
-                                            <option value="July" defaultValue>
-                                                July
-                                            </option>
-                                            <option value="Aug" defaultValue>
-                                                Aug
-                                            </option>
-                                            <option value="Sept" defaultValue>
-                                                Sept
-                                            </option>
-                                            <option value="Oct" defaultValue>
-                                                Oct
-                                            </option>
-                                            <option value="Nov" defaultValue>
-                                                Nov
-                                            </option>
-                                            <option value="Dec" defaultValue>
-                                                Dec
-                                            </option>
+                                            {months.map((month) => (
+                                                <option key={month} value={month}>
+                                                    {month}
+                                                </option>
+                                            ))}
                                         </select>
                                         <select
                                             className="h-12 px-4  lg:w-6/12 max-w-md border"
@@ -310,22 +249,11 @@ export const Contact = () => {
                                             <option value="" defaultValue>
                                                 Select a Year
                                             </option>
-
-                                            <option value="2024" defaultValue>
-                                                2024
-                                            </option>
-                                            <option value="2025" defaultValue>
-                                                2025
-                                            </option>
-                                            <option value="2026" defaultValue>
-                                                2026
-                                            </option>
-                                            <option value="2027" defaultValue>
-                                                2027
-                                            </option>
-                                            <option value="2028" defaultValue>
-                                                2028
-                                            </option>
+                                            {years.map((year) => (
+                                                <option key={year} value={year}>
+                                                    {year}
+                                                </option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
@@ -477,7 +405,6 @@ export const Contact = () => {
                         )}
                         {step === 5 && (
                             <Step5
-                                showThanks={showThanks}
                                 firstName={firstName}
                                 lastName={lastName}
                                 email={email}
@@ -487,12 +414,7 @@ export const Contact = () => {
                             />
                         )}
                     </form>
-                    <CallToActions
-                        step={step}
-                        setStep={setStep}
-                        showThanks={showThanks}
-                        updateData={updateData}
-                    />
+                    <CallToActions step={step} setStep={setStep} updateData={updateData} />
                 </section>
             </div>
         </section>

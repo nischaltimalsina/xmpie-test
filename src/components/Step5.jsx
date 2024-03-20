@@ -1,45 +1,31 @@
 import React from 'react';
 
-const Step5 = ({
-    showThanks,
-    firstName,
-    lastName,
-    email,
-    courses,
-    additionalData,
-    downLoadBrochure
-}) => {
+const Step5 = ({ firstName, lastName, email, courses, additionalData, downLoadBrochure }) => {
     return (
         <>
-            {showThanks ? (
-                <>
+            <>
+                <p>
                     You can download your personalised brochure now {firstName} {lastName}.
                     We&apos;ve also sent an email to {email} with a link.
-                    <br />{' '}
-                    <span className="font-semibold">
-                        You requested the following information for your personalised brochure:
-                    </span>
-                    {courses.map((course) => (
-                        <p key={course}>{course}</p>
-                    ))}
-                    {additionalData.map((course) => (
-                        <p key={course}>{course}</p>
-                    ))}
-                </>
-            ) : (
-                <>
-                    <p className="font-semibold">
-                        Please submit the form to get brochure through email. You can also download
-                        it from below:
-                        <br />
-                        <button
-                            className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                            onClick={downLoadBrochure}>
-                            Download Brochure
-                        </button>
-                    </p>
-                </>
-            )}
+                </p>
+                <br />{' '}
+                <p className="font-semibold mt-4">
+                    You requested the following information for your personalised brochure:
+                </p>
+                {courses.map((course) => (
+                    <p key={course}>{course}</p>
+                ))}
+                {additionalData.map((course) => (
+                    <p key={course}>{course}</p>
+                ))}
+                <div className="w-full flex justify-center mt-8">
+                    <button
+                        className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                        onClick={downLoadBrochure}>
+                        Download Brochure
+                    </button>
+                </div>
+            </>
         </>
     );
 };
