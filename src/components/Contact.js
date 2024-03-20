@@ -27,7 +27,7 @@ export const Contact = () => {
     const [activeCourse, setActiveCourse] = useState({});
     const [courses, setCourses] = useState(xmp.r['activeCourse']?.split(',') || []);
     const [additionalData, setAdditionalData] = useState(xmp.r['additionalData']?.split(',') || []);
-
+    const [link, setLink] = useState(xmp.r['XMPie.PDF.P3']);
     const [studyArea, setStudyArea] = useState(xmp.r['studyArea']);
     const [studyLevel, setStudyLevel] = useState([]);
 
@@ -51,6 +51,7 @@ export const Contact = () => {
         setCourses(xmp.r['activeCourse']?.split(',') || []);
         setAdditionalData(xmp.r['additionalData']?.split(',') || []);
         setStudyArea(xmp.r['studyArea']);
+        setLink(xmp.r['XMPie.PDF.P3']);
     }, [xmp]);
 
     const trackEvent = (e) => {
@@ -68,15 +69,6 @@ export const Contact = () => {
     const triggerEmail = async () => {
         try {
             trigger('E2');
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const downLoadBrochure = (e) => {
-        e.preventDefault();
-        try {
-            trigger('P3');
         } catch (error) {
             console.log(error);
         }
@@ -410,7 +402,7 @@ export const Contact = () => {
                                 email={email}
                                 courses={courses}
                                 additionalData={additionalData}
-                                downLoadBrochure={downLoadBrochure}
+                                link={link}
                             />
                         )}
                     </form>

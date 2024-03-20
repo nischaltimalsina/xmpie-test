@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Step5 = ({ firstName, lastName, email, courses, additionalData, downLoadBrochure }) => {
+const Step5 = ({ firstName, lastName, email, courses, additionalData, link }) => {
     return (
         <>
             <>
@@ -19,11 +19,11 @@ const Step5 = ({ firstName, lastName, email, courses, additionalData, downLoadBr
                     <p key={course}>{course}</p>
                 ))}
                 <div className="w-full flex justify-center mt-8">
-                    <button
-                        className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
-                        onClick={downLoadBrochure}>
-                        Download Brochure
-                    </button>
+                    <div className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32">
+                        <a target="_blank" rel="noreferrer" href={link}>
+                            Download Brochure
+                        </a>
+                    </div>
                 </div>
             </>
         </>
