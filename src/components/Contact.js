@@ -112,6 +112,7 @@ export const Contact = () => {
         setActiveCourse(courses);
     }, [studyLevel]);
 
+    console.log(link);
     return (
         <section id="contact" className="mb-32 container mx-auto">
             <div className="">

@@ -20,7 +20,7 @@ const Step5 = ({ firstName, lastName, email, courses, additionalData, link }) =>
                 ))}
                 <div className="w-full flex justify-center mt-8">
                     <div className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32">
-                        <a target="_blank" rel="noreferrer" href={link}>
+                        <a href={link} target="_blank" rel="noreferrer">
                             Download Brochure
                         </a>
                     </div>
