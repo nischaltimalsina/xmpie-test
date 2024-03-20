@@ -19,6 +19,8 @@ function App() {
             adors: [
                 'firstName',
                 'lastName',
+                'phone',
+                'optionalEmail',
                 'preference',
                 'email',
                 'photo1',

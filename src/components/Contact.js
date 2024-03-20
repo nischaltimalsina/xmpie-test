@@ -6,9 +6,12 @@ export const Contact = () => {
     const [showThanks, setShowThanks] = useState(false);
     const [showForm, setShowForm] = useState(true);
     const { updateAdors } = useAdors();
-    const [firstName, setFirstName] = useState(xmp.r['firstname']);
-    const [lastName, setLastName] = useState(xmp.r['lastname']);
+    const [firstName, setFirstName] = useState(xmp.r['firstName']);
+    const [lastName, setLastName] = useState(xmp.r['lastName']);
     const [email, setEmail] = useState(xmp.r['email']);
+    const [phone, setPhone] = useState(xmp.r['phone']);
+    const [optionalEmail, setOptionalEmail] = useState(xmp.r['optionalEmail']);
+
     const { events } = useEvents();
     const { trigger } = useTrigger();
     const rid =
@@ -16,9 +19,11 @@ export const Contact = () => {
         localStorage.getItem('xmpRecipientID');
 
     useEffect(() => {
-        setFirstName(xmp.r['firstname']);
-        setLastName(xmp.r['lastname']);
+        setFirstName(xmp.r['firstName']);
+        setLastName(xmp.r['lastName']);
         setEmail(xmp.r['email']);
+        setOptionalEmail(xmp.r['optionalEmail']);
+        setPhone(xmp.r['phone']);
     }, [xmp]);
 
     const trackEvent = (e) => {
@@ -160,6 +165,7 @@ export const Contact = () => {
                                         placeholder="Given Name"
                                         type="text"
                                         name="firstName"
+                                        id="firstName"
                                         value={firstName || ''}
                                         onChange={(e) => {
                                             setFirstName(e.target.value);
@@ -170,6 +176,7 @@ export const Contact = () => {
                                         placeholder="Family Name"
                                         type="text"
                                         name="lastName"
+                                        id="lastName"
                                         value={lastName || ''}
                                         onChange={(e) => {
                                             setLastName(e.target.value);
@@ -182,18 +189,17 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         Contact Details
                                     </label>
-                                    {/* <input
+                                    <input
                                         className="h-12 max-w-md px-4 border "
                                         placeholder="0412 345 678 (Optional)"
                                         type="text"
-                                        name="phone"
                                         name="phone"
                                         id="phone"
                                         value={phone || ''}
                                         onChange={(e) => {
                                             setPhone(e.target.value);
                                         }}
-                                    /> */}
+                                    />
                                     <input
                                         className="h-12 max-w-md px-4 border "
                                         placeholder="Email Address"
@@ -213,14 +219,17 @@ export const Contact = () => {
                                         Share my personalised brochure with the following email
                                         address
                                     </label>
-                                    {/* <input
+                                    <input
                                         className="h-12 max-w-md px-4 border "
                                         placeholder="Email Address (optional)"
                                         type="text"
-                                        name="optionalemail"
-                                        value={formData.optionalemail}
-                                        onChange={handleChange}
-                                    /> */}
+                                        name="optionalEmail"
+                                        id="optionalEmail"
+                                        value={optionalEmail || ''}
+                                        onChange={(e) => {
+                                            setOptionalEmail(e.target.value);
+                                        }}
+                                    />
                                 </div>
                                 <div className="flex flex-col text-sm font-normal gap-">
                                     <span className="mb-3 text-xl font-semibold mt-7">
