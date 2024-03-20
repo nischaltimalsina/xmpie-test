@@ -1,10 +1,11 @@
 import { XmplContext, useAdors, useEvents, useTrigger } from 'xmpl-react';
 import { useContext, useEffect, useState } from 'react';
+import data from '../assets/data.json';
+import InfoComponent from './common/InfoComponent';
 
 export const Contact = () => {
     const { xmp } = useContext(XmplContext);
     const [showThanks, setShowThanks] = useState(false);
-    const [showForm, setShowForm] = useState(true);
     const { updateAdors } = useAdors();
     const [firstName, setFirstName] = useState(xmp.r['firstName']);
     const [lastName, setLastName] = useState(xmp.r['lastName']);
@@ -15,6 +16,14 @@ export const Contact = () => {
     const [year, setYear] = useState(xmp.r['year']);
     const [nationality, setNationality] = useState(xmp.r['nationality']);
     const [residenceCountry, setResidenceCountry] = useState(xmp.r['residenceCountry']);
+    const [step, setStep] = useState(1);
+
+    const [activeCourse, setActiveCourse] = useState({});
+    const [courses, setCourses] = useState(xmp.r['activeCourse']?.split(',') || []);
+    const [additionalData, setAdditionalData] = useState(xmp.r['additionalData']?.split(',') || []);
+
+    const [studyArea, setStudyArea] = useState(xmp.r['studyArea']);
+    const [studyLevel, setStudyLevel] = useState([]);
 
     const { events } = useEvents();
     const { trigger } = useTrigger();
@@ -32,6 +41,10 @@ export const Contact = () => {
         setYear(xmp.r['year']);
         setNationality(xmp.r['nationality']);
         setResidenceCountry(xmp.r['residenceCountry']);
+        setActiveCourse(xmp.r['activeCourse']);
+        setCourses(xmp.r['activeCourse']?.split(',') || []);
+        setAdditionalData(xmp.r['additionalData']?.split(',') || []);
+        setStudyArea(xmp.r['studyArea']);
     }, [xmp]);
 
     const trackEvent = (e) => {
@@ -66,63 +79,373 @@ export const Contact = () => {
             month,
             year,
             nationality,
-            residenceCountry
+            residenceCountry,
+            courses: courses.join(','),
+            studyArea,
+            additionalData: additionalData.join(',')
         });
         if (res) {
             setShowThanks(true);
-            setShowForm(false);
         }
         triggerEmail();
         trackEvent(e);
     };
-
+    useEffect(() => {
+        let tempActiveCourse = data.studyArea.filter((d) => d.value === studyArea);
+        let courses = {};
+        if (studyLevel.includes('Vocational and further education courses')) {
+            courses.vocational = [...tempActiveCourse[0].vocational];
+        }
+        if (studyLevel.includes('Masters, graduate courses and PhDs (postgraduate)')) {
+            courses.masters = [...tempActiveCourse[0].masters];
+        }
+        if (studyLevel.includes('Bachelor and diploma courses (undergraduate)')) {
+            courses.bachelor = [...tempActiveCourse[0].bachelor];
+        }
+        setActiveCourse(courses);
+    }, [studyLevel]);
     return (
-        <section id="contact">
-            <div className="inner">
+        <section id="contact" className="mb-32 container mx-auto">
+            <div className="">
                 <section>
-                    <div id="formDiv" style={{ display: `${showForm ? 'block' : 'none'}` }}>
-                        <h2>Interested? Like more information?</h2>
-                        <p>Confirm your contact details below:</p>
-                        <form>
-                            {/* <div className="fields">
-                                <div className="field half">
-                                    <label htmlFor="firstname">First Name</label>
-                                    <input
-                                        type="text"
-                                        name="firstname"
-                                        id="firstname"
-                                        value={firstName || ''}
-                                        onChange={(e) => {
-                                            setFirstName(e.target.value);
-                                        }}
-                                    />
-                                </div>
-                                <div className="field half">
-                                    <label htmlFor="lastname">Last Name</label>
-                                    <input
-                                        type="text"
-                                        name="lastname"
-                                        id="lastname"
-                                        value={lastName || ''}
-                                        onChange={(e) => {
-                                            setLastName(e.target.value);
-                                        }}
-                                    />
-                                </div>
-                                <div className="field">
-                                    <label htmlFor="email">Email</label>
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        value={email || ''}
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                        }}
-                                    />
-                                </div>
-                                <input type="hidden" id="followup" name="followup" />
+                    <h1 className="text-[56px] font-condensed text-[#262626] leading-[64px] my-[60px]">
+                        SELECT STUDY AREA AND LEVEL
+                    </h1>
+                </section>
+                <section id="scrollToHere" className="flex bg-white justify-around mb-1 py-16">
+                    {data.titles.map((title) => (
+                        <span
+                            className="text-center text-lg font-semibold leading-7"
+                            key={title.value}>
+                            {title.text}
+                        </span>
+                    ))}
+                </section>
+                <section className="bg-white w-full  p-8 ">
+                    <form className="bg-white">
+                        {step === 1 && (
+                            <section>
+                                <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
+                                    WHAT STUDY AREA AND LEVEL ARE YOU INTERESTED IN?
+                                </h2>
+                                {/* <div className="w-full border-red-600 border-[2px] p-4 text-red-600 text-lg font-semibold mb-4">
+                                {error}
                             </div> */}
+                                <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                                    StudyArea
+                                    <InfoComponent text="Choose your study Area" />
+                                </label>
+                                <select
+                                    id="studyArea"
+                                    name="studyArea"
+                                    value={studyArea}
+                                    onChange={(e) => {
+                                        setStudyArea(e.target.value);
+                                    }}
+                                    className="w-full max-w-md text-xs box-border rounded-none h-12 px-[15px] border-[1px] border-[#ccc]  shadow-sm focus-visible:outline-0">
+                                    <option value="" className="text-xs">
+                                        Select a Study Area
+                                    </option>
+                                    {data?.studyArea.map((study) => (
+                                        <option
+                                            key={study.value}
+                                            value={study.value}
+                                            className="text-xs">
+                                            {study.text}
+                                        </option>
+                                    ))}
+                                </select>
+                                <div className="my-4 max-w-md">
+                                    <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                                        Study Level
+                                        <InfoComponent text="Choose your study Level" />
+                                    </label>
+                                    Select up to 2 of the options below:
+                                    <div>
+                                        {data.studyLevel.map((level) => (
+                                            <div key={level}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={level}
+                                                    name="studyLevel"
+                                                    value={level}
+                                                    checked={studyLevel.includes(level)}
+                                                    onChange={(e) => {
+                                                        setStudyLevel((prevData) =>
+                                                            e.target.checked
+                                                                ? [...prevData, e.target.value]
+                                                                : prevData.filter(
+                                                                      (item) =>
+                                                                          item !== e.target.value
+                                                                  )
+                                                        );
+                                                    }}
+                                                />
+                                                <label htmlFor="reading" className="ml-2 mr-4">
+                                                    {level}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </section>
+                        )}
+                        {step === 2 && (
+                            <section>
+                                <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
+                                    WHAT COURSES ARE YOU INTERESTED IN?
+                                </h2>
+                                Choose up to 12 courses from the options below and we’ll add them to
+                                your personalised brochure.
+                                <br />
+                                We&apos;ll also include information on these topics, and more:
+                                <ul className="list-disc ml-8">
+                                    {data.topics.map((topic) => (
+                                        <li key={topic}>{topic}</li>
+                                    ))}
+                                </ul>
+                                <h3 className="text-[28px] leading-[36px] uppercase font-condensed my-[25px] text-[#262626] font-medium ">
+                                    {studyArea}
+                                </h3>
+                                {activeCourse?.vocational &&
+                                    (activeCourse?.vocational.length === 0 ? (
+                                        `There are currently no Vocational and Further Education Courses(International) relating to ${studyArea}`
+                                    ) : (
+                                        <div className="my-4">
+                                            <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                                                Vocational and further education
+                                            </label>
+                                            <div>
+                                                {activeCourse?.vocational?.map((course) => (
+                                                    <div key={course}>
+                                                        <input
+                                                            type="checkbox"
+                                                            id={course}
+                                                            name="courses"
+                                                            value={course}
+                                                            checked={courses.includes(course)}
+                                                            onChange={(e) => {
+                                                                setCourses((prevData) =>
+                                                                    e.target.checked
+                                                                        ? [
+                                                                              ...prevData,
+                                                                              e.target.value
+                                                                          ]
+                                                                        : prevData.filter(
+                                                                              (item) =>
+                                                                                  item !==
+                                                                                  e.target.value
+                                                                          )
+                                                                );
+                                                            }}
+                                                        />
+                                                        <label
+                                                            htmlFor="reading"
+                                                            className="ml-2 mr-4">
+                                                            {course}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                {activeCourse?.bachelor &&
+                                    (activeCourse?.bachelor.length === 0 ? (
+                                        `There are currently no Bachelor Courses(International) relating to ${studyArea}`
+                                    ) : (
+                                        <div className="my-4">
+                                            <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                                                Bachelor Courses
+                                            </label>
+                                            <div>
+                                                {activeCourse?.bachelor?.map((course) => (
+                                                    <div key={course}>
+                                                        <input
+                                                            type="checkbox"
+                                                            id={course}
+                                                            name="courses"
+                                                            value={course}
+                                                            checked={courses.includes(course)}
+                                                            onChange={(e) => {
+                                                                setCourses((prevData) =>
+                                                                    e.target.checked
+                                                                        ? [
+                                                                              ...prevData,
+                                                                              e.target.value
+                                                                          ]
+                                                                        : prevData.filter(
+                                                                              (item) =>
+                                                                                  item !==
+                                                                                  e.target.value
+                                                                          )
+                                                                );
+                                                            }}
+                                                        />
+                                                        <label
+                                                            htmlFor="reading"
+                                                            className="ml-2 mr-4">
+                                                            {course}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                {activeCourse?.masters &&
+                                    (activeCourse?.masters.length === 0 ? (
+                                        `There are currently no Masters Courses(International) relating to  ${studyArea}`
+                                    ) : (
+                                        <div className="my-4">
+                                            <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
+                                                Masters, graduate courses and PhDs (postgraduate)
+                                            </label>
+                                            <div>
+                                                {activeCourse?.masters?.map((course) => (
+                                                    <div key={course}>
+                                                        <input
+                                                            type="checkbox"
+                                                            id={course}
+                                                            name="courses"
+                                                            value={course}
+                                                            checked={courses.includes(course)}
+                                                            onChange={(e) => {
+                                                                setCourses((prevData) =>
+                                                                    e.target.checked
+                                                                        ? [
+                                                                              ...prevData,
+                                                                              e.target.value
+                                                                          ]
+                                                                        : prevData.filter(
+                                                                              (item) =>
+                                                                                  item !==
+                                                                                  e.target.value
+                                                                          )
+                                                                );
+                                                            }}
+                                                        />
+                                                        <label
+                                                            htmlFor="reading"
+                                                            className="ml-2 mr-4">
+                                                            {course}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                            </section>
+                        )}
+                        {step === 3 && (
+                            <section>
+                                <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
+                                    WHAT ADDITIONAL INFORMATION ARE YOU INTERESTED IN?
+                                </h2>
+                                We&apos;ll provide all of the core information about your course and
+                                the University. Here you can add more information, should you need
+                                it.
+                                <h3 className="text-[28px] leading-[36px] font-condensed my-[25px] text-[#262626] font-medium ">
+                                    ALREADY IN YOUR PERSONALISED BROCHURE:
+                                </h3>
+                                <ul className="list-disc ml-8">
+                                    {data.alreadyInBrochure.map((topic) => (
+                                        <li key={topic}>{topic}</li>
+                                    ))}
+                                </ul>
+                                <h3 className="text-[28px] leading-[36px] font-condensed my-[25px] text-[#262626] font-medium ">
+                                    CHOOSE TO ADD INFORMATION ON THE FOLLOWING:
+                                </h3>
+                                <ul className="flex flex-col md:flex-row justify-between">
+                                    <div>
+                                        <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                                            About Melbourne
+                                        </h4>
+                                        {data.aboutMelbourne.map((about) => (
+                                            <li key={about}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={about}
+                                                    name="additionalData"
+                                                    value={about}
+                                                    checked={additionalData.includes(about)}
+                                                    onChange={(e) => {
+                                                        setAdditionalData((prevData) =>
+                                                            e.target.checked
+                                                                ? [...prevData, e.target.value]
+                                                                : prevData.filter(
+                                                                      (item) =>
+                                                                          item !== e.target.value
+                                                                  )
+                                                        );
+                                                    }}
+                                                />
+                                                <label htmlFor="reading" className="ml-2 mr-4">
+                                                    {about}
+                                                </label>
+                                            </li>
+                                        ))}
+                                    </div>
+                                    <div>
+                                        <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                                            English Language Support
+                                        </h4>
+                                        {data.englishLanguageSupport.map((english) => (
+                                            <li key={english}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={english}
+                                                    name="additionalData"
+                                                    value={english}
+                                                    checked={additionalData.includes(english)}
+                                                    onChange={(e) => {
+                                                        setAdditionalData((prevData) =>
+                                                            e.target.checked
+                                                                ? [...prevData, e.target.value]
+                                                                : prevData.filter(
+                                                                      (item) =>
+                                                                          item !== e.target.value
+                                                                  )
+                                                        );
+                                                    }}
+                                                />
+                                                <label htmlFor="reading" className="ml-2 mr-4">
+                                                    {english}
+                                                </label>
+                                            </li>
+                                        ))}
+                                    </div>
+                                    <div>
+                                        <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                                            University Services
+                                        </h4>
+                                        {data.universityServices.map((service) => (
+                                            <li key={service}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={service}
+                                                    name="additionalData"
+                                                    value={service}
+                                                    checked={additionalData.includes(service)}
+                                                    onChange={(e) => {
+                                                        setAdditionalData((prevData) =>
+                                                            e.target.checked
+                                                                ? [...prevData, e.target.value]
+                                                                : prevData.filter(
+                                                                      (item) =>
+                                                                          item !== e.target.value
+                                                                  )
+                                                        );
+                                                    }}
+                                                />
+                                                <label htmlFor="reading" className="ml-2 mr-4">
+                                                    {service}
+                                                </label>
+                                            </li>
+                                        ))}
+                                    </div>
+                                </ul>
+                            </section>
+                        )}
+                        {step === 4 && (
                             <section className="mx-auto py-10 pb-20 ">
                                 <h2 className="pt-5 pb-8 text-5xl font-light font-condensed">
                                     TELL US ABOUT YOURSELF
@@ -141,7 +464,7 @@ export const Contact = () => {
                                         onChange={(e) => {
                                             setResidenceCountry(e.target.value);
                                         }}>
-                                        <option value="Nepal" disabled defaultValue>
+                                        <option value="Nepal" defaultValue>
                                             Select a Country
                                         </option>
                                     </select>
@@ -160,7 +483,7 @@ export const Contact = () => {
                                         onChange={(e) => {
                                             setNationality(e.target.value);
                                         }}>
-                                        <option value="Nepal" disabled defaultValue>
+                                        <option value="Nepal" defaultValue>
                                             Select a Country
                                         </option>
                                     </select>
@@ -179,7 +502,7 @@ export const Contact = () => {
                                         onChange={(e) => {
                                             setMonth(e.target.value);
                                         }}>
-                                        <option value="" disabled defaultValue>
+                                        <option value="Jan" defaultValue>
                                             Month
                                         </option>
                                     </select>
@@ -191,7 +514,7 @@ export const Contact = () => {
                                         onChange={(e) => {
                                             setYear(e.target.value);
                                         }}>
-                                        <option value="" disabled defaultValue>
+                                        <option value="2020" defaultValue>
                                             Year
                                         </option>
                                     </select>
@@ -337,52 +660,44 @@ export const Contact = () => {
                                     </p>
                                 </div>
                             </section>
-                            <ul className="actions">
-                                <li>
-                                    <input
-                                        type="submit"
-                                        value="Send me more information"
-                                        className="primary"
-                                        onClick={updateData}
-                                    />
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                    <div id="thanksDiv" style={{ display: `${showThanks ? 'block' : 'none'}` }}>
-                        <h4>Thanks! </h4>
-                        <p>{`We have received your request for more information
-                            and one of our ${xmp.r['preference']} specialists
-                            will be in contact as soon as possible.`}</p>
-                    </div>
-                </section>
-                <section className="split">
-                    <section>
-                        <div className="contact-method">
-                            <span className="icon solid alt fa-envelope"></span>
-                            <h3>Email</h3>
-                            <a href="mailto:information@untitled.tld"> information@untitled.tld </a>
+                        )}
+                        {step === 5 && <>{showThanks ? 'Thank you' : 'Please submit the form'}</>}
+                    </form>
+                    <section className="flex w-full justify-between mt-32 px-10">
+                        <div>
+                            {step !== 1 && (
+                                <button
+                                    className="text-[#261248] cursor-pointer font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setStep((prevStep) => Number(prevStep) - Number(1));
+                                        let elem = document.getElementById('scrollToHere');
+                                        elem.scrollIntoView();
+                                    }}>
+                                    Back
+                                </button>
+                            )}
                         </div>
-                    </section>
-                    <section>
-                        <div className="contact-method">
-                            <span className="icon solid alt fa-phone"></span>
-                            <h3>Phone</h3>
-                            <span>(000) 000-0000 x12387</span>
-                        </div>
-                    </section>
-                    <section>
-                        <div className="contact-method">
-                            <span className="icon solid alt fa-home"></span>
-                            <h3>Address</h3>
-                            <span>
-                                1234 Somewhere Road #5432
-                                <br />
-                                Nashville, TN 00000
-                                <br />
-                                United States of America
-                            </span>
-                        </div>
+                        {!showThanks &&
+                            (step === 5 ? (
+                                <button
+                                    type="submit"
+                                    className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                                    onClick={updateData}>
+                                    Submit
+                                </button>
+                            ) : (
+                                <button
+                                    className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setStep((prevStep) => Number(prevStep) + 1);
+                                        let elem = document.getElementById('scrollToHere');
+                                        elem.scrollIntoView();
+                                    }}>
+                                    Next
+                                </button>
+                            ))}
                     </section>
                 </section>
             </div>

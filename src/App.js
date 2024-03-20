@@ -1,6 +1,6 @@
 import './assets/css/main.css';
 import { Header } from './components/Header';
-import { Banner } from './components/Banner';
+// import { Banner } from './components/Banner';
 import { Footer } from './components/Footer';
 // import { MainBlock } from './components/MainBlock';
 import { Contact } from './components/Contact';
@@ -25,6 +25,9 @@ function App() {
                 'year',
                 'nationality',
                 'residenceCountry',
+                'courses',
+                'additionalData',
+                'studyArea',
                 'preference',
                 'email',
                 'photo1',
@@ -43,10 +46,10 @@ function App() {
         });
     }, [xmp]);
     return (
-        <div className="App">
+        <div className="bg-gray-100 w-full h-full min-h-screen">
             <div id="wrapper">
                 <Header />
-                <Banner />
+                {/* <Banner /> */}
                 {/* <MainBlock /> */}
                 <Contact />
                 <Footer />

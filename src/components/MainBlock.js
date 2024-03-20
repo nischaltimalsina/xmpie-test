@@ -295,7 +295,7 @@ export const MainBlock = () => {
     }, [xmp]);
 
     return (
-        <main className="container mx-auto mb-32">
+        <main className="container mx-auto mb-32 bg-white">
             <section>
                 <h1 className="text-[56px] font-condensed text-[#262626] leading-[64px] my-[60px]">
                     SELECT STUDY AREA AND LEVEL
