@@ -19,6 +19,7 @@ function App() {
             adors: [
                 'firstName',
                 'lastName',
+                'XMPie.PDF.P3',
                 'phone',
                 'optionalEmail',
                 'month',
