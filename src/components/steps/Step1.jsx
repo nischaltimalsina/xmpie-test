@@ -1,6 +1,6 @@
 import React from 'react';
-import InfoComponent from './common/InfoComponent';
-import data from '../assets/data.json';
+import InfoComponent from '../common/InfoComponent';
+import data from '../../assets/data.json';
 
 const Step1 = ({
     studyArea,

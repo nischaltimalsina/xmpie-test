@@ -1,5 +1,5 @@
 import React from 'react';
-import data from '../assets/data.json';
+import data from '../../assets/data.json';
 
 const Step2 = ({ activeCourse, courses, setCourses, field, setError, error }) => {
     return (

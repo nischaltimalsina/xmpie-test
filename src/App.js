@@ -1,6 +1,6 @@
 import './assets/css/main.css';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
+import { Header } from './components/common/Header';
+import { Footer } from './components/common/Footer';
 import { Contact } from './components/Contact';
 import { useContext, useEffect } from 'react';
 import { XmplContext, useAdors } from 'xmpl-react';

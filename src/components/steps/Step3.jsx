@@ -1,5 +1,5 @@
 import React from 'react';
-import data from '../assets/data.json';
+import data from '../../assets/data.json';
 
 const Step3 = ({ additionalData, setAdditionalData }) => {
     return (
