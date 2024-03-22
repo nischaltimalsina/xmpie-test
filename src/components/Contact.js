@@ -1,18 +1,24 @@
 import { XmplContext, useAdors, useEvents, useTrigger } from 'xmpl-react';
 import { useContext, useEffect, useState } from 'react';
+import { getNames } from 'country-list';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+
 import data from '../assets/data.json';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import Step5 from './Step5';
 import CallToActions from './CallToActions';
+import ProgressiveNumbers from './ProgressiveNumbers';
 
-const countries = ['Nepal', 'India', 'Maldives', 'Australia', 'Srilanka'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 const years = ['2024', '2025', '2026', '2027', '2028', '2029'];
 export const Contact = () => {
     const { xmp } = useContext(XmplContext);
     const { updateAdors } = useAdors();
+    const countries = getNames();
+
     const [firstName, setFirstName] = useState(xmp.r['firstName']);
     const [lastName, setLastName] = useState(xmp.r['lastName']);
     const [email, setEmail] = useState(xmp.r['email']);
@@ -23,12 +29,13 @@ export const Contact = () => {
     const [nationality, setNationality] = useState(xmp.r['nationality']);
     const [residenceCountry, setResidenceCountry] = useState(xmp.r['residenceCountry']);
     const [step, setStep] = useState(1);
-
+    const [error, setError] = useState('');
     const [activeCourse, setActiveCourse] = useState({});
     const [courses, setCourses] = useState(xmp.r['activeCourse']?.split(',') || []);
     const [additionalData, setAdditionalData] = useState(xmp.r['additionalData']?.split(',') || []);
     const [link, setLink] = useState(xmp.r['XMPie.PDF.P3']);
     const [studyArea, setStudyArea] = useState(xmp.r['studyArea']);
+    const [field, setField] = useState('');
     const [studyLevel, setStudyLevel] = useState([]);
 
     const { events } = useEvents();
@@ -75,6 +82,9 @@ export const Contact = () => {
     };
     const updateData = async (e) => {
         e.preventDefault();
+        const errorExists = testError();
+
+        if (errorExists) return;
         let tempAdditionalData = additionalData.join(',');
         let tempCourses = courses.join(',');
         const res = await updateAdors({
@@ -93,70 +103,120 @@ export const Contact = () => {
             additionalData: tempAdditionalData
         });
         if (res) {
+            setError('');
             setStep(5);
+            let elem = document.getElementById('scrollToHere');
+            elem.scrollIntoView();
         }
         triggerEmail();
         trackEvent(e);
     };
+
+    const testError = () => {
+        if (step === 1) {
+            if (!studyArea) {
+                setError('Please chhose an study Area.');
+                let elem = document.getElementById('scrollToHere');
+                elem.scrollIntoView();
+                return true;
+            } else if (studyLevel.length === 0) {
+                setError('Please chhose at least 1 study level.');
+                let elem = document.getElementById('scrollToHere');
+                elem.scrollIntoView();
+                return true;
+            }
+        }
+        if (step === 2) {
+            if (courses.length === 0) {
+                setError('Please chhose at least 1 course');
+                let elem = document.getElementById('scrollToHere');
+                elem.scrollIntoView();
+                return true;
+            }
+        }
+        if (step === 4) {
+            if (!firstName || !lastName || !email || !year || !nationality || !residenceCountry) {
+                setError('Please fill in all required values');
+                let elem = document.getElementById('scrollToHere');
+                elem.scrollIntoView();
+                return true;
+            }
+        }
+    };
     useEffect(() => {
         let tempActiveCourse = data.studyArea.filter((d) => d.value === studyArea);
-        let courses = {};
-        if (studyLevel.includes('Vocational and further education courses')) {
-            courses.vocational = [...tempActiveCourse[0].vocational];
+        if (tempActiveCourse.length > 0) {
+            let courses = {};
+            if (studyLevel.includes('Vocational and further education courses')) {
+                courses.vocational = [...tempActiveCourse[0].vocational];
+            }
+            if (studyLevel.includes('Masters, graduate courses and PhDs (postgraduate)')) {
+                courses.masters = [...tempActiveCourse[0].masters];
+            }
+            if (studyLevel.includes('Bachelor and diploma courses (undergraduate)')) {
+                courses.bachelor = [...tempActiveCourse[0].bachelor];
+            }
+            setActiveCourse(courses);
         }
-        if (studyLevel.includes('Masters, graduate courses and PhDs (postgraduate)')) {
-            courses.masters = [...tempActiveCourse[0].masters];
-        }
-        if (studyLevel.includes('Bachelor and diploma courses (undergraduate)')) {
-            courses.bachelor = [...tempActiveCourse[0].bachelor];
-        }
-        setActiveCourse(courses);
-    }, [studyLevel]);
-    console.log({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phone: phone,
-        optionalEmail: optionalEmail,
-        followup: true,
-        month,
-        year,
-        nationality,
-        residenceCountry,
-        courses: courses?.join(','),
-        studyArea,
-        additionalData: additionalData?.join(',')
-    });
+    }, [studyLevel, studyArea]);
+
     return (
         <section id="contact" className="mb-32 container mx-auto">
             <div className="">
                 <section>
                     <h1 className="text-[56px] font-condensed text-[#262626] leading-[64px] my-[60px]">
-                        SELECT STUDY AREA AND LEVEL
+                        {step === 1
+                            ? 'SELECT STUDY AREA AND LEVEL'
+                            : step === 2
+                              ? 'CHOOSE A COURSE'
+                              : step === 3
+                                ? 'ADD INFORMATION'
+                                : step === 4
+                                  ? 'PROVIDE YOUR DETAILS'
+                                  : 'DOWNLOAD BROCHURE'}
                     </h1>
                 </section>
-                <section id="scrollToHere" className="flex bg-white justify-around mb-1 py-16">
-                    {data.titles.map((title) => (
-                        <span
-                            className={`text-center text-lg font-semibold leading-7 ${step === title.value ? 'text-green-500' : ''}`}
-                            key={title.value}>
-                            {title.text}
-                        </span>
+                <section id="scrollToHere" className="flex  justify-around mb-2 ">
+                    {data.titles.map((title, i) => (
+                        <div
+                            key={title.value}
+                            className={`w-full font-semibold flex flex-col justify-center items-center py-16 ${step === title.value ? ' bg-[rgba(91,194,231,0.1)]' : 'bg-white'}`}>
+                            <ProgressiveNumbers number={i + 1} status={i + 1 < step} />
+                            <span
+                                className={`text-center hidden lg:flex text-lg font-semibold leading-7 ${step === title.value ? 'text-green-500' : ''}`}>
+                                {title.text}
+                            </span>
+                        </div>
                     ))}
                 </section>
-                <section className="bg-white w-full  p-8 ">
-                    <form className="">
+                <section>
+                    <div className={` ${error ? 'pt-4' : ''} w-full  bg-white  `}>
+                        {error && (
+                            <div className=" border-red-600 border-[1px] p-4 mx-4 text-red-600  font-normal">
+                                <p>Before you proceed:</p>
+                                <ul className="ml-8 list-disc my-4">
+                                    <li>{error}</li>
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                    <form className="bg-white p-8">
                         {step === 1 && (
                             <Step1
+                                error={error}
+                                setError={setError}
                                 studyArea={studyArea}
                                 setStudyArea={setStudyArea}
+                                setField={setField}
                                 studyLevel={studyLevel}
                                 setStudyLevel={setStudyLevel}
                             />
                         )}
                         {step === 2 && (
                             <Step2
-                                studyArea={studyArea}
+                                error={error}
+                                setError={setError}
+                                field={field}
                                 activeCourse={activeCourse}
                                 courses={courses}
                                 setCourses={setCourses}
@@ -179,23 +239,26 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         Which country are you currently living in?
                                     </label>
-                                    <select
-                                        className="h-12 max-w-md px-4 border"
-                                        name="residenceCountry"
-                                        id="residenceCountry"
-                                        value={residenceCountry || ''}
-                                        onChange={(e) => {
-                                            setResidenceCountry(e.target.value);
-                                        }}>
-                                        <option value="" defaultValue>
-                                            Select a Country
-                                        </option>
-                                        {countries.map((country) => (
-                                            <option key={country} value={country}>
-                                                {country}
+                                    <div className="lg:mb-0 mb-2 lg:w-6/12 lg:mr-8 max-w-md  flex flex-row ">
+                                        <select
+                                            className="border h-12  px-4 w-full mr-1"
+                                            name="residenceCountry"
+                                            id="residenceCountry"
+                                            value={residenceCountry || ''}
+                                            onChange={(e) => {
+                                                setResidenceCountry(e.target.value);
+                                            }}>
+                                            <option value="" defaultValue>
+                                                Select a Country
                                             </option>
-                                        ))}
-                                    </select>
+                                            {countries.map((country) => (
+                                                <option key={country} value={country}>
+                                                    {country}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <span className="text-red-600">*</span>
+                                    </div>
                                 </div>
                                 <div className="flex flex-col gap-2 text-sm font-normal">
                                     <label
@@ -203,23 +266,24 @@ export const Contact = () => {
                                         className="mb-3 text-xl font-semibold mt-7">
                                         What is your nationality?
                                     </label>
-                                    <select
-                                        className="h-12 max-w-md px-4 border"
-                                        name="nationality"
-                                        id="nationality"
-                                        value={nationality || ''}
-                                        onChange={(e) => {
-                                            setNationality(e.target.value);
-                                        }}>
-                                        <option value="" defaultValue>
-                                            Select a Country
-                                        </option>
-                                        {countries.map((country) => (
-                                            <option key={country} value={country}>
-                                                {country}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    <div className="lg:mb-0 mb-2 lg:w-6/12 lg:mr-8 max-w-md  flex flex-row ">
+                                        <select
+                                            className="border h-12  px-4 w-full mr-1"
+                                            name="nationality"
+                                            id="nationality"
+                                            value={nationality || ''}
+                                            onChange={(e) => {
+                                                setNationality(e.target.value);
+                                            }}>
+                                            <option value="">Select a Country</option>
+                                            {countries.map((country) => (
+                                                <option key={country} value={country}>
+                                                    {country}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <span className="text-red-600">*</span>
+                                    </div>
                                 </div>
                                 <div className="flex flex-col gap-2 text-sm font-normal">
                                     <label
@@ -228,40 +292,46 @@ export const Contact = () => {
                                         When do you plan to start your study?
                                     </label>
                                     <div className="flex flex-col lg:flex-row w-full justify-start">
-                                        <select
-                                            className="h-12 mb-2 lg:mb-0 lg:w-6/12 max-w-md px-4 lg:mr-12 border"
-                                            name="month"
-                                            id="month"
-                                            value={month || ''}
-                                            onChange={(e) => {
-                                                setMonth(e.target.value);
-                                            }}>
-                                            <option value="" defaultValue>
-                                                Select a Month
-                                            </option>
-                                            {months.map((month) => (
-                                                <option key={month} value={month}>
-                                                    {month}
+                                        <div className="lg:mb-0 mb-2 lg:w-6/12 lg:mr-8 max-w-md  flex flex-row ">
+                                            <select
+                                                className="border h-12  px-4 w-full mr-1"
+                                                name="month"
+                                                id="month"
+                                                value={month || ''}
+                                                onChange={(e) => {
+                                                    setMonth(e.target.value);
+                                                }}>
+                                                <option value="" defaultValue>
+                                                    Select a Month
                                                 </option>
-                                            ))}
-                                        </select>
-                                        <select
-                                            className="h-12 px-4  lg:w-6/12 max-w-md border"
-                                            name="year"
-                                            id="year"
-                                            value={year || ''}
-                                            onChange={(e) => {
-                                                setYear(e.target.value);
-                                            }}>
-                                            <option value="" defaultValue>
-                                                Select a Year
-                                            </option>
-                                            {years.map((year) => (
-                                                <option key={year} value={year}>
-                                                    {year}
+                                                {months.map((month) => (
+                                                    <option key={month} value={month}>
+                                                        {month}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            <span className="text-red-600 opacity-0">*</span>
+                                        </div>
+                                        <div className="lg:mb-0 lg:w-6/12  max-w-md flex flex-row">
+                                            <select
+                                                className="border h-12  px-4 w-full mr-1"
+                                                name="year"
+                                                id="year"
+                                                value={year || ''}
+                                                onChange={(e) => {
+                                                    setYear(e.target.value);
+                                                }}>
+                                                <option value="" defaultValue>
+                                                    Select a Year
                                                 </option>
-                                            ))}
-                                        </select>
+                                                {years.map((year) => (
+                                                    <option key={year} value={year}>
+                                                        {year}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            <span className="text-red-600">*</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="flex flex-col text-sm font-normal gap-">
@@ -271,59 +341,69 @@ export const Contact = () => {
                                         Name
                                     </label>
                                     <div className="flex flex-col lg:flex-row w-full justify-start">
-                                        <input
-                                            className="lg:mb-0 mb-2 lg:w-6/12 lg:mr-12 h-12 max-w-md px-4 border "
-                                            placeholder="Given Name"
-                                            type="text"
-                                            name="firstName"
-                                            id="firstName"
-                                            value={firstName || ''}
-                                            onChange={(e) => {
-                                                setFirstName(e.target.value);
-                                            }}
-                                        />
-                                        <input
-                                            className="lg:mb-0 lg:w-6/12  h-12 max-w-md px-4 border "
-                                            placeholder="Family Name"
-                                            type="text"
-                                            name="lastName"
-                                            id="lastName"
-                                            value={lastName || ''}
-                                            onChange={(e) => {
-                                                setLastName(e.target.value);
-                                            }}
-                                        />
+                                        <div className="lg:mb-0 mb-2 lg:w-6/12 lg:mr-8 max-w-md  flex flex-row ">
+                                            <input
+                                                className="border h-12  px-4 w-full mr-1"
+                                                placeholder="Given Name"
+                                                type="text"
+                                                name="firstName"
+                                                id="firstName"
+                                                value={firstName || ''}
+                                                onChange={(e) => {
+                                                    setFirstName(e.target.value);
+                                                }}
+                                            />
+                                            <span className="text-red-600">*</span>
+                                        </div>
+                                        <div className="lg:mb-0 lg:w-6/12  max-w-md flex flex-row">
+                                            <input
+                                                className="border h-12  px-4 w-full mr-1"
+                                                placeholder="Family Name"
+                                                type="text"
+                                                name="lastName"
+                                                id="lastName"
+                                                value={lastName || ''}
+                                                onChange={(e) => {
+                                                    setLastName(e.target.value);
+                                                }}
+                                            />
+                                            <span className="text-red-600">*</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-col text-sm font-normal gap-">
+                                <div className="flex flex-col text-sm font-normal ">
                                     <label
                                         htmlFor="name"
                                         className="mb-3 text-xl font-semibold mt-7">
                                         Contact Details
                                     </label>
                                     <div className="flex flex-col lg:flex-row w-full justify-start">
-                                        <input
-                                            className="h-12 mb-2 lg:mb-0 lg:w-6/12 max-w-md px-4 lg:mr-12 border"
-                                            placeholder="0412 345 678 (Optional)"
-                                            type="text"
-                                            name="phone"
-                                            id="phone"
-                                            value={phone || ''}
-                                            onChange={(e) => {
-                                                setPhone(e.target.value);
-                                            }}
-                                        />
-                                        <input
-                                            className="lg:mb-0 lg:w-6/12  h-12 max-w-md px-4 border  "
-                                            placeholder="Email Address"
-                                            type="text"
-                                            name="email"
-                                            id="email"
-                                            value={email || ''}
-                                            onChange={(e) => {
-                                                setEmail(e.target.value);
-                                            }}
-                                        />
+                                        <div className="lg:mb-0 mb-2 lg:w-6/12 lg:mr-8 max-w-md  flex flex-row ">
+                                            <PhoneInput
+                                                className="border h-12  px-4 w-full mr-1 [&>input:focus-visible]:outline-transparent"
+                                                type="text"
+                                                name="phone"
+                                                id="phone"
+                                                placeholder="Enter phone number"
+                                                value={phone || ''}
+                                                onChange={setPhone}
+                                            />
+                                            <span className="text-red-600 opacity-0">*</span>
+                                        </div>
+                                        <div className="lg:mb-0 lg:w-6/12  max-w-md flex flex-row">
+                                            <input
+                                                className="border h-12  px-4 w-full mr-1"
+                                                placeholder="Email Address"
+                                                type="email"
+                                                name="email"
+                                                id="email"
+                                                value={email || ''}
+                                                onChange={(e) => {
+                                                    setEmail(e.target.value);
+                                                }}
+                                            />
+                                            <span className="text-red-600">*</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="flex flex-col text-sm font-normal gap-">
@@ -333,17 +413,20 @@ export const Contact = () => {
                                         Share my personalised brochure with the following email
                                         address
                                     </label>
-                                    <input
-                                        className="h-12 max-w-md px-4 border "
-                                        placeholder="Email Address (optional)"
-                                        type="text"
-                                        name="optionalEmail"
-                                        id="optionalEmail"
-                                        value={optionalEmail || ''}
-                                        onChange={(e) => {
-                                            setOptionalEmail(e.target.value);
-                                        }}
-                                    />
+                                    <div className="lg:mb-0 mb-2 lg:w-6/12 lg:mr-8 max-w-md  flex flex-row ">
+                                        <input
+                                            className="border h-12  px-4 w-full mr-1"
+                                            placeholder="Email Address (optional)"
+                                            type="text"
+                                            name="optionalEmail"
+                                            id="optionalEmail"
+                                            value={optionalEmail || ''}
+                                            onChange={(e) => {
+                                                setOptionalEmail(e.target.value);
+                                            }}
+                                        />
+                                        <span className="text-red-600 opacity-0">*</span>
+                                    </div>
                                 </div>
                                 <div className="flex flex-col text-sm font-normal gap-">
                                     <span className="mb-3 text-xl font-semibold mt-7">
@@ -421,7 +504,13 @@ export const Contact = () => {
                             />
                         )}
                     </form>
-                    <CallToActions step={step} setStep={setStep} updateData={updateData} />
+                    <CallToActions
+                        testError={testError}
+                        step={step}
+                        setStep={setStep}
+                        updateData={updateData}
+                        setError={setError}
+                    />
                 </section>
             </div>
         </section>

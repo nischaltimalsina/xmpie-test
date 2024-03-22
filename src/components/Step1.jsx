@@ -2,15 +2,21 @@ import React from 'react';
 import InfoComponent from './common/InfoComponent';
 import data from '../assets/data.json';
 
-const Step1 = ({ studyArea, setStudyArea, studyLevel, setStudyLevel }) => {
+const Step1 = ({
+    studyArea,
+    setStudyArea,
+    studyLevel,
+    setStudyLevel,
+    setField,
+    setError,
+    error
+}) => {
     return (
         <section>
             <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
                 WHAT STUDY AREA AND LEVEL ARE YOU INTERESTED IN?
             </h2>
-            {/* <div className="w-full border-red-600 border-[2px] p-4 text-red-600 text-lg font-semibold mb-4">
-    {error}
-</div> */}
+            <p>All fields are required unless specified optional.</p>
             <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
                 StudyArea
                 <InfoComponent text="Choose your study Area" />
@@ -20,10 +26,12 @@ const Step1 = ({ studyArea, setStudyArea, studyLevel, setStudyLevel }) => {
                 name="studyArea"
                 value={studyArea}
                 onChange={(e) => {
+                    error === 'Please chhose an study Area.' ? setError('') : null;
                     setStudyArea(e.target.value);
+                    setField(e.target?.options[e.target.selectedIndex]?.text);
                 }}
                 className="w-full max-w-md text-xs box-border rounded-none h-12 px-[15px] border-[1px] border-[#ccc]  shadow-sm focus-visible:outline-0">
-                <option value="" className="text-xs">
+                <option value="" name="" className="text-xs">
                     Select a Study Area
                 </option>
                 {data?.studyArea.slice(0, 3).map((study) => (
@@ -48,6 +56,16 @@ const Step1 = ({ studyArea, setStudyArea, studyLevel, setStudyLevel }) => {
                                 value={level}
                                 checked={studyLevel.includes(level)}
                                 onChange={(e) => {
+                                    if (studyLevel.length === 2 && e.target.checked) {
+                                        let elem = document.getElementById('scrollToHere');
+                                        elem.scrollIntoView();
+                                        return setError('You can only choose 2 options');
+                                    }
+                                    error === 'You can only choose 2 options' ||
+                                    error === 'Please chhose at least 1 study level.'
+                                        ? setError('')
+                                        : null;
+
                                     setStudyLevel((prevData) =>
                                         e.target.checked
                                             ? [...prevData, e.target.value]
@@ -55,7 +73,7 @@ const Step1 = ({ studyArea, setStudyArea, studyLevel, setStudyLevel }) => {
                                     );
                                 }}
                             />
-                            <label htmlFor="reading" className="ml-2 mr-4">
+                            <label htmlFor="reading" className="ml-2 mr-4 leading-[35px]">
                                 {level}
                             </label>
                         </div>

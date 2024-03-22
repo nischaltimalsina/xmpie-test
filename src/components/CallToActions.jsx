@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CallToActions = ({ step, setStep, updateData }) => {
+const CallToActions = ({ step, setStep, updateData, testError, setError }) => {
     return (
         <section className="flex w-full justify-between mt-32 px-10">
             <div>
@@ -30,9 +30,13 @@ const CallToActions = ({ step, setStep, updateData }) => {
                         className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32"
                         onClick={(e) => {
                             e.preventDefault();
-                            setStep((prevStep) => Number(prevStep) + 1);
-                            let elem = document.getElementById('scrollToHere');
-                            elem.scrollIntoView();
+                            const errorExists = testError();
+                            if (!errorExists) {
+                                setStep((prevStep) => Number(prevStep) + 1);
+                                let elem = document.getElementById('scrollToHere');
+                                elem.scrollIntoView();
+                                setError('');
+                            }
                         }}>
                         Next
                     </button>
