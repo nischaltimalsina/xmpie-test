@@ -75,6 +75,8 @@ export const Contact = () => {
     };
     const updateData = async (e) => {
         e.preventDefault();
+        let tempAdditionalData = additionalData.join(',');
+        let tempCourses = courses.join(',');
         const res = await updateAdors({
             firstName: firstName,
             lastName: lastName,
@@ -82,13 +84,13 @@ export const Contact = () => {
             phone: phone,
             optionalEmail: optionalEmail,
             followup: true,
-            month,
-            year,
-            nationality,
-            residenceCountry,
-            courses: courses.join(','),
-            studyArea,
-            additionalData: additionalData.join(',')
+            month: month,
+            year: year,
+            nationality: nationality,
+            residenceCountry: residenceCountry,
+            courses: tempCourses,
+            studyArea: studyArea,
+            additionalData: tempAdditionalData
         });
         if (res) {
             setStep(5);
