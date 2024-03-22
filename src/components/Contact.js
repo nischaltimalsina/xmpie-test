@@ -73,7 +73,6 @@ export const Contact = () => {
             console.log(error);
         }
     };
-
     const updateData = async (e) => {
         e.preventDefault();
         const res = await updateAdors({
@@ -111,8 +110,21 @@ export const Contact = () => {
         }
         setActiveCourse(courses);
     }, [studyLevel]);
-
-    console.log(link);
+    console.log({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        optionalEmail: optionalEmail,
+        followup: true,
+        month,
+        year,
+        nationality,
+        residenceCountry,
+        courses: courses?.join(','),
+        studyArea,
+        additionalData: additionalData?.join(',')
+    });
     return (
         <section id="contact" className="mb-32 container mx-auto">
             <div className="">

@@ -12,10 +12,10 @@ const Step5 = ({ firstName, lastName, email, courses, additionalData, link }) =>
                 <p className="font-semibold mt-4">
                     You requested the following information for your personalised brochure:
                 </p>
-                {courses.map((course) => (
+                {courses?.map((course) => (
                     <p key={course}>{course}</p>
                 ))}
-                {additionalData.map((course) => (
+                {additionalData?.map((course) => (
                     <p key={course}>{course}</p>
                 ))}
                 <div className="w-full flex justify-center mt-8">
