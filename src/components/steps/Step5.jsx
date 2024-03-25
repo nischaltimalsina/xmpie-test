@@ -8,10 +8,10 @@ const Step5 = ({ firstName, lastName, email, courses, additionalData, link }) =>
             <p>
                 You can download your personalised brochure now{' '}
                 <span className="font-semibold">
-                    {firstName} {lastName}.
+                    {firstName} {lastName}.{' '}
                 </span>
-                We&apos;ve also sent an email to <span className="font-semibold">{email}</span>
-                with a link.
+                We&apos;ve also sent an email to <span className="font-semibold">{email}</span> with
+                a link.
             </p>
             <br />{' '}
             <p className="font-semibold mt-4">

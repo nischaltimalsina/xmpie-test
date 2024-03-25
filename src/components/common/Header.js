@@ -7,12 +7,12 @@ export const Header = () => {
                 <div></div>
                 <a
                     href="https://gotovu.custhelp.com/app/utils/login_form/redirect/ask?p_ptaid=fUKAiNcpH_lLUDabv_CKIhbIcx5ziOj8XjFQ9a%7Ewx9ydis2mtGq1FdoAQjmQBF0YJ%7EzoaZsFSm87qDa_gbcnk6jkDhrlpB_Hl6iPiQNOpJ24kKGEgQKLMdmA%21%21"
-                    className="bg-[#21104b] uppercase cursor-pointer text-2xl font-normal font-condensed  text-white px-12 flex items-center">
+                    className="bg-[#21104b] uppercase cursor-pointer text-[20px] font-normal font-condensed  text-white px-12 flex items-center">
                     enquire
                 </a>
                 <a
                     href="https://eaams.vu.edu.au/portal/Login.aspx?ReturnUrl=%2fPortal%2fApplications%2fBrowseApplications.aspx"
-                    className="bg-[#40c7f4]  font-normal text-2xl  font-condensed cursor-pointer px-12 flex items-center">
+                    className="bg-[#40c7f4]  font-normal text-[20px]  font-condensed cursor-pointer px-12 flex items-center">
                     APPLY
                 </a>
                 <a
