@@ -25,7 +25,7 @@ export const Contact = () => {
     const [year, setYear] = useState(xmp.r['year']);
     const [nationality, setNationality] = useState(xmp.r['nationality']);
     const [residenceCountry, setResidenceCountry] = useState(xmp.r['residenceCountry']);
-    const [courses, setCourses] = useState(xmp.r['activeCourse']?.split(',') || []);
+    const [courses, setCourses] = useState(xmp.r['courses']?.split(',') || []);
     const [studyArea, setStudyArea] = useState(xmp.r['studyArea']);
     const [additionalData, setAdditionalData] = useState(xmp.r['additionalData']?.split(',') || []);
     const [link, setLink] = useState(xmp.r['XMPie.PDF.P3']);
@@ -55,7 +55,7 @@ export const Contact = () => {
         setNationality(xmp.r['nationality']);
         setResidenceCountry(xmp.r['residenceCountry']);
         setActiveCourse(xmp.r['activeCourse']);
-        setCourses(xmp.r['activeCourse']?.split(',') || []);
+        setCourses(xmp.r['courses']?.split(',') || []);
         setAdditionalData(xmp.r['additionalData']?.split(',') || []);
         setStudyArea(xmp.r['studyArea']);
         setLink(xmp.r['XMPie.PDF.P3']);
