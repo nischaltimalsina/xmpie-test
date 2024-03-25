@@ -18,23 +18,23 @@ export const Contact = () => {
 
     const [firstName, setFirstName] = useState(xmp.r['firstName']);
     const [lastName, setLastName] = useState(xmp.r['lastName']);
-    const [email, setEmail] = useState(xmp.r['email']);
     const [phone, setPhone] = useState(xmp.r['phone']);
+    const [email, setEmail] = useState(xmp.r['email']);
     const [optionalEmail, setOptionalEmail] = useState(xmp.r['optionalEmail']);
     const [month, setMonth] = useState(xmp.r['month']);
     const [year, setYear] = useState(xmp.r['year']);
     const [nationality, setNationality] = useState(xmp.r['nationality']);
     const [residenceCountry, setResidenceCountry] = useState(xmp.r['residenceCountry']);
+    const [courses, setCourses] = useState(xmp.r['activeCourse']?.split(',') || []);
+    const [studyArea, setStudyArea] = useState(xmp.r['studyArea']);
+    const [additionalData, setAdditionalData] = useState(xmp.r['additionalData']?.split(',') || []);
+    const [link, setLink] = useState(xmp.r['XMPie.PDF.P3']);
+
     const [step, setStep] = useState(1);
     const [error, setError] = useState('');
     const [activeCourse, setActiveCourse] = useState({});
-    const [courses, setCourses] = useState(xmp.r['activeCourse']?.split(',') || []);
-    const [additionalData, setAdditionalData] = useState(xmp.r['additionalData']?.split(',') || []);
-    const [link, setLink] = useState(xmp.r['XMPie.PDF.P3']);
-    const [studyArea, setStudyArea] = useState(xmp.r['studyArea']);
     const [field, setField] = useState('');
     const [studyLevel, setStudyLevel] = useState([]);
-
     const [sendUpdates, setSendUpdates] = useState(false);
     const [sendEmail, setSendEmail] = useState(false);
 
@@ -91,17 +91,17 @@ export const Contact = () => {
         const res = await updateAdors({
             firstName: firstName,
             lastName: lastName,
-            email: email,
             phone: phone,
+            email: email,
             optionalEmail: optionalEmail,
-            followup: true,
             month: month,
             year: year,
             nationality: nationality,
             residenceCountry: residenceCountry,
             courses: tempCourses,
             studyArea: studyArea,
-            additionalData: tempAdditionalData
+            additionalData: tempAdditionalData,
+            followup: true
         });
         if (res) {
             setError('');
@@ -165,7 +165,7 @@ export const Contact = () => {
         <section id="contact" className="mb-32 container mx-auto">
             <div className="">
                 <section>
-                    <h1 className="text-[56px] font-condensed text-[#262626] leading-[64px] my-[60px]">
+                    <h1 className="ml-4 text-[56px] font-condensed text-[#262626] leading-[64px] my-[60px]">
                         {step === 1
                             ? 'SELECT STUDY AREA AND LEVEL'
                             : step === 2
