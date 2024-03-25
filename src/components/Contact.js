@@ -61,6 +61,8 @@ export const Contact = () => {
         setLink(xmp.r['XMPie.PDF.P3']);
     }, [xmp]);
 
+    console.log(additionalData, 'additionalData');
+    console.log(courses, 'courses');
     const trackEvent = (e) => {
         const isAnchor = e.target.tagName === 'A';
         const options = {
