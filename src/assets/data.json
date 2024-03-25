@@ -62,14 +62,27 @@
         {
             "value": "1209",
             "text": "Engineering and Construction",
-            "vocational": [],
-            "masters": [],
-            "bachelor": []
+            "vocational": ["Diploma of Building and Construction (Building)"],
+            "masters": [
+                "Graduate Diploma in Project Management",
+                "Master of Engineering",
+                "Master of Project Management"
+            ],
+            "bachelor": [
+                "Bachelor of Building Design",
+                "Bachelor of Construction Management (Honours)",
+                "Bachelor of Engineering (Honours) (Civil Engineering)",
+                "Bachelor of Engineering (Honours) (Electrical and Electronic Engineering)",
+                "Bachelor of Engineering (Honours) (Mechanical Engineering)"
+            ]
         },
         {
             "value": "1216",
             "text": "Foundation Studies",
-            "vocational": [],
+            "vocational": [
+                "International Foundations at VU",
+                "International Foundations at VU (Extended)"
+            ],
             "masters": [],
             "bachelor": []
         },
@@ -77,45 +90,132 @@
             "value": "1213",
             "text": "Health, Nursing and Dermal Sciences",
             "vocational": [],
-            "masters": [],
-            "bachelor": []
+            "masters": [
+                "Bachelor of Science (Osteopathy)/Master of Health Science (Osteopathy)",
+                "Graduate Certificate in Global Public Health",
+                "Master of Global Public Health"
+            ],
+            "bachelor": [
+                "Bachelor of Biomedical Science",
+                "Bachelor of Biomedicine",
+                "Bachelor of Dermal Sciences",
+                "Bachelor of Health Science",
+                "Bachelor of Human Nutrition",
+                "Bachelor of Midwifery/Bachelor of Nursing",
+                "Bachelor of Nursing",
+                "Bachelor of Paramedicine",
+                "Bachelor of Science (Osteopathy)/Master of Health Science (Osteopathy)"
+            ]
         },
         {
             "value": "1217",
             "text": "Hospitality and Commercial Cookery",
             "vocational": [],
             "masters": [],
-            "bachelor": []
+            "bachelor": ["Associate Degree in Hospitality and Hotel Management"]
         },
         {
             "value": "1202",
             "text": "Information Technology",
             "vocational": [],
-            "masters": [],
-            "bachelor": []
+            "masters": [
+                "Graduate Certificate in Artificial Intelligence",
+                "Graduate Certificate in Digital Media",
+                "Graduate Diploma in Cyber Security",
+                "Graduate Diploma in Digital Media",
+                "Graduate Diploma in Project Management",
+                "Master of Applied Information Technology",
+                "Master of Business Analytics",
+                "Master of Digital Media",
+                "Master of Enterprise Resource Planning",
+                "Master of Project Management",
+                "Master of Supply Chain Management"
+            ],
+            "bachelor": [
+                "Bachelor of Cyber Security",
+                "Bachelor of Data Science",
+                "Bachelor of Information Technology",
+                "Bachelor of Information Technology (Professional)",
+                "Diploma of Information Technology"
+            ]
         },
         {
             "value": "1208",
             "text": "Law and Criminology",
             "vocational": [],
-            "masters": [],
-            "bachelor": []
+            "masters": ["Graduate Diploma in Migration Law"],
+            "bachelor": [
+                "Bachelor of Criminal Justice",
+                "Bachelor of Criminal Justice and Psychological Studies",
+                "Bachelor of Criminology",
+                "Bachelor of Criminology/Bachelor of Psychological Studies",
+                "Bachelor of Laws",
+                "Bachelor of Laws (Graduate Entry)",
+                "Bachelor of Laws/ Bachelor of Criminology"
+            ]
         },
-        { "value": "1214", "text": "Psychology", "vocational": [], "masters": [], "bachelor": [] },
-        { "value": "1210", "text": "Science", "vocational": [], "masters": [], "bachelor": [] },
+        {
+            "value": "1214",
+            "text": "Psychology",
+            "vocational": [],
+            "masters": ["Master of Counselling"],
+            "bachelor": [
+                "Bachelor of Criminal Justice and Psychological Studies",
+                "Bachelor of Criminology/Bachelor of Psychological Studies",
+                "Bachelor of Psychological Studies",
+                "Bachelor of Psychological Studies / Bachelor of Business",
+                "Bachelor of Psychology (Honours)",
+                "Bachelor of Sport Science (Human Movement) / Bachelor of Psychological Studies"
+            ]
+        },
+        {
+            "value": "1210",
+            "text": "Science",
+            "vocational": [],
+            "masters": [],
+            "bachelor": [
+                "Bachelor of Biomedical and Exercise Science",
+                "Bachelor of Biomedical Science",
+                "Bachelor of Biomedicine",
+                "Bachelor of Dermal Sciences",
+                "Bachelor of Health Science",
+                "Bachelor of Human Nutrition",
+                "Bachelor of Science (Honours) (Biomedical Science)"
+            ]
+        },
         {
             "value": "1215",
             "text": "Social Work and Community Development",
             "vocational": [],
-            "masters": [],
-            "bachelor": []
+            "masters": [
+                "Graduate Certificate in Global Public Health",
+                "Graduate Certificate in International Community Development",
+                "Graduate Diploma in International Community Development",
+                "Master of International Community Development"
+            ],
+            "bachelor": [
+                "Bachelor of Community Development",
+                "Bachelor of Social Work",
+                "Bachelor of Youth Work"
+            ]
         },
         {
             "value": "1247",
             "text": "Sport and Exercise Science",
             "vocational": [],
-            "masters": [],
-            "bachelor": []
+            "masters": ["Master of Clinical Exercise Science and Rehabilitation"],
+            "bachelor": [
+                "Bachelor of Biomedical and Exercise Science",
+                "Bachelor of Exercise Science (Clinical Practice)",
+                "Bachelor of Exercise Science (Sport Practice)",
+                "Bachelor of Outdoor Leadership",
+                "Bachelor of Physical Education and Sport Science",
+                "Bachelor of Sport Management",
+                "Bachelor of Sport Management / Bachelor of Business",
+                "Bachelor of Sport Science",
+                "Bachelor of Sport Science (Human Movement) / Bachelor of Psychological Studies",
+                "Bachelor of Sport Science (Human Movement) / Bachelor of Sport Management"
+            ]
         }
     ],
     "studyLevel": [

@@ -34,7 +34,7 @@ const Step1 = ({
                 <option value="" name="" className="text-xs">
                     Select a Study Area
                 </option>
-                {data?.studyArea.slice(0, 3).map((study) => (
+                {data?.studyArea.map((study) => (
                     <option key={study.value} value={study.value} className="text-xs">
                         {study.text}
                     </option>

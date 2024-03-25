@@ -20,7 +20,7 @@ const Step2 = ({ activeCourse, courses, setCourses, field, setError, error }) =>
             </h3>
             {activeCourse?.vocational &&
                 (activeCourse?.vocational.length === 0 ? (
-                    `There are currently no Vocational and Further Education Courses(International) relating to ${field}`
+                    `There are currently no Vocational and Further Education Courses(International) relating to ${field}.`
                 ) : (
                     <div className="my-4">
                         <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
@@ -58,7 +58,7 @@ const Step2 = ({ activeCourse, courses, setCourses, field, setError, error }) =>
                 ))}
             {activeCourse?.bachelor &&
                 (activeCourse?.bachelor.length === 0 ? (
-                    `There are currently no Bachelor Courses(International) relating to ${field}`
+                    `There are currently no Bachelor Courses(International) relating to ${field}.`
                 ) : (
                     <div className="my-4">
                         <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
@@ -96,7 +96,7 @@ const Step2 = ({ activeCourse, courses, setCourses, field, setError, error }) =>
                 ))}
             {activeCourse?.masters &&
                 (activeCourse?.masters.length === 0 ? (
-                    `There are currently no Masters Courses(International) relating to  ${field}`
+                    `There are currently no Masters Courses(International) relating to  ${field}.`
                 ) : (
                     <div className="my-4">
                         <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
