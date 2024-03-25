@@ -16,9 +16,9 @@ const Step1 = ({
             <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
                 WHAT STUDY AREA AND LEVEL ARE YOU INTERESTED IN?
             </h2>
-            <p>All fields are required unless specified optional.</p>
-            <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
-                StudyArea
+            <p className="leading-7">All fields are required unless specified optional.</p>
+            <label className="flex flex-row my-5 text-[#2b2b2b] font-semibold items-center text-lg mb-2">
+                Study area
                 <InfoComponent text="Choose your study Area" />
             </label>
             <select
@@ -30,7 +30,7 @@ const Step1 = ({
                     setStudyArea(e.target.value);
                     setField(e.target?.options[e.target.selectedIndex]?.text);
                 }}
-                className="w-full max-w-md text-xs box-border rounded-none h-12 px-[15px] border-[1px] border-[#ccc]  shadow-sm focus-visible:outline-0">
+                className="w-full max-w-md mt-5 text-xs box-border rounded-none h-12 px-[15px] border-[1px] border-[#ccc]  shadow-sm focus-visible:outline-0">
                 <option value="" name="" className="text-xs">
                     Select a Study Area
                 </option>
@@ -40,9 +40,9 @@ const Step1 = ({
                     </option>
                 ))}
             </select>
-            <div className="my-4 max-w-md">
-                <label className="flex flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl mb-2">
-                    Study Level
+            <div className="my-6 max-w-md">
+                <label className="flex mt-2 mb-5 flex-row text-[#2b2b2b] font-semibold items-center text-lg leading-2xl ">
+                    Study level
                     <InfoComponent text="Choose your study Level" />
                 </label>
                 Select up to 2 of the options below:

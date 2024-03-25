@@ -21,8 +21,8 @@ const Step3 = ({ additionalData, setAdditionalData }) => {
                 CHOOSE TO ADD INFORMATION ON THE FOLLOWING:
             </h3>
             <ul className="flex flex-col md:flex-row justify-between">
-                <div>
-                    <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                <div className="my-2">
+                    <h4 className="text-[20px] mb-4 leading-[28px] font-condensed  text-[#262626] font-semibold ">
                         About Melbourne
                     </h4>
                     {data.aboutMelbourne.map((about) => (
@@ -41,14 +41,14 @@ const Step3 = ({ additionalData, setAdditionalData }) => {
                                     );
                                 }}
                             />
-                            <label htmlFor="reading" className="ml-2 mr-4">
+                            <label htmlFor="reading" className="ml-2 mr-4 leading-[35px]">
                                 {about}
                             </label>
                         </li>
                     ))}
                 </div>
-                <div>
-                    <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                <div className="my-2">
+                    <h4 className="text-[20px] mb-4 leading-[28px] font-condensed  text-[#262626] font-semibold ">
                         English Language Support
                     </h4>
                     {data.englishLanguageSupport.map((english) => (
@@ -67,14 +67,14 @@ const Step3 = ({ additionalData, setAdditionalData }) => {
                                     );
                                 }}
                             />
-                            <label htmlFor="reading" className="ml-2 mr-4">
+                            <label htmlFor="reading" className="ml-2 mr-4 leading-[35px]">
                                 {english}
                             </label>
                         </li>
                     ))}
                 </div>
-                <div>
-                    <h4 className="text-[20px] leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                <div className="my-2">
+                    <h4 className="text-[20px] mb-4 leading-[28px] font-condensed  text-[#262626] font-semibold ">
                         University Services
                     </h4>
                     {data.universityServices.map((service) => (
@@ -93,7 +93,7 @@ const Step3 = ({ additionalData, setAdditionalData }) => {
                                     );
                                 }}
                             />
-                            <label htmlFor="reading" className="ml-2 mr-4">
+                            <label htmlFor="reading" className="ml-2 mr-4 leading-[35px]">
                                 {service}
                             </label>
                         </li>

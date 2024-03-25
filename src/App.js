@@ -45,7 +45,7 @@ function App() {
         });
     }, [xmp]);
     return (
-        <div className="bg-gray-100 w-full h-full min-h-screen font-sans text-[16px] leading-6">
+        <div className="bg-gray-100 antialiased w-full h-full min-h-screen font-sans text-[16px] leading-6">
             <div id="wrapper">
                 <Header />
                 <Contact />
