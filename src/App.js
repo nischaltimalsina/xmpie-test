@@ -8,6 +8,9 @@ import { XmplContext, useAdors } from 'xmpl-react';
 function App() {
     const { xmp } = useContext(XmplContext);
     const { getAdorValues } = useAdors();
+    console.log("useAdors",useAdors())
+    console.log("xmp",xmp)
+
     const rid = new URLSearchParams(window.location.search).get('rid');
 
     useEffect(() => {
