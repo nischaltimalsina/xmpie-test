@@ -63,7 +63,6 @@ export const Contact = () => {
                 followup: true
             }
         });
-        console.log(res);
 
         setError('');
         navigate(`/thankyou?rid=${res.recipientID}`);

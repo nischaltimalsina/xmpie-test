@@ -54,7 +54,6 @@ const Thankyou = () => {
         setAdditionalData(xmp.r['additionalData']?.split(',') || []);
         setLink(xmp.r['XMPie.PDF.P3']);
     }, [xmp]);
-    console.log(link, courses);
 
     return (
         <div className="bg-gray-100 antialiased w-full h-full min-h-screen font-sans text-[16px] leading-6">
