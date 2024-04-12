@@ -63,13 +63,12 @@ export const Contact = () => {
                 followup: true
             }
         });
+        console.log(res);
 
-        if (res) {
-            setError('');
-            navigate(`/thankyou?rid=${res.recepientID}`);
-            let elem = document.getElementById('scrollToHere');
-            elem.scrollIntoView();
-        }
+        setError('');
+        navigate(`/thankyou?rid=${res.recipientID}`);
+        let elem = document.getElementById('scrollToHere');
+        elem.scrollIntoView();
     };
 
     const testError = () => {
