@@ -1,14 +1,11 @@
 import {
-    // XmplContext, useAdors,
+    XmplContext,
+    useAdors,
     // useEvents,
     useTrigger,
     useRecipients
 } from 'xmpl-react';
-import {
-    // useContext,
-    useEffect,
-    useState
-} from 'react';
+import { useContext, useEffect, useState } from 'react';
 import 'react-phone-number-input/style.css';
 // import { useNavigate } from 'react-router-dom';
 import data from '../assets/data.json';
@@ -22,31 +19,9 @@ import ErrorComponent from './common/ErrorComponent';
 import Step4 from './steps/Step4';
 
 export const Contact = () => {
-    // const { xmp } = useContext(XmplContext);
-    // const { updateAdors } = useAdors();
+    const { xmp } = useContext(XmplContext);
     const { addRecipient } = useRecipients();
-    // const { navigate } = useNavigate();
-    // const [firstName, setFirstName] = useState(xmp.r['firstName']);
-    // const [lastName, setLastName] = useState(xmp.r['lastName']);
-    // const [phone, setPhone] = useState(xmp.r['phone']);
-    // const [email, setEmail] = useState(xmp.r['email']);
-    // const [optionalEmail, setOptionalEmail] = useState(xmp.r['optionalEmail']);
-    // const [month, setMonth] = useState(xmp.r['month']);
-    // const [year, setYear] = useState(xmp.r['year']);
-    // const [nationality, setNationality] = useState(xmp.r['nationality']);
-    // const [residenceCountry, setResidenceCountry] = useState(xmp.r['residenceCountry']);
-    // const [courses, setCourses] = useState(xmp.r['courses']?.split(',') || []);
-    // const [studyArea, setStudyArea] = useState(xmp.r['studyArea']);
-    // const [additionalData, setAdditionalData] = useState(xmp.r['additionalData']?.split(',') || []);
-    // const [link, setLink] = useState(xmp.r['XMPie.PDF.P3']);
-
-    // const [step, setStep] = useState(1);
-    // const [error, setError] = useState('');
-    // const [activeCourse, setActiveCourse] = useState({});
-    // const [field, setField] = useState('');
-    // const [studyLevel, setStudyLevel] = useState([]);
-    // const [sendUpdates, setSendUpdates] = useState(false);
-    // const [sendEmail, setSendEmail] = useState(false);
+    const { getAdorValues } = useAdors();
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -60,7 +35,7 @@ export const Contact = () => {
     const [courses, setCourses] = useState([]);
     const [studyArea, setStudyArea] = useState('');
     const [additionalData, setAdditionalData] = useState([]);
-    const [link] = useState('');
+    const [link, setLink] = useState('');
     const [sendUpdates, setSendUpdates] = useState(false);
     const [sendEmail, setSendEmail] = useState(false);
 
@@ -70,41 +45,7 @@ export const Contact = () => {
     const [field, setField] = useState('');
     const [studyLevel, setStudyLevel] = useState([]);
 
-    // const { events } = useEvents();
     const { trigger } = useTrigger();
-    // const rid =
-    //     new URLSearchParams(window.location.search).get('rid') ||
-    //     localStorage.getItem('xmpRecipientID');
-
-    // useEffect(() => {
-    //     setFirstName(xmp.r['firstName']);
-    //     setLastName(xmp.r['lastName']);
-    //     setEmail(xmp.r['email']);
-    //     setOptionalEmail(xmp.r['optionalEmail']);
-    //     setPhone(xmp.r['phone']);
-    //     setMonth(xmp.r['month']);
-    //     setYear(xmp.r['year']);
-    //     setNationality(xmp.r['nationality']);
-    //     setResidenceCountry(xmp.r['residenceCountry']);
-    //     setActiveCourse(xmp.r['activeCourse']);
-    //     setCourses(xmp.r['courses']?.split(',') || []);
-    //     setAdditionalData(xmp.r['additionalData']?.split(',') || []);
-    //     setStudyArea(xmp.r['studyArea']);
-    //     setLink(xmp.r['XMPie.PDF.P3']);
-    // }, [xmp]);
-
-    // const trackEvent = (e) => {
-    //     const isAnchor = e.target.tagName === 'A';
-    //     const options = {
-    //         sync: isAnchor,
-    //         recipientID: rid,
-    //         PageName: 'Sample',
-    //         ActionName: 'Send me more information',
-    //         ActionParams: 'actionParameters',
-    //         type: 'mousedown'
-    //     };
-    //     events(options);
-    // };
     const triggerEmail = async () => {
         try {
             trigger('E2');
@@ -143,45 +84,12 @@ export const Contact = () => {
         if (res) {
             setError('');
             window.location.href = `https://xmpie-test.vercel.app/?rid=${res.recipientID}`;
-            // navigate(`https://xmpie-test.vercel.app/?rid=${res.recipientID}`);
             setStep(5);
             let elem = document.getElementById('scrollToHere');
             elem.scrollIntoView();
         }
         triggerEmail();
     };
-    // const updateData = async (e) => {
-    //     e.preventDefault();
-    //     const errorExists = testError();
-
-    //     if (errorExists) return;
-    //     let tempAdditionalData = additionalData.join(',');
-    //     let tempCourses = courses.join(',');
-
-    //     const res = await updateAdors({
-    //         firstName: firstName,
-    //         lastName: lastName,
-    //         phone: phone,
-    //         email: email,
-    //         optionalEmail: optionalEmail,
-    //         month: month,
-    //         year: year,
-    //         nationality: nationality,
-    //         residenceCountry: residenceCountry,
-    //         courses: tempCourses,
-    //         studyArea: studyArea,
-    //         additionalData: tempAdditionalData,
-    //         followup: true
-    //     });
-    //     if (res) {
-    //         setError('');
-    //         setStep(5);
-    //         let elem = document.getElementById('scrollToHere');
-    //         elem.scrollIntoView();
-    //     }
-    //     triggerEmail();
-    //     trackEvent(e);
-    // };
 
     const testError = () => {
         if (step === 1) {
