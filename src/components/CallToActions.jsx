@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CallToActions = ({ step, setStep, updateData, testError, setError }) => {
+const CallToActions = ({ step, setStep, addData, testError, setError }) => {
     return (
         <section className="flex w-full justify-between mt-32 px-10">
             <div>
@@ -22,7 +22,7 @@ const CallToActions = ({ step, setStep, updateData, testError, setError }) => {
                 <button
                     type="submit"
                     className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32 ease-in-out "
-                    onClick={updateData}>
+                    onClick={addData}>
                     Submit
                 </button>
             ) : (
