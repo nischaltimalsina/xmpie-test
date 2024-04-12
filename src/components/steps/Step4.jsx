@@ -216,7 +216,7 @@ const Step4 = ({
             </div>
             <div className="flex flex-col text-sm font-normal gap-">
                 <span className="mb-3 text-xl font-semibold mt-7">
-                    Share my personalised brochure with the following email address
+                    Print your name on this brochure?
                 </span>
                 <div className="flex gap-4 pl-4">
                     <label htmlFor="">Yes</label>
