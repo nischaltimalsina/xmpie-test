@@ -1,17 +1,13 @@
 import './assets/css/main.css';
-import { Header } from './components/common/Header';
-import { Footer } from './components/common/Footer';
-import { Contact } from './components/Contact';
-
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Thankyou from './pages/Thankyou';
 function App() {
     return (
-        <div className="bg-gray-100 antialiased w-full h-full min-h-screen font-sans text-[16px] leading-6">
-            <div id="wrapper">
-                <Header />
-                <Contact />
-                <Footer />
-            </div>
-        </div>
+        <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/thankyou" element={<Thankyou />} />
+        </Routes>
     );
 }
 

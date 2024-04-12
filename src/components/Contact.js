@@ -1,31 +1,23 @@
-import {
-    XmplContext,
-    useAdors,
-    // useEvents,
-    useTrigger,
-    useRecipients
-} from 'xmpl-react';
-import { useContext, useEffect, useState } from 'react';
+import { useRecipients } from 'xmpl-react';
+import { useEffect, useState } from 'react';
 import 'react-phone-number-input/style.css';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import data from '../assets/data.json';
 import Step1 from './steps/Step1';
 import Step2 from './steps/Step2';
 import Step3 from './steps/Step3';
-import Step5 from './steps/Step5';
 import CallToActions from './CallToActions';
 import Tabs from './Tabs';
 import ErrorComponent from './common/ErrorComponent';
 import Step4 from './steps/Step4';
 
 export const Contact = () => {
-    const { xmp } = useContext(XmplContext);
     const { addRecipient } = useRecipients();
-    const { getAdorValues } = useAdors();
+    const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [phone, setPhone] = useState('');
+    const [phone, setPhone] = useState('+61');
     const [email, setEmail] = useState('');
     const [optionalEmail, setOptionalEmail] = useState('');
     const [month, setMonth] = useState('');
@@ -35,7 +27,6 @@ export const Contact = () => {
     const [courses, setCourses] = useState([]);
     const [studyArea, setStudyArea] = useState('');
     const [additionalData, setAdditionalData] = useState([]);
-    const [link, setLink] = useState('');
     const [sendUpdates, setSendUpdates] = useState(false);
     const [sendEmail, setSendEmail] = useState(false);
 
@@ -44,15 +35,6 @@ export const Contact = () => {
     const [activeCourse, setActiveCourse] = useState({});
     const [field, setField] = useState('');
     const [studyLevel, setStudyLevel] = useState([]);
-
-    const { trigger } = useTrigger();
-    const triggerEmail = async () => {
-        try {
-            trigger('E2');
-        } catch (error) {
-            console.log(error);
-        }
-    };
 
     const addData = async (e) => {
         e.preventDefault();
@@ -83,12 +65,10 @@ export const Contact = () => {
 
         if (res) {
             setError('');
-            window.location.href = `https://xmpie-test.vercel.app/?rid=${res.recipientID}`;
-            setStep(5);
+            navigate(`/thankyou?rid=${res.recepientID}`);
             let elem = document.getElementById('scrollToHere');
             elem.scrollIntoView();
         }
-        triggerEmail();
     };
 
     const testError = () => {
@@ -124,37 +104,6 @@ export const Contact = () => {
     };
 
     useEffect(() => {
-        const rid = new URLSearchParams(window.location.search).get('rid');
-        if (rid) {
-            setStep(5);
-            getAdorValues({
-                rid,
-                isLogin: true,
-                adors: [
-                    'firstName',
-                    'lastName',
-                    'email',
-                    'courses',
-                    'studyArea',
-                    'additionalData',
-                    'XMPie.PDF.P3'
-                ],
-                resolved: ['photo1', 'photo2', 'photo3', 'photo4'],
-                async: false,
-                isCached: true,
-                noCache: false
-            });
-        }
-        setFirstName(xmp.r['firstName']);
-        setLastName(xmp.r['lastName']);
-        setEmail(xmp.r['email']);
-        setCourses(xmp.r['courses']?.split(',') || []);
-        setAdditionalData(xmp.r['additionalData']?.split(',') || []);
-        setLink(xmp.r['XMPie.PDF.P3']);
-        setStudyArea(xmp.r['studyArea']);
-    }, []);
-
-    useEffect(() => {
         let tempActiveCourse = data.studyArea.filter((d) => d.value === studyArea);
         if (tempActiveCourse.length > 0) {
             let courses = {};
@@ -182,9 +131,7 @@ export const Contact = () => {
                               ? 'CHOOSE A COURSE'
                               : step === 3
                                 ? 'ADD INFORMATION'
-                                : step === 4
-                                  ? 'PROVIDE YOUR DETAILS'
-                                  : 'DOWNLOAD BROCHURE'}
+                                : 'PROVIDE YOUR DETAILS'}
                     </h1>
                 </section>
                 <Tabs step={step} />
@@ -243,16 +190,6 @@ export const Contact = () => {
                                 setSendEmail={setSendEmail}
                                 sendUpdates={sendUpdates}
                                 setSendUpdates={setSendUpdates}
-                            />
-                        )}
-                        {step === 5 && (
-                            <Step5
-                                firstName={firstName}
-                                lastName={lastName}
-                                email={email}
-                                courses={courses}
-                                additionalData={additionalData}
-                                link={link}
                             />
                         )}
                     </form>

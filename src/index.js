@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { XmplProvider } from 'xmpl-react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 var xmpcfg = {
@@ -18,7 +19,9 @@ var xmpcfg = {
 root.render(
     <React.StrictMode>
         <XmplProvider xmpcfg={xmpcfg}>
-            <App />
+            <Router>
+                <App />
+            </Router>
         </XmplProvider>
     </React.StrictMode>
 );
