@@ -10,6 +10,7 @@ import CallToActions from './CallToActions';
 import Tabs from './Tabs';
 import ErrorComponent from './common/ErrorComponent';
 import Step4 from './steps/Step4';
+const _ = require('lodash');
 
 export const Contact = () => {
     const { addRecipient } = useRecipients();
@@ -87,6 +88,13 @@ export const Contact = () => {
         }
         if (step === 2) {
             if (courses.length === 0) {
+                if (
+                    _.isEmpty(activeCourse?.vocational) &&
+                    _.isEmpty(activeCourse?.masters) &&
+                    _.isEmpty(activeCourse?.bachelor)
+                ) {
+                    return false;
+                }
                 setError('Please chhose at least 1 course');
                 let elem = document.getElementById('scrollToHere');
                 elem.scrollIntoView();
