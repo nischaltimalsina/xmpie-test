@@ -5,7 +5,7 @@ import { Contact } from '../components/Contact';
 
 const Home = () => {
     return (
-        <div className="bg-gray-100 antialiased w-full h-full min-h-screen font-sans text-[16px] leading-6">
+        <div className="bg-[#F9F9F9]  antialiased w-full h-full min-h-screen text-[19px] font-normal leading-[25px]">
             <div id="wrapper">
                 <Header />
                 <Contact />

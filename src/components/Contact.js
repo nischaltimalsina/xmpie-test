@@ -10,6 +10,7 @@ import CallToActions from './CallToActions';
 import Tabs from './Tabs';
 import ErrorComponent from './common/ErrorComponent';
 import Step4 from './steps/Step4';
+// eslint-disable-next-line no-undef
 const _ = require('lodash');
 
 export const Contact = () => {
@@ -127,24 +128,13 @@ export const Contact = () => {
     }, [studyLevel, studyArea]);
 
     return (
-        <section id="contact" className="mb-32 container mx-auto">
+        <section id="contact">
             <div className="">
-                <section>
-                    <h1 className="ml-4 text-[56px] font-condensed text-[#262626] leading-[64px] my-[60px]">
-                        {step === 1
-                            ? 'SELECT STUDY AREA AND LEVEL'
-                            : step === 2
-                              ? 'CHOOSE A COURSE'
-                              : step === 3
-                                ? 'ADD INFORMATION'
-                                : 'PROVIDE YOUR DETAILS'}
-                    </h1>
-                </section>
                 <Tabs step={step} />
-                <section>
+                <section className="bg-white pb-10">
                     <ErrorComponent error={error} />
 
-                    <form className="bg-white p-8">
+                    <form className="py-8 px-2 md:px-16  container mx-auto">
                         {step === 1 && (
                             <Step1
                                 error={error}

@@ -30,8 +30,10 @@ const Step4 = ({
     const countries = getNames();
 
     return (
-        <section className="mx-auto py-10 pb-20 ">
-            <h2 className="pt-5 pb-8 text-5xl font-light font-condensed">TELL US ABOUT YOURSELF</h2>
+        <section className="mx-auto py-10 ">
+            <h2 className="text-[33px] leading-[43px] mt-[50px]  font-bold ">
+                Tell us about yourself
+            </h2>
             <div className="flex flex-col gap-2 text-sm font-normal">
                 <label htmlFor="name" className="mb-3 text-xl font-semibold mt-7">
                     Which country are you currently living in?
@@ -219,36 +221,39 @@ const Step4 = ({
                     Print your name on this brochure?
                 </span>
                 <div className="flex gap-4 pl-4">
-                    <label htmlFor="">Yes</label>
                     <input
-                        className="border"
+                        className="border w-[20px] h-[20px] mr-6 my-2 rounded-[5px]"
                         placeholder="Email Address (optional)"
                         name="sendEmail"
                         id="sendEmail"
                         value={sendUpdates}
                         onChange={() => setSendEmail(!sendEmail)}
                         type="checkbox"
-                    />
+                    />{' '}
+                    <label htmlFor="" className="ml-2 mr-4 font-normal leading-[35px]">
+                        Yes
+                    </label>
                 </div>
             </div>
             <hr className="mx-24 my-12 border-t border-gray-400" />
             <div className="flex items-start gap-4 pl-4">
                 <input
-                    className="mt-2.5"
+                    className="mt-2.5 min-w-[20px] min-h-[20px] mr-6 my-2 rounded-[5px]"
                     type="checkbox"
                     name="sendUpdates"
                     id="sendUpdates"
                     value={sendUpdates}
                     onChange={() => setSendUpdates(!sendUpdates)}
                 />
-                <label htmlFor="" className="font-normal leading-9 tracking-wide">
+                <label htmlFor="" className="ml-2 mr-4 leading-[35px] font-normal ">
+                    {' '}
                     Please keep me informed of VU events, updates and information relevant to my
                     enquiry.
                 </label>
             </div>
             <div className="font-normal leading-[1.5] space-y-4">
-                <h2 className="py-4 mt-4 text-xl font-medium">Privacy Policy</h2>
-                <p>
+                <h2 className="text-[33px] leading-[43px] mt-[50px]  font-bold ">Privacy Policy</h2>
+                <p className="text-justify">
                     Victoria University is committed to the responsible collection and handling of
                     your personal information in accordance with all relevant legislation, including
                     the Information Privacy Act 2000 (Vic.) and the Health Records Act 2001 (Vic.).
@@ -259,7 +264,7 @@ const Step4 = ({
                     If you do not wish to receive further communications, please uncheck the
                     checkbox at the end of the form.
                 </p>
-                <p>
+                <p className="text-justify">
                     Your personal information may be disclosed to Commonwealth and State Agencies
                     such as the Department of Education and Training, and the Department of Home
                     Affairs pursuant to reporting obligations under applicable legislation. Your
@@ -268,7 +273,7 @@ const Step4 = ({
                     under the National Code made under the Education Services for Overseas Students
                     Act 2000.
                 </p>
-                <p>
+                <p className="text-justify">
                     You have a right to access personal information that Victoria University holds
                     about you. Refer to our Privacy Policy for more information.
                 </p>

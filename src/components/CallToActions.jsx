@@ -2,11 +2,11 @@ import React from 'react';
 
 const CallToActions = ({ step, setStep, addData, testError, setError }) => {
     return (
-        <section className="flex w-full justify-between mt-32 px-10">
-            <div>
+        <section className="flex w-full justify-between mt-6 px-16  container mx-auto">
+            {/* <div>
                 {step !== 1 && step !== 5 && (
                     <button
-                        className="text-[#261248] cursor-pointer box-border font-condensed font-normal text-xl text-center uppercase px-12 py-5 min-w-32 border-transparent border-2 hover:border-[#21104b] hover:scale-105"
+                        className="text-[#261248] cursor-pointer box-border  font-normal text-xl text-center uppercase px-12 py-5 min-w-32 border-transparent border-2 hover:border-[#21104b] hover:scale-105"
                         onClick={(e) => {
                             e.preventDefault();
                             setError('');
@@ -17,18 +17,18 @@ const CallToActions = ({ step, setStep, addData, testError, setError }) => {
                         Back
                     </button>
                 )}
-            </div>
+            </div> */}
             {step === 4 ? (
                 <button
                     type="submit"
-                    className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32 ease-in-out "
+                    className="text-[#fff] cursor-pointer bg-[#2E6186]  font-normal text-xl text-center uppercase border-0 rounded-[5px] px-12 py-3 min-w-32 ease-in-out "
                     onClick={addData}>
                     Submit
                 </button>
             ) : (
                 step !== 5 && (
                     <button
-                        className="text-[#fff] cursor-pointer bg-[#21104b] font-condensed font-normal text-xl text-center uppercase border-0 px-12 py-5 min-w-32 hover:scale-105 ease-in-out "
+                        className="text-[#fff] cursor-pointer bg-[#2E6186]  font-normal text-xl text-center uppercase border-0 rounded-[5px] px-12 py-3 min-w-32 hover:scale-105 ease-in-out "
                         onClick={(e) => {
                             e.preventDefault();
                             const errorExists = testError();

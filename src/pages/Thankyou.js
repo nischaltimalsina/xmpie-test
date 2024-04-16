@@ -56,50 +56,47 @@ const Thankyou = () => {
     }, [xmp]);
 
     return (
-        <div className="bg-gray-100 antialiased w-full h-full min-h-screen font-sans text-[16px] leading-6">
+        <div className="bg-[#F9F9F9] antialiased w-full h-full min-h-screen  text-[16px] leading-6">
             <Header />
-            <div className="container mx-auto">
-                <h1 className="ml-4 text-[56px] font-condensed text-[#262626] leading-[64px] my-[60px]">
-                    DOWNLOAD BROCHURE
-                </h1>
+            <div>
                 <Tabs step={5} />
-                <div className="container mx-auto">
-                    <h1 className="my-16 leading-16 text-6xl font-condensed uppercase">
-                        Thank You!
-                    </h1>
-                    <p>
-                        You can download your personalised brochure now{' '}
-                        <span className="font-semibold">
-                            {firstName} {lastName}.{' '}
-                        </span>
-                        We&apos;ve also sent an email to{' '}
-                        <span className="font-semibold">{email}</span> with a link.
-                    </p>
-                    <br />{' '}
-                    <p className="font-semibold mt-4">
-                        You requested the following information for your personalised brochure:
-                    </p>
-                    {courses?.map((course) => (
-                        <p key={course} className="flex">
-                            <span>
-                                <FaCheck className="mr-4 mt-2" />{' '}
+                <div className="bg-white py-10">
+                    <div className="container mx-auto">
+                        <h1 className="my-16 leading-16 text-6xl   uppercase">Thank You!</h1>
+                        <p>
+                            You can download your personalised brochure now{' '}
+                            <span className="font-semibold">
+                                {firstName} {lastName}.{' '}
                             </span>
-                            <span>{course}</span>
+                            We&apos;ve also sent an email to{' '}
+                            <span className="font-semibold">{email}</span> with a link.
                         </p>
-                    ))}
-                    {additionalData?.map((course) => (
-                        <p key={course} className="flex">
-                            <span>
-                                <FaCheck className="mr-4 mt-2" />{' '}
-                            </span>
-                            <span>{course}</span>
+                        <br />{' '}
+                        <p className="font-semibold mt-4">
+                            You requested the following information for your personalised brochure:
                         </p>
-                    ))}
-                    <div className="w-full flex justify-center mt-12 mb-24">
-                        <div className="text-[#21104b] cursor-pointer bg-[#ed6b5e] hover:bg-[#21104b] hover:text-[#ed6b5e] font-condensed font-normal text-2xl text-center uppercase border-0 px-12 py-5 min-w-32">
-                            <a href={link} target="_blank" rel="noreferrer">
-                                Download Your Personalised Brochure
-                            </a>
+                        {courses?.map((course) => (
+                            <p key={course} className="flex">
+                                <span>
+                                    <FaCheck className="mr-4 mt-2" />{' '}
+                                </span>
+                                <span>{course}</span>
+                            </p>
+                        ))}
+                        {additionalData?.map((course) => (
+                            <p key={course} className="flex">
+                                <span>
+                                    <FaCheck className="mr-4 mt-2" />{' '}
+                                </span>
+                                <span>{course}</span>
+                            </p>
+                        ))}
+                        <div className="w-full flex justify-center mt-12 mb-24">
+                            <div className="text-[#21104b] cursor-pointer bg-[#ed6b5e] hover:bg-[#21104b] hover:text-[#ed6b5e]  font-normal text-2xl text-center uppercase border-0 px-12 py-5 min-w-32">
+                                <a href={link} target="_blank" rel="noreferrer">
+                                    Download Your Personalised Brochure
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -4,8 +4,8 @@ module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
         fontFamily: {
-            sans: ['Source Sans Pro', 'sans-serif'],
-            condensed: ['DIN Condensed', 'sans-serif']
+            nokora: ['Nokora', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif']
         },
         extend: {}
     },

@@ -4,35 +4,43 @@ import data from '../../assets/data.json';
 const Step3 = ({ additionalData, setAdditionalData }) => {
     return (
         <section>
-            <h2 className="text-[44px] leading-[52px] font-condensed my-[50px] text-[#262626] font-medium ">
-                WHAT ADDITIONAL INFORMATION ARE YOU INTERESTED IN?
+            <h2 className="text-[33px] leading-[43px]  font-bold ">
+                What additional information are you interested in?
             </h2>
-            We&apos;ll provide all of the core information about your course and the University.
-            Here you can add more information, should you need it.
-            <h3 className="text-[28px] leading-[36px] font-condensed my-[25px] text-[#262626] font-medium ">
-                ALREADY IN YOUR PERSONALISED BROCHURE:
-            </h3>
+            <p className=" font-normal mt-4">
+                We&apos;ll provide all of the core information about your course and the University.
+                Here you can add more information, should you need it.
+            </p>
+
+            <p className="leading-[33px] text-[25px] font-bold mt-4">
+                Already in yout personalized brochure:
+            </p>
+
             <ul className="list-disc ml-8">
                 {data.alreadyInBrochure.map((topic) => (
-                    <li key={topic}>{topic}</li>
+                    <li key={topic} className="font-normal mt-4">
+                        {topic}
+                    </li>
                 ))}
             </ul>
-            <h3 className="text-[28px] leading-[36px] font-condensed my-[25px] text-[#262626] font-medium ">
-                CHOOSE TO ADD INFORMATION ON THE FOLLOWING:
-            </h3>
+            <p className="leading-[33px] text-[25px] font-bold mt-4">
+                Choose to add information on the following:
+            </p>
+
             <ul className="flex flex-col md:flex-row justify-between">
                 <div className="my-2">
-                    <h4 className="text-[20px] mb-4 leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                    <h4 className="text-[20px] mb-4 leading-[20px]   text-[#262626] font-semibold ">
                         About Melbourne
                     </h4>
                     {data.aboutMelbourne.map((about) => (
-                        <li key={about}>
+                        <li key={about} className="w-full flex items-center">
                             <input
                                 type="checkbox"
                                 id={about}
                                 name="additionalData"
                                 value={about}
                                 checked={additionalData.includes(about)}
+                                className="min-w-[20px] min-h-[20px] mr-6 my-2 rounded-[5px]"
                                 onChange={(e) => {
                                     setAdditionalData((prevData) =>
                                         e.target.checked
@@ -48,17 +56,18 @@ const Step3 = ({ additionalData, setAdditionalData }) => {
                     ))}
                 </div>
                 <div className="my-2">
-                    <h4 className="text-[20px] mb-4 leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                    <h4 className="text-[20px] mb-4 leading-[20px]   text-[#262626] font-semibold ">
                         English Language Support
                     </h4>
                     {data.englishLanguageSupport.map((english) => (
-                        <li key={english}>
+                        <li key={english} className="w-full flex items-center">
                             <input
                                 type="checkbox"
                                 id={english}
                                 name="additionalData"
                                 value={english}
                                 checked={additionalData.includes(english)}
+                                className="min-w-[20px] min-h-[20px] mr-6 my-2 rounded-[5px]"
                                 onChange={(e) => {
                                     setAdditionalData((prevData) =>
                                         e.target.checked
@@ -74,17 +83,18 @@ const Step3 = ({ additionalData, setAdditionalData }) => {
                     ))}
                 </div>
                 <div className="my-2">
-                    <h4 className="text-[20px] mb-4 leading-[28px] font-condensed  text-[#262626] font-semibold ">
+                    <h4 className="text-[20px] mb-4 leading-[20px]   text-[#262626] font-semibold ">
                         University Services
                     </h4>
                     {data.universityServices.map((service) => (
-                        <li key={service}>
+                        <li key={service} className="w-full flex items-center">
                             <input
                                 type="checkbox"
                                 id={service}
                                 name="additionalData"
                                 value={service}
                                 checked={additionalData.includes(service)}
+                                className="min-w-[20px] min-h-[20px] mr-6 my-2 rounded-[5px]"
                                 onChange={(e) => {
                                     setAdditionalData((prevData) =>
                                         e.target.checked
