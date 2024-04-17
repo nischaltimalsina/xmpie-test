@@ -60,7 +60,7 @@ const Thankyou = () => {
             <Header />
             <div>
                 <Tabs step={5} />
-                <div className="bg-white py-10">
+                <div className="bg-white py-10 px-2 md:px-8">
                     <div className="container mx-auto">
                         <h1 className="my-16 leading-16 text-6xl   uppercase">Thank You!</h1>
                         <p>

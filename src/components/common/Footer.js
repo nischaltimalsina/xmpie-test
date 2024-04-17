@@ -83,7 +83,7 @@ export const Footer = () => {
                         ))}
                     </div>
                 </div>
-                <div className="py-6 px-2 md:px-0 flex justify-between font-normal  text-[18px] leading-[20px] ">
+                <div className="py-6 px-2 md:px-4 flex justify-between font-normal  text-[18px] leading-[20px] ">
                     <div className="flex items-center">
                         Keep in touch
                         <div className="border-[0.5px] w-[30px] ml-2"></div>
