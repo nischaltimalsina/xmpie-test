@@ -45,18 +45,18 @@ export const Header = () => {
                     {open && (
                         <div className="absolute w-fit flex flex-col border top-5 right-0   bg-white">
                             <a
-                                href="https://gotovu.custhelp.com/app/utils/login_form/redirect/ask?p_ptaid=fUKAiNcpH_lLUDabv_CKIhbIcx5ziOj8XjFQ9a%7Ewx9ydis2mtGq1FdoAQjmQBF0YJ%7EzoaZsFSm87qDa_gbcnk6jkDhrlpB_Hl6iPiQNOpJ24kKGEgQKLMdmA%21%21"
+                                // href="https://gotovu.custhelp.com/app/utils/login_form/redirect/ask?p_ptaid=fUKAiNcpH_lLUDabv_CKIhbIcx5ziOj8XjFQ9a%7Ewx9ydis2mtGq1FdoAQjmQBF0YJ%7EzoaZsFSm87qDa_gbcnk6jkDhrlpB_Hl6iPiQNOpJ24kKGEgQKLMdmA%21%21"
                                 className="h-10 w-full border-b-2 whitespace-nowrap px-4 flex items-center hover:bg-gray-100">
                                 Enquiry
                             </a>
                             <a
-                                href="https://eaams.vu.edu.au/portal/Login.aspx?ReturnUrl=%2fPortal%2fApplications%2fBrowseApplications.aspx"
+                                // href="https://eaams.vu.edu.au/portal/Login.aspx?ReturnUrl=%2fPortal%2fApplications%2fBrowseApplications.aspx"
                                 className="h-10 w-full border-b-2 whitespace-nowrap px-4 flex items-center hover:bg-gray-100">
                                 Apply
                             </a>
 
                             <a
-                                href="https://eaams.vu.edu.au/"
+                                // href="https://eaams.vu.edu.au/"
                                 className="h-10 w-full whitespace-nowrap px-4 flex items-center hover:bg-gray-100">
                                 International Students
                             </a>
@@ -65,7 +65,7 @@ export const Header = () => {
                 </div>
                 <div className="hidden md:flex ml-auto  flex-row items-center">
                     <a
-                        href="https://gotovu.custhelp.com/app/utils/login_form/redirect/ask?p_ptaid=fUKAiNcpH_lLUDabv_CKIhbIcx5ziOj8XjFQ9a%7Ewx9ydis2mtGq1FdoAQjmQBF0YJ%7EzoaZsFSm87qDa_gbcnk6jkDhrlpB_Hl6iPiQNOpJ24kKGEgQKLMdmA%21%21"
+                        // href="https://gotovu.custhelp.com/app/utils/login_form/redirect/ask?p_ptaid=fUKAiNcpH_lLUDabv_CKIhbIcx5ziOj8XjFQ9a%7Ewx9ydis2mtGq1FdoAQjmQBF0YJ%7EzoaZsFSm87qDa_gbcnk6jkDhrlpB_Hl6iPiQNOpJ24kKGEgQKLMdmA%21%21"
                         className="bg-[#2E6186] text-white h-[41px] mx-2 rounded-md  cursor-pointer   px-8 flex items-center">
                         Enquire
                         <div className="ml-3">
@@ -73,12 +73,12 @@ export const Header = () => {
                         </div>
                     </a>
                     <a
-                        href="https://eaams.vu.edu.au/portal/Login.aspx?ReturnUrl=%2fPortal%2fApplications%2fBrowseApplications.aspx"
+                        // href="https://eaams.vu.edu.au/portal/Login.aspx?ReturnUrl=%2fPortal%2fApplications%2fBrowseApplications.aspx"
                         className="bg-[#2E6186] rounded-md text-white h-[41px] mx-2    cursor-pointer px-8 flex items-center">
                         Apply
                     </a>
                     <a
-                        href="https://eaams.vu.edu.au/"
+                        // href="https://eaams.vu.edu.au/"
                         className="bg-white  h-[41px] mx-2 border border-black rounded-md tracking-tight   whitespace-nowrap flex items-center cursor-pointer px-4 text-left">
                         <div className="mr-3">
                             <Globe color="black" />

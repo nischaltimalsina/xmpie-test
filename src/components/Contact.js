@@ -61,6 +61,8 @@ export const Contact = () => {
                 courses: tempCourses,
                 studyArea: studyArea,
                 additionalData: tempAdditionalData,
+                sendUpdates: sendUpdates,
+                sendEmail: sendEmail,
                 followup: true
             }
         });

@@ -54,21 +54,30 @@ export const Footer = () => {
                     </div>
                     <div className="flex flex-col justify-start items-start px-2 lg:px-0 lg:py-10 underline whitespace-nowrap">
                         {links.slice(0, 3).map((link) => (
-                            <a key={link.name} href={link.link} className="my-2">
+                            <a
+                                key={link.name}
+                                // href={link.link}
+                                className="my-2">
                                 {link.name}
                             </a>
                         ))}
                     </div>
                     <div className="flex flex-col justify-start items-start px-2 lg:px-0 lg:py-10 underline whitespace-nowrap">
                         {links.slice(3, 6).map((link) => (
-                            <a key={link.name} href={link.link} className="my-2">
+                            <a
+                                key={link.name}
+                                // href={link.link}
+                                className="my-2">
                                 {link.name}
                             </a>
                         ))}
                     </div>
                     <div className="flex flex-col justify-start items-start px-2 lg:px-0 lg:py-10 underline whitespace-nowrap">
                         {links.slice(6, 8).map((link) => (
-                            <a key={link.name} href={link.link} className="my-2">
+                            <a
+                                key={link.name}
+                                // href={link.link}
+                                className="my-2">
                                 {link.name}
                             </a>
                         ))}
