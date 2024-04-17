@@ -2,7 +2,7 @@ import React from 'react';
 
 const CallToActions = ({ step, setStep, addData, testError, setError }) => {
     return (
-        <section className="flex w-full justify-between mt-6 px-16  container mx-auto">
+        <section className="flex w-full justify-between mt-6 px-2 md:px-8  container mx-auto">
             {/* <div>
                 {step !== 1 && step !== 5 && (
                     <button

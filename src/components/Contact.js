@@ -136,7 +136,7 @@ export const Contact = () => {
                 <section className="bg-white pb-10">
                     <ErrorComponent error={error} />
 
-                    <form className="py-8 px-2 md:px-16  container mx-auto">
+                    <form className="py-8 px-2 md:px-8  container mx-auto">
                         {step === 1 && (
                             <Step1
                                 error={error}
